@@ -4,7 +4,7 @@ import random
 from faker import Faker
 
 # Django setup
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'realestate_portal.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'propcore.settings')
 django.setup()
 
 # Models import

@@ -66,8 +66,8 @@ MIDDLEWARE = [
 ]
 
 # 🧠 6️⃣ URL & WSGI
-ROOT_URLCONF = 'realestate_portal.urls'
-WSGI_APPLICATION = 'realestate_portal.wsgi.application'
+ROOT_URLCONF = 'propcore.urls'
+WSGI_APPLICATION = 'propcore.wsgi.application'
 
 # 🧠 7️⃣ Templates
 TEMPLATES = [
