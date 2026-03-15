@@ -9,7 +9,7 @@ from utility.models import Locality,PropertyType,City,Bank,ProjectAmenities
 from blog.models import Blog, Category
 from .models import (
     Setting, Slider, Testimonial, About, Leadership,
-    Contact_Page, FAQ, Our_Team,Why_Choose,ImpactMetric, Service, FooterLink,ContactEnquiry
+    Contact_Page, FAQ, Our_Team,Why_Choose,ImpactMetric, Service, FooterLink,ContactEnquiry,Slider
 )
 from user.models import Developer 
 from rent.models import RentalProperty
@@ -79,6 +79,7 @@ def index(request):
     footerlink = FooterLink.objects.filter( is_active=True, parent__isnull=True).prefetch_related("children").order_by("order")
     why_choose_items = Why_Choose.objects.filter(is_active=True).order_by("order")
     testimonials = Testimonial.objects.all().order_by("-id")
+    slider = Slider.objects.filter(is_active=True).first()
     faqs = FAQ.objects.all().order_by("id")
 
     # ================= CURRENT CITY =================
@@ -119,6 +120,7 @@ def index(request):
         "faqs": faqs,
         "possession_counts": possession_counts,
         "rental_properties": rental_properties,
+        "slider": slider,
     })
 
 

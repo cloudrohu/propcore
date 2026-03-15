@@ -77,11 +77,13 @@ class Setting(ImageCompressionMixin, models.Model):
 # 🖼️ Hero / Slider Section (Multiple)
 # =============================
 class Slider(models.Model):
-    title = models.CharField(max_length=200)
+    heading = models.CharField(max_length=200)
     subtitle = models.CharField(max_length=300, blank=True, null=True)
+    short_description = models.CharField(max_length=600, blank=True, null=True)
     image = models.ImageField(upload_to='slider/')
-    button_text = models.CharField(max_length=100, blank=True, null=True)
-    button_link = models.URLField(blank=True, null=True)
+    headeing_color = models.CharField(max_length=50, blank=True, null=True)
+    tabs_color = models.CharField(max_length=50, blank=True, null=True)
+    search_btn_color = models.CharField(max_length=50, blank=True, null=True)
     order = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=True)
 
@@ -90,12 +92,11 @@ class Slider(models.Model):
         verbose_name_plural = '1. Slider Section'
 
     def __str__(self):
-        return self.title
+        return self.heading
+
 # =============================
 # 👥 Leadership Team Section
 # =============================
-
-
 class Leadership(models.Model):
     name = models.CharField(max_length=100, help_text="Full name of the team member")
     designation = models.CharField(max_length=150, help_text="Position or title (e.g., CEO, Managing Director)")

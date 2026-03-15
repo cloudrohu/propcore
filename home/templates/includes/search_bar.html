@@ -1,172 +1,133 @@
 {% load static %}
 
-{% load static %}
-
-
 <style>
-
 .tab-btn{
-background:rgba(255,255,255,0.2);
-color:white;
-border-color:rgba(8, 8, 8, 0.5);
+background:transparent;
+color:var(--tabColor);
+border:1px solid var(--tabColor);
 font-weight:600;
+transition:0.3s;
 }
 
-/* Hover effect */
+/* Hover */
 .tab-btn:hover{
-background:white;
-color:black;
+background:var(--tabColor);
+color:white;
 }
 
-/* Active Tab */
+/* Active */
 .tab-btn.active{
-background:#1d9bf0;
+background:var(--tabColor);
 color:white;
-border-color:#1d9bf0;
+border-color:var(--tabColor);
 font-weight:700;
 }
 
 /* Active par hover change nahi hoga */
 .tab-btn.active:hover{
-background:#1d9bf0;
+background:var(--tabColor);
 color:white;
 }
-
+.tab-btn.active{
+background:var(--tabColor);
+color:white;
+border-color:var(--tabColor);
+font-weight:700;
+}
 </style>
 
+<section class="bg-[#eef3f6] py-20" style="--tabColor: {{ slider.tabs_color|default:'#2b8cc9' }};">
 
-<div class="hidden md:block">
-  <section  class="relative flex flex-col items-center justify-center text-center text-white h-[560px] bg-cover bg-center bg-no-repeat overflow-hidden" style="background-image: url('{% if settings_obj.search_bg %}{{ settings_obj.search_bg.url }}{% else %}{% static 'images/central-mumbai.jpeg' %}{% endif %}');">
+  <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-10 items-center">
 
-    <h1 class="text-3xl md:text-4xl font-bold mb-3">Find Your Dream Property</h1>
- 
-    <p class="text-gray-600 mb-4">
-      We’ve got you covered! From finding the perfect property to
-      <span class="text-pink-700">Transactions</span>
+    <!-- LEFT CONTENT -->
+    <div>
+
+    <h2 class="text-4xl md:text-5xl font-light mb-3" style="color: {{ slider.headeing_color|default:'#2b7dbb' }}">
+      {{ slider.heading }}
+    </h2>
+
+    <h1 class="text-5xl md:text-6xl font-extrabold text-gray-800 mb-6">
+      {{settings_obj.site_name}}
+    </h1>
+
+    <p class="text-gray-600 max-w-lg mb-8">
+      {{ slider.short_description }}
     </p>
 
-      <div class="flex gap-3 mb-6" id="hero-tabs">
 
-        <button onclick="handleTabClick(this)" class="tab-btn active px-8 py-2 rounded-lg border-2 transition-all min-w-[100px]">
-          Buy
-        </button>
+    <!-- Tabs -->
+  <div id="hero-tabs" class="flex gap-4 mb-6">
 
-        <button onclick="handleTabClick(this,true)" class="tab-btn px-8 py-2 rounded-lg border-2 transition-all min-w-[100px]">
-          New Projects
-        </button>
+    <button class="tab-btn active px-12 py-1.5 rounded-md font-semibold shadow">
+      Buy
+    </button>
 
-        <button onclick="handleTabClick(this)" class="tab-btn px-8 py-2 rounded-lg border-2 transition-all min-w-[100px]">
-          Rent
-        </button>
+    <button class="tab-btn px-12 py-1.5 rounded-md font-semibold">
+      Sell
+    </button>
+
+    <button class="tab-btn px-12 py-1.5 rounded-md font-semibold">
+      Rent
+    </button>
+
+  </div>
+
+    <!-- SEARCH BOX -->
+    <div class="flex items-center bg-white rounded-md shadow-lg overflow-visible max-w-xl relative">
+
+      <select id="propertyType" class="px-2 py-3 outline-none text-gray-600 border-r">
+        <option>Residential</option>
+        <option>Commercial</option>
+      </select>
+
+      <div class="relative flex-1">
+
+        <input id="searchInput" required type="text" placeholder="Select City, Locality, Developer Or Projects Name" class="w-full px-4 py-3 outline-none" />
+
+        <ul id="suggestionBox" class="absolute left-0 right-0 top-full bg-white border border-gray-200 rounded-b-lg shadow-xl max-h-56 overflow-y-auto hidden z-50">
+        </ul>
 
       </div>
 
-    <div class="bg-white/30 w-[90%] lg:w-[45%] rounded-2xl p-3 mb-5 shadow-xl text-gray-700 backdrop-blur-sm relative">
-
-      <div class="relative flex flex-wrap items-center gap-2 rounded-md">
-        <select id="propertyType" class="border rounded-md px-2 py-2 w-35">
-          <option>Residential</option>
-          <option>Commercial</option>
-        </select>
-
-        <div class="relative flex-grow">
-          <input id="searchInput" type="text" placeholder="Select City, Locality, Developer Or Projects Name" class="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white/90" autocomplete="off" />
-          <ul id="suggestionBox" class="absolute left-0 right-0 top-full bg-white border border-gray-200 rounded-b-lg shadow-xl max-h-56 overflow-y-auto hidden z-50"></ul>
-        </div>
-
-        <button id="searchButton" class="bg-green-500 text-white px-6 py-2 rounded-md font-semibold hover:bg-green-600 transition">
-          Search
-        </button>
-      </div>
-      
-    </div>
-
-    <div class="flex items-center gap-6 bg-gray-100 px-6 py-3 rounded-full shadow-md w-fit mx-auto">
-         
-      <!-- Verified Properties -->
-      <div class="flex items-center gap-2 text-green-600 font-medium">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7 7h10v10H7z"/>
-        </svg>
-        Verified Properties
-      </div>
-
-      <div class="h-6 w-px bg-gray-400"></div>
-
-
-      <!-- Bottom Rate Policy -->
-      <div class="flex items-center gap-2 text-[#0b7a44] font-medium">
-        <div class="w-6 h-6">
-          <!-- MahaRERA Logo -->
-          <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="256" cy="256" r="240" fill="#fff" stroke="#d9362a" stroke-width="35"/>
-            <circle cx="256" cy="256" r="180" fill="#fff" stroke="#000" stroke-width="10"/>
-            <rect x="175" y="180" width="40" height="130" fill="#000"/>
-            <rect x="225" y="150" width="40" height="160" fill="#000"/>
-            <rect x="275" y="200" width="40" height="110" fill="#000"/>
-            <text x="256" y="260" text-anchor="middle" font-size="70" fill="#000" font-family="Arial Black">MAHA</text>
-            <text x="256" y="330" text-anchor="middle" font-size="70" fill="#000" font-family="Arial Black">RERA</text>
-          </svg>
-        </div>
-
-     RERA Registered Properties
-      </div>
-
-   
+      <button id="searchButton" class="text-white px-6 py-3 font-semibold transition bg-[{{ slider.search_btn_color }}]">
+        Search
+      </button>
 
     </div>
 
-  </section>
-</div>
+    </div>
 
+    <!-- RIGHT IMAGE -->
+    <div class="relative flex justify-center">
 
-<div class="md:hidden">
-  <section  class="relative flex flex-col items-center justify-center text-center text-white h-[420px] overflow-hidden">
+      <img src="{{ slider.image.url }}" class="w-[420px] md:w-[500px]" alt="Mumbai"/>
 
-    <img src="{% if settings_obj.search_bg %}{{ settings_obj.search_bg.url }}{% else %}{% static 'images/central-mumbai.webp' %}{% endif %}" loading="eager  fetchpriority="high" class="absolute inset-0 w-full h-full object-cover" alt="Real estate background">
+    </div>
 
-    <div class="absolute inset-0 bg-black/25"></div>
+  </div>
 
-      <div class="relative z-10 w-full px-4">
+</section>
 
-        <h2 class="text-2xl font-bold mb-2">Real Estate Made Real Easy</h2>
-        <p class="text-gray-300 mb-5 text-sm">
-          We’ve got you covered! From finding property to 
-          <span class="text-pink-400 font-semibold">Interiors</span>
-        </p>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
 
-        <!-- Tabs -->
-        <div id="mobileTabs" class="flex justify-center gap-2 overflow-x-auto scrollbar-hide w-full max-w-md mx-auto">
-          <button class="tab-btn bg-white text-black px-3 py-2 rounded-md font-semibold" data-tab="buy">Buy</button>
-          <button class="tab-btn bg-[#122c61] text-white px-3 py-2 rounded-md" data-tab="projects">New Projects</button>
-          <button class="tab-btn bg-[#122c61] text-white px-3 py-2 rounded-md" data-tab="rental">Rental</button>
-        </div>
+const tabs = document.querySelectorAll("#hero-tabs .tab-btn");
 
-        <!-- Search -->
-        <div class="flex items-center bg-white/80 mt-5 rounded-full px-4 py-2 text-gray-700 shadow-md max-w-lg mx-auto">
+tabs.forEach(tab => {
 
-          <select id="propertyTypeSelect" class="text-sm text-gray-600 bg-transparent outline-none cursor-pointer">
-            <option value="residential">Residential</option>
-            <option value="commercial">Commercial</option>
-          </select>
+tab.addEventListener("click", function(){
 
-          <div class="h-5 w-px bg-gray-300 mx-2"></div>
+tabs.forEach(btn => btn.classList.remove("active"));
 
-          <div class="relative flex-grow">
-            <input id="mobileSearchInput" class="w-full bg-transparent outline-none text-sm" placeholder="Select City, Locality Or Projects Name" autocomplete="off">
+this.classList.add("active");
 
-          </div>
+});
 
-          <button id="mobileSearchButton" class="ml-2">
-            <i class="fas fa-search text-gray-700"></i>
-          </button>
+});
 
-        </div>
-      </div>
-
-  </section>
-</div>
-
+});
+</script>
 
 
 <script>
@@ -191,7 +152,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const desktopBtn = document.getElementById("searchButton");
 
   const mobileInput = document.getElementById("mobileSearchInput");
-  const mobileBox = document.getElementById("mobileSuggestionBox");
   const mobileBtn = document.getElementById("mobileSearchButton");
 
   /* =========================
@@ -280,37 +240,9 @@ document.addEventListener("DOMContentLoaded", function () {
     desktopSearch(e.target.value.trim());
   });
 
-  desktopBtn?.addEventListener("click", () => {
-    const value = desktopInput.value.trim();
-    if (value.length < 2) {
-      alert("Please enter a valid search term");
-      return;
-    }
-    window.location.href =
-      `/projects/search/?q=${encodeURIComponent(value)}`;
-  });
 
-  /* =========================
-     MOBILE SEARCH
-  ========================== */
-  const mobileSearch = debounce((value) => {
-    fetchSuggestions(value, mobileBox, mobileInput);
-  });
 
-  mobileInput?.addEventListener("input", (e) => {
-    mobileSearch(e.target.value.trim());
-  });
-
-  mobileBtn?.addEventListener("click", () => {
-    const value = mobileInput.value.trim();
-    if (value.length < 2) {
-      alert("Please enter a valid search term");
-      return;
-    }
-    window.location.href =
-      `/projects/search/?q=${encodeURIComponent(value)}`;
-  });
-
+  
   /* =========================
      CLOSE DROPDOWN ON OUTSIDE CLICK
   ========================== */

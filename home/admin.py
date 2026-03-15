@@ -114,9 +114,9 @@ class SettingAdmin(admin.ModelAdmin):
 # =============================
 @admin.register(Slider)
 class SliderAdmin(admin.ModelAdmin):
-    list_display = ("title", "order", "is_active")
+    list_display = ("heading", "order", "is_active")
     list_editable = ("order", "is_active")
-    search_fields = ("title", "subtitle")
+    search_fields = ("heading", "subtitle")
     list_filter = ("is_active",)
     ordering = ("order",)
 
@@ -345,3 +345,5 @@ class FooterLinkAdmin(admin.ModelAdmin):
     list_filter = ("is_active",)
     search_fields = ("title", "subtitle")
     ordering = ("parent", "order")
+
+    
