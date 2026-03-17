@@ -8,7 +8,7 @@
 {% block content %}
 
 <!-- ========== HERO START HERE ========== -->
-<section class="relative w-full h-[280px] md:h-[320px] overflow-hidden rounded-b-2xl mb-8">
+<section class="relative w-full h-[280px] md:h-[320px] overflow-hidden rounded-b-2xl">
 
     <!-- Background Image -->
     <img src="{% static 'images/about-banner.jpg' %}" 
@@ -117,6 +117,62 @@
       </div>
 
     </div>
+
+  </div>
+
+</section>
+<!-- ========== MISSION, VISION END HERE ========== -->
+
+<!-- ========== MISSION, VISION START HERE ========== -->
+<section class="relative bg-[#012f2f] text-white py-10 overflow-hidden">
+
+  <div class="max-w-5xl mx-auto text-center px-6">
+
+    <!-- Small Heading -->
+    <p class="text-sky-400 uppercase tracking-widest text-sm mb-6">
+      FIND OUT OFFERS AND MORE!
+    </p>
+
+    <!-- Main Heading -->
+    <h2 class="text-5xl font-serif mb-6">
+      Find your best property
+    </h2>
+
+    <!-- Description -->
+    <p class="text-gray-200 max-w-3xl mx-auto mb-10">
+      At {{settings_obj.site_name}}, we’re more than just realtors – we are your trusted partners
+      in your journey to find the perfect property. To explore the properties,
+      click on the icons below.
+    </p>
+
+    <!-- Options -->
+    <div class="flex justify-center gap-12 text-lg mb-10">
+
+      <div class="flex items-center gap-3">
+        <i class="fa-solid fa-building text-2xl"></i>
+        <span>Buy Properties</span>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <i class="fa-solid fa-door-open text-2xl"></i>
+        <span>Rent properties</span>
+      </div>
+
+    </div>
+
+    <!-- Divider -->
+    <div class="border-t border-gray-400/40 max-w-3xl mx-auto mb-7"></div>
+
+    <!-- Text -->
+    <p class="text-gray-200 mb-4">
+      List your property for us to sell now. Click on the button below and
+      submit all the information.
+    </p>
+
+    <!-- Button -->
+    <button class="bg-cyan-400 hover:bg-cyan-300 text-black font-medium px-8 py-3 transition">
+      Sell your property
+    </button>
 
   </div>
 
