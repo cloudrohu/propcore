@@ -134,16 +134,8 @@ class Why_Choose(models.Model):
 
 
 class About(models.Model):
-    search_bg = models.ImageField(
-        upload_to='about/backgrounds/',
-        blank=True, null=True,
-        help_text="Background image for the top search banner (optional)"
-    )
-    home_bg = models.ImageField(
-        upload_to='about/backgrounds/',
-        blank=True, null=True,
-        help_text="Background image for home about section"
-    )
+    search_bg = models.ImageField(upload_to='about/backgrounds/',blank=True, null=True,help_text="Background image for the top search banner (optional)")
+    home_bg = models.ImageField(upload_to='about/backgrounds/',blank=True, null=True,help_text="Background image for home about section")
 
     # =============================
     # 🏠 Main About Section

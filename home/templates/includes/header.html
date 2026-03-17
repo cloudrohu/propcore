@@ -1,4 +1,6 @@
-<header class="sticky top-0 z-50 border-b bg-white shadow-sm font-sans">
+{% load static %}
+
+<header class="sticky top-0 z-50 border-b  shadow-sm font-sans" style="background:{{ settings_obj.header_footer_color }};color:{{ settings_obj.text_color }}">
   <div class="max-w-[1400px] mx-auto px-4 py-3">
     <div class="flex items-center justify-between gap-4">
       
@@ -12,9 +14,8 @@
         {% endif %}
       </a>
 
-      <form action="{% url 'search_projects' %}" method="GET" class="hidden md:flex flex-1 max-w-md relative group mx-4">
-          <input type="text" name="q" placeholder="What are you looking for?" 
-                 class="w-full bg-gray-100 border-none py-2.5 px-6 focus:ring-2 focus:ring-red-400 outline-none text-sm transition-all">
+      <form action="{% url 'search_projects' %}" method="GET" class="hidden md:flex border border-slate-500 flex-1 max-w-md relative group mx-4">
+          <input type="text" name="q" required placeholder="What are you looking for?" class="w-full bg-gray-100 border-none py-2.5 px-6 focus:ring-2 focus:ring-red-400 outline-none text-sm transition-all">
           <button type="submit" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-red-500">
               <i class="fa-solid fa-magnifying-glass"></i>
           </button>
@@ -31,12 +32,12 @@
           </nav>
 
           <div class="flex items-center gap-2 md:gap-4 md:border-l md:pl-6 border-gray-200">
-              <a href="/admin/" class="hidden sm:flex items-center gap-2 text-gray-700 font-medium hover:text-red-500 transition">
+             
+            <a href="/admin/" class="hidden sm:flex items-center gap-2 text-gray-700 font-medium hover:text-red-500 transition">
                   <i class="fa-regular fa-user"></i> Login/Register
               </a>
               
-              <a href="{% url 'contact' %}" 
-                 class="bg-[#4095bd] hover:bg-[#4ABEF5] text-white px-3 md:px-4 py-2 md:py-2.5 font-semibold text-xs md:text-sm flex items-center gap-2 transition shadow-md shadow-red-100">
+              <a href="{% url 'contact' %}" class="bg-[#4095bd] hover:bg-[#4ABEF5] text-white px-3 md:px-4 py-2 md:py-2.5 font-semibold text-xs md:text-sm flex items-center gap-2 transition shadow-md shadow-red-100">
                   <i class="fa-solid fa-plus"></i> <span class="hidden sm:inline">Sell/Rent your property</span><span class="sm:hidden">Sell/Rent your property</span>
               </a>
 
@@ -106,4 +107,4 @@
         overlay.classList.add("hidden");
     };
     overlay.onclick = closeMenu.onclick;
-</script>
+</script> 

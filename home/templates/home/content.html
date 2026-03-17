@@ -284,8 +284,6 @@
   </section>
   <!-- ======================= HERO END ======================= -->
 
-
-
   <!-- ======================= FEATURE PROPERTIES ======================= -->
    {% if rental_properties %}
   <section class="bg-gray-100 py-8">
@@ -414,7 +412,80 @@
   </section>
   {% endif %}
   <!-- ======================= FEATURE PROPERTIES END ======================= -->
+  
+  <!-- ======================= 🌟 WHY CHOOSE US ======================= -->
+  <section class="bg-[#dfe7e7] py-16">
 
+    <div class="max-w-6xl mx-auto px-6">
+
+      <!-- Heading -->
+      <div class="text-center mb-12">
+
+        <h2 class="text-4xl md:text-5xl font-serif text-[#0e2c2c] mb-3">
+          Why Rely on {{settings_obj.site_name}}?
+        </h2>
+
+        <p class="text-gray-700 max-w-2xl mx-auto text-sm">
+          With over a decade of experience in the real estate market, we understand the
+          ins and outs of property transactions like no other.
+        </p>
+
+      </div>
+
+      <!-- Cards -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+
+      <!-- Card -->
+      <div class="bg-white rounded-xl shadow-md p-4 text-center hover:shadow-lg transition duration-300">
+
+          <img src="https://propcore.in/wp-content/uploads/2024/09/3D-Icon-3-2.png" alt="Experienced Team" class="w-16 h-16 mx-auto mb-2 object-contain" >
+
+          <h3 class="text-base font-semibold text-gray-800">
+              Experienced Team
+          </h3>
+
+      </div>
+
+      <!-- Card -->
+      <div class="bg-white rounded-xl shadow-md p-4 text-center hover:shadow-lg transition duration-300">
+
+          <img src="https://propcore.in/wp-content/uploads/2024/09/3D-Icon-2-2.png" alt="Certified Properties/Projects" class="w-16 h-16 mx-auto mb-2 object-contain" >
+
+          <h3 class="text-base font-semibold text-gray-800">
+              Certified Properties/Projects
+          </h3>
+
+      </div>
+      
+      
+      <!-- Card -->
+      <div class="bg-white rounded-xl shadow-md p-4 text-center hover:shadow-lg transition duration-300">
+
+          <img src="https://propcore.in/wp-content/uploads/2024/09/3D-Icon-1-2.png" alt="Uncomplicated Transactions" class="w-16 h-16 mx-auto mb-2 object-contain" >
+
+          <h3 class="text-base font-semibold text-gray-800">
+              Uncomplicated Transactions
+          </h3>
+
+      </div>
+      
+      <!-- Card -->
+      <div class="bg-white rounded-xl shadow-md p-4 text-center hover:shadow-lg transition duration-300">
+
+          <img src="https://propcore.in/wp-content/uploads/2024/09/handshake-icon.png" alt="Best value Deals" class="w-16 h-16 mx-auto mb-2 object-contain" >
+
+          <h3 class="text-base font-semibold text-gray-800">
+              Best value Deals
+          </h3>
+
+      </div>
+
+      </div>
+
+    </div>
+
+  </section>
+  <!-- ======================= 🌟 WHY CHOOSE US END ======================= -->
 
   <!-- ======================= POSSESSION STATUS (UNIQUE) ======================= -->
   <section class="py-16 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
@@ -600,209 +671,6 @@
   </section>
   <!-- ======================= WHAT ARE YOU LOOKING FOR? ======================= -->
 
-  <!-- ======================= 🌟 WHY CHOOSE US ======================= -->
-  <section class="hidden md:block py-12 bg-white" id="why-choose">
-    <div class="max-w-7xl mx-auto px-4 md:px-6 grid md:grid-cols-2 gap-8 items-center">
-
-      <!-- IMAGE SIDE -->
-      <div class="relative group md:order-none order-1"
-          data-aos="zoom-in-right">
-
-        <div class="absolute -inset-2 bg-orange-500/10 blur-xl opacity-0 md:group-hover:opacity-100 transition"></div>
-
-        <img 
-          src="{{ about_page.home_bg.url|default:'https://dummyimage.com/600x380/cccccc/000&text=Why+Choose+Us' }}"
-          class="relative w-full h-[220px] sm:h-[280px] md:h-[450px] object-cover shadow-xl transition md:group-hover:scale-[1.01]"
-          alt="Why Choose"
-          loading="lazy"
-        >
-
-        <div class="absolute inset-0 border border-white/20 pointer-events-none"></div>
-      </div>
-
-      <!-- TEXT SIDE -->
-      <div data-aos="fade-left">
-
-        <h2 class="text-2xl md:text-3xl font-bold text-orange-600 mb-4 text-center md:text-left">
-          Why Choose Us
-        </h2>
-
-        <!-- NO INTERNAL SCROLL ON MOBILE -->
-        <div class="md:max-h-[350px] md:overflow-y-auto pr-1 md:pr-3 space-y-4 text-gray-800 text-[15px] leading-relaxed">
-
-          {% for item in why_choose_items %}
-          <div class="flex gap-3">
-
-            <span class="text-green-600 text-xl leading-none">
-              {% if item.icon %} {{ item.icon }} {% else %} ✔ {% endif %}
-            </span>
-
-            <span class="font-medium">
-              {{ item.title }}
-              {% if item.subtitle %}
-              <span class="text-gray-600 font-normal"> — {{ item.subtitle }}</span>
-              {% endif %}
-            </span>
-
-          </div>
-          {% endfor %}
-
-        </div>
-
-      </div>
-
-    </div>
-  </section>
-
-  <section class="block md:hidden py-10 bg-gray-50">
-
-    <div class="max-w-md mx-auto px-4 text-center">
-
-      <h2 class="text-2xl font-bold text-orange-600 mb-6">
-        Why Choose Us
-      </h2>
-
-      <div class="space-y-4">
-
-        {% for item in why_choose_items|slice:":5" %}
-        <div class="flex items-center gap-3 bg-white shadow-sm rounded-xl p-4">
-
-          <span class="text-green-600 text-xl">
-            {% if item.icon %} {{ item.icon }} {% else %} ✔ {% endif %}
-          </span>
-
-          <span class="text-gray-800 font-medium text-left">
-            {{ item.title }}
-          </span>
-
-        </div>
-        {% endfor %}
-
-      </div>
-
-    </div>
-  </section>
-  <!-- ======================= 🌟 WHY CHOOSE US END ======================= -->
-
-  <!-- ===================== How We Work ======================= -->
-  <section class="w-full py-12 text-white bg-cover bg-center relative" style="background-image: url('https://sigmahomes.co.in/media/about/Prithvi_Pride.jpg');">
-
-    <div class="absolute inset-0 bg-black/50"></div>
-
-    <div class="relative max-w-7xl mx-auto px-6 text-center">
-
-      <h2 class="text-3xl md:text-4xl font-semibold mb-14 uppercase">
-        How We Work
-      </h2>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-10 relative">
-
-        <div class="hidden md:block absolute top-[38px] left-0 right-0 h-[2px] bg-white/30"></div>
-
-        <!-- ITEM 1 -->
-        <div class="group flex flex-col items-center text-center">
-          <div class="w-20 h-20 rounded-full border-2 border-white/40 flex items-center justify-center
-                      transition group-hover:bg-orange-500 group-hover:scale-110">
-            <i class="fa-solid fa-building text-2xl"></i>
-          </div>
-
-          <h3 class="mt-4 font-semibold">Search & Shortlisting</h3>
-          <p class="mt-2 text-sm opacity-100 md:opacity-0 md:group-hover:opacity-100 transition">
-            Lacs of verified listings from 500+ developers
-          </p>
-
-          <button class="common-btn"
-            data-bs-toggle="modal"
-            data-bs-target="#commonModal"
-            data-modal-title="Get In Touch">
-            Get In Touch
-          </button>
-        </div>
-
-        <!-- ITEM 2 -->
-        <div class="group flex flex-col items-center text-center">
-          <div class="w-20 h-20 rounded-full border-2 border-white/40 flex items-center justify-center
-                      transition group-hover:bg-orange-500 group-hover:scale-110">
-            <i class="fa-solid fa-car text-2xl"></i>
-          </div>
-
-          <h3 class="mt-4 font-semibold">Site Visit</h3>
-          <p class="mt-2 text-sm opacity-100 md:opacity-0 md:group-hover:opacity-100 transition">
-            Guided site visits with experts
-          </p>
-
-          <button class="common-btn"
-            data-bs-toggle="modal"
-            data-bs-target="#commonModal"
-            data-modal-title="Book Site Visit">
-            Book Site Visit
-          </button>
-        </div>
-
-        <!-- ITEM 3 -->
-        <div class="group flex flex-col items-center text-center">
-          <div class="w-20 h-20 rounded-full border-2 border-white/40 flex items-center justify-center
-                      transition group-hover:bg-orange-500 group-hover:scale-110">
-            <i class="fa-solid fa-sack-dollar text-2xl"></i>
-          </div>
-
-          <h3 class="mt-4 font-semibold">Home Loan Assistance</h3>
-          <p class="mt-2 text-sm opacity-100 md:opacity-0 md:group-hover:opacity-100 transition">
-            Loan guidance from top banks
-          </p>
-
-          <button class="common-btn"
-            data-bs-toggle="modal"
-            data-bs-target="#commonModal"
-            data-modal-title="Home Loan Assistance">
-            Apply Home Loan
-          </button>
-        </div>
-
-        <!-- ITEM 4 -->
-        <div class="group flex flex-col items-center text-center">
-          <div class="w-20 h-20 rounded-full border-2 border-white/40 flex items-center justify-center
-                      transition group-hover:bg-orange-500 group-hover:scale-110">
-            <i class="fa-solid fa-file-lines text-2xl"></i>
-          </div>
-
-          <h3 class="mt-4 font-semibold">Legal Advice</h3>
-          <p class="mt-2 text-sm opacity-100 md:opacity-0 md:group-hover:opacity-100 transition">
-            Legal and documentation support
-          </p>
-
-          <button class="common-btn"
-            data-bs-toggle="modal"
-            data-bs-target="#commonModal"
-            data-modal-title="Legal Advice">
-            Get In Touch
-          </button>
-        </div>
-
-        <!-- ITEM 5 -->
-        <div class="group flex flex-col items-center text-center">
-          <div class="w-20 h-20 rounded-full border-2 border-white/40 flex items-center justify-center
-                      transition group-hover:bg-orange-500 group-hover:scale-110">
-            <i class="fa-solid fa-key text-2xl"></i>
-          </div>
-
-          <h3 class="mt-4 font-semibold">Unit Booking</h3>
-          <p class="mt-2 text-sm opacity-100 md:opacity-0 md:group-hover:opacity-100 transition">
-            Assistance till final possession
-          </p>
-
-          <button class="common-btn"
-            data-bs-toggle="modal"
-            data-bs-target="#commonModal"
-            data-modal-title="Unit Booking">
-            Get In Touch
-          </button>
-        </div>
-
-      </div>
-    </div>
-  </section>
-  <!-- ===================== How We Work End======================= -->
 
   <!-- ======================= Blog Section Start ======================= -->
   <section id="blog" class="py-20 bg-gray-50">
