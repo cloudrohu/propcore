@@ -98,6 +98,8 @@ def index(request):
         .filter(active=True)
         .order_by("-created_at")[:8]
     )
+
+    
    
     # ================= RENDER =================
     return render(request, "home/index.html", {

@@ -4,15 +4,12 @@ from django.utils.safestring import mark_safe
 from utility.compress_mixin import ImageCompressionMixin
 
 
-# =============================
-# 🧠 MAIN MODEL — Website Setting
-# =============================
 class Setting(ImageCompressionMixin, models.Model):    
     site_name = models.CharField(max_length=150)
     logo = models.ImageField(upload_to='settings/', blank=True, null=True)
     favicon = models.ImageField(upload_to='settings/', blank=True, null=True)
     search_bg = models.ImageField(upload_to='logo/', blank=True, null=True)
-    testmonial_bg = models.ImageField(upload_to='logo/')
+    hero_video = models.FileField(upload_to='videos/', blank=True, null=True)
     header_footer_color = models.CharField(max_length=150, blank=True)
     text_color = models.CharField(max_length=150, blank=True)
     button_color = models.CharField(max_length=150, blank=True)
@@ -71,11 +68,6 @@ class Setting(ImageCompressionMixin, models.Model):
             return self.logo.url
         return None
 
-
-
-# =============================
-# 🖼️ Hero / Slider Section (Multiple)
-# =============================
 class Slider(models.Model):
     heading = models.CharField(max_length=200)
     subtitle = models.CharField(max_length=300, blank=True, null=True)
@@ -94,9 +86,6 @@ class Slider(models.Model):
     def __str__(self):
         return self.heading
 
-# =============================
-# 👥 Leadership Team Section
-# =============================
 class Leadership(models.Model):
     name = models.CharField(max_length=100, help_text="Full name of the team member")
     designation = models.CharField(max_length=150, help_text="Position or title (e.g., CEO, Managing Director)")
@@ -131,7 +120,6 @@ class Why_Choose(models.Model):
 
     def __str__(self):
         return self.title
-
 
 class About(models.Model):
     search_bg = models.ImageField(upload_to='about/backgrounds/',blank=True, null=True,help_text="Background image for the top search banner (optional)")
@@ -198,9 +186,6 @@ class About(models.Model):
     def __str__(self):
         return self.title
 
-# =============================
-# 📝 Contact Page (Single)
-# =============================
 class Contact_Page(models.Model):
     heading = models.CharField(max_length=200)
     sub_heading = models.CharField(max_length=300, blank=True, null=True)
@@ -215,9 +200,6 @@ class Contact_Page(models.Model):
     def __str__(self):
         return self.heading
 
-# =============================
-# 👨‍💼 Our Team (Multiple)
-# =============================
 class Our_Team(models.Model):
     name = models.CharField(max_length=100)
     designation = models.CharField(max_length=100)
@@ -230,9 +212,6 @@ class Our_Team(models.Model):
     def __str__(self):
         return self.name
 
-# =============================
-# 💬 Testimonial Section (Multiple)
-# =============================
 class Testimonial(models.Model):
     name = models.CharField(max_length=100)
     designation = models.CharField(max_length=100, blank=True, null=True)
@@ -246,9 +225,6 @@ class Testimonial(models.Model):
     def __str__(self):
         return f"{self.name} ({self.rating}⭐)"
 
-# =============================
-# ❓ FAQ Section (Multiple)
-# =============================
 class FAQ(models.Model):
     question = models.CharField(max_length=300)
     answer = CKEditor5Field()
