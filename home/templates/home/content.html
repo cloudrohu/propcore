@@ -285,7 +285,6 @@
     </script>
   <!-- ======================= FEATURE PROJECTS ======================= -->
 
-
   <!-- ======================= FEATURE PROPERTIES ======================= -->
    {% if rental_properties %}
   <section class="bg-gray-100 py-8">
@@ -298,7 +297,7 @@
         </h2>
       </div>
 
-        <!-- Swiper -->
+      <!-- Swiper -->
       <div class="swiper rentPropSwiper h-full">
         <div class="swiper-wrapper">
 
@@ -307,19 +306,25 @@
             <div class="bg-white rounded-lg shadow-md hover:shadow-xl transition duration-300 overflow-hidden flex flex-col w-full h-full">
 
 
-              <!-- Image -->
+               <!-- Image -->
               <div class="relative">
-                {% if property.image %}
-                  <img src="{{ property.image.url }}" class="w-full h-56 object-cover"  alt="{{ property.title }}">
-                {% else %}
-                  <img src="https://via.placeholder.com/800x500" class="w-full h-56 object-cover" alt="No Image">
-                {% endif %}
+
+                {% with property.gallery.first as img %}
+                
+                  {% if img %}
+                    <img src="{{ img.gallery_image.url }}" class="w-full h-56 object-cover" alt="{{ property.title }}">
+                  {% else %}
+                    <img src="https://via.placeholder.com/800x500" class="w-full h-56 object-cover" alt="No Image">
+                  {% endif %}
+
+                {% endwith %}
 
                 {% if property.configuration %}
                 <span class="absolute top-4 right-4 bg-[#c6a16e] text-white text-xs px-3 py-1 font-semibold">
                   {{ property.configuration }}
                 </span>
                 {% endif %}
+
               </div>
 
               <!-- Content -->
@@ -610,7 +615,6 @@
   <!-- ======================= POSSESSION STATUS (UNIQUE END) ======================= -->
 
   <hr>
-
   <!-- ======================= WHAT ARE YOU LOOKING FOR? ======================= -->
   <section class="py-16 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 text-center">
@@ -954,332 +958,332 @@
   </section>
   <!-- ======================= TESTIMONIALS ======================= -->
 
-<!-- ======================= CLASSIC CONTACT SECTION ======================= -->
-<section id="contact" class="py-20 bg-gray-50">
+  <!-- ======================= CLASSIC CONTACT SECTION ======================= -->
+  <section id="contact" class="py-20 bg-gray-50">
 
-  <div class="max-w-7xl mx-auto px-6">
+    <div class="max-w-7xl mx-auto px-6">
 
-    <!-- Section Heading -->
-    <div class="text-center mb-14">
+      <!-- Section Heading -->
+      <div class="text-center mb-14">
 
-      <h2 class="text-4xl font-bold text-gray-900 mb-3">
-        Contact Our Property Experts
-      </h2>
+        <h2 class="text-4xl font-bold text-gray-900 mb-3">
+          Contact Our Property Experts
+        </h2>
 
-      <p class="text-gray-600 max-w-2xl mx-auto">
-        Have questions about buying, selling or renting property?  
-        Our team is ready to assist you with the best real estate solutions.
-      </p>
-
-    </div>
-
-
-    <div class="grid lg:grid-cols-2 gap-12">
-
-
-      <div class="space-y-8">
-
-      <!-- Address -->
-      <div class="flex items-start gap-5 border-b pb-6">
-
-      <i class="fa-solid fa-location-dot text-orange-600 text-xl mt-1"></i>
-
-      <div>
-
-        <h4 class="font-semibold text-gray-900 mb-1">
-          Office Address
-        </h4>
-
-        <p class="text-gray-600">
-          Mumbai, Maharashtra, India
+        <p class="text-gray-600 max-w-2xl mx-auto">
+          Have questions about buying, selling or renting property?  
+          Our team is ready to assist you with the best real estate solutions.
         </p>
 
       </div>
 
-      </div>
+
+      <div class="grid lg:grid-cols-2 gap-12">
 
 
-      <!-- Phone -->
-      <div class="flex items-start gap-5 border-b pb-6">
+        <div class="space-y-8">
 
-        <i class="fa-solid fa-phone text-orange-600 text-xl mt-1"></i>
+        <!-- Address -->
+        <div class="flex items-start gap-5 border-b pb-6">
 
-        <div>
-
-        <h4 class="font-semibold text-gray-900 mb-1">
-        Call Us
-        </h4>
-
-        <p class="text-gray-600">
-        +91 98980 34466
-        </p>
-
-        </div>
-
-      </div>
-
-
-      <!-- Email -->
-      <div class="flex items-start gap-5 border-b pb-6">
-
-        <i class="fa-solid fa-envelope text-orange-600 text-xl mt-1"></i>
+        <i class="fa-solid fa-location-dot text-orange-600 text-xl mt-1"></i>
 
         <div>
 
           <h4 class="font-semibold text-gray-900 mb-1">
-            Email Address
+            Office Address
           </h4>
 
           <p class="text-gray-600">
-            info@example.com
+            Mumbai, Maharashtra, India
           </p>
 
         </div>
 
-      </div>
-      </div>
+        </div>
 
 
-      <div class="bg-white border shadow-sm p-6">
+        <!-- Phone -->
+        <div class="flex items-start gap-5 border-b pb-6">
 
-        <h3 class="text-2xl font-semibold text-gray-900 mb-6">
-          Send Us a Message
-        </h3>
+          <i class="fa-solid fa-phone text-orange-600 text-xl mt-1"></i>
 
-        <form class="space-y-5">
+          <div>
 
-          <input type="text" placeholder="Full Name" class="w-full border p-3 focus:outline-none focus:border-orange-500" >
+          <h4 class="font-semibold text-gray-900 mb-1">
+          Call Us
+          </h4>
 
-          <input type="email" placeholder="Email Address" class="w-full border p-3 focus:outline-none focus:border-orange-500" >
+          <p class="text-gray-600">
+          +91 98980 34466
+          </p>
 
-          <input type="tel" placeholder="Phone Number" class="w-full border p-3 focus:outline-none focus:border-orange-500" >
+          </div>
 
-          <textarea rows="5" placeholder="Your Message" class="w-full border p-3 focus:outline-none focus:border-orange-500" ></textarea>
+        </div>
 
-          <button class="w-full bg-orange-600 text-white py-3 font-semibold hover:bg-orange-700 transition" >
-            Send Message
-          </button>
 
-        </form>
+        <!-- Email -->
+        <div class="flex items-start gap-5 border-b pb-6">
+
+          <i class="fa-solid fa-envelope text-orange-600 text-xl mt-1"></i>
+
+          <div>
+
+            <h4 class="font-semibold text-gray-900 mb-1">
+              Email Address
+            </h4>
+
+            <p class="text-gray-600">
+              info@example.com
+            </p>
+
+          </div>
+
+        </div>
+        </div>
+
+
+        <div class="bg-white border shadow-sm p-6">
+
+          <h3 class="text-2xl font-semibold text-gray-900 mb-6">
+            Send Us a Message
+          </h3>
+
+          <form class="space-y-5">
+
+            <input type="text" placeholder="Full Name" class="w-full border p-3 focus:outline-none focus:border-orange-500" >
+
+            <input type="email" placeholder="Email Address" class="w-full border p-3 focus:outline-none focus:border-orange-500" >
+
+            <input type="tel" placeholder="Phone Number" class="w-full border p-3 focus:outline-none focus:border-orange-500" >
+
+            <textarea rows="5" placeholder="Your Message" class="w-full border p-3 focus:outline-none focus:border-orange-500" ></textarea>
+
+            <button class="w-full bg-orange-600 text-white py-3 font-semibold hover:bg-orange-700 transition" >
+              Send Message
+            </button>
+
+          </form>
+
+        </div>
 
       </div>
 
     </div>
 
-  </div>
+  </section>
+  <!-- ======================= CONTACT SECTION END ======================= -->
 
-</section>
-<!-- ======================= CONTACT SECTION END ======================= -->
+  <script defer>
+  document.addEventListener("DOMContentLoaded", () => {
 
-<script defer>
-document.addEventListener("DOMContentLoaded", () => {
-
-  /* ===== MODAL ===== */
-  const modal = document.getElementById("commonModal");
-  if (modal) {
-    modal.addEventListener("show.bs.modal", e => {
-      document.getElementById("modalTitle").innerText =
-        e.relatedTarget?.getAttribute("data-modal-title") || "";
-    });
-  }
-
-  /* ===== SWIPER (ALL TYPES) ===== */
-  if (window.Swiper) {
-
-  // Home Loan Partners smooth auto slider
-    document.querySelectorAll(".loanPartnerSwiper").forEach(el=>{
-      new Swiper(el,{
-        loop:true,
-        speed:6000,
-        spaceBetween:22,
-
-        freeMode:true,
-        freeModeMomentum:false,
-
-        autoplay:{
-          delay:0,
-          disableOnInteraction:false,
-          pauseOnMouseEnter:true
-        },
-
-        breakpoints:{
-          320:{slidesPerView:1.2},
-          480:{slidesPerView:1.6},
-          640:{slidesPerView:2.3},
-          768:{slidesPerView:3},
-          1024:{slidesPerView:3.8},
-          1280:{slidesPerView:4.5}
-        }
+    /* ===== MODAL ===== */
+    const modal = document.getElementById("commonModal");
+    if (modal) {
+      modal.addEventListener("show.bs.modal", e => {
+        document.getElementById("modalTitle").innerText =
+          e.relatedTarget?.getAttribute("data-modal-title") || "";
       });
-    });
+    }
 
-    // Blog mobile slider
-    document.querySelectorAll(".blogSwiper").forEach(el=>{
-      new Swiper(el,{
-        slidesPerView:1,
-        spaceBetween:18,
-        loop:true,
+    /* ===== SWIPER (ALL TYPES) ===== */
+    if (window.Swiper) {
 
-        autoplay:{
-          delay:4000,
-          disableOnInteraction:false,
-          pauseOnMouseEnter:true
-        },
+    // Home Loan Partners smooth auto slider
+      document.querySelectorAll(".loanPartnerSwiper").forEach(el=>{
+        new Swiper(el,{
+          loop:true,
+          speed:6000,
+          spaceBetween:22,
 
-        pagination:{
-          el: el.querySelector(".swiper-pagination"),
-          clickable:true
-        }
-      });
-    });
+          freeMode:true,
+          freeModeMomentum:false,
 
-      // New Launch Projects slider
-    document.querySelectorAll(".newLaunchSwiper").forEach(el=>{
-      new Swiper(el,{
-        slidesPerView:1,
-        spaceBetween:20,
-        loop:true,
+          autoplay:{
+            delay:0,
+            disableOnInteraction:false,
+            pauseOnMouseEnter:true
+          },
 
-        autoplay:{
-          delay:3500,
-          disableOnInteraction:false,
-          pauseOnMouseEnter:true
-        },
-
-        breakpoints:{
-          0:{slidesPerView:1},
-          640:{slidesPerView:1},
-          768:{slidesPerView:2},
-          1024:{slidesPerView:3}
-        }
-      });
-    });
-
-
-  }
-
-  /* ===== BHK TABS ===== */
-  function activateTab(tab, card){
-    const wrap = card.querySelector(".bhk-tabs");
-    const underline = wrap.querySelector(".bhk-underline");
-
-    card.querySelectorAll(".bhk-tab").forEach(t=>t.classList.remove("active"));
-    card.querySelectorAll(".bhk-panel").forEach(p=>p.classList.add("hidden"));
-
-    tab.classList.add("active");
-
-    const r1=tab.getBoundingClientRect(), r2=wrap.getBoundingClientRect();
-    underline.style.width=r1.width+"px";
-    underline.style.left=(r1.left-r2.left)+"px";
-
-    card.querySelector(`[data-panel="${tab.dataset.target}"]`)?.classList.remove("hidden");
-  }
-
-  document.addEventListener("click", e=>{
-    const tab=e.target.closest(".bhk-tab");
-    if(!tab || tab.classList.contains("bhk-disabled")) return;
-    const card=tab.closest(".config-card");
-    if(card) activateTab(tab,card);
-  });
-
-  document.querySelectorAll(".config-card").forEach(card=>{
-    const first=card.querySelector(".bhk-tab:not(.bhk-disabled)");
-    if(first) activateTab(first,card);
-  });
-
-  /* ===== SIMPLE TABS ===== */
-  document.querySelectorAll(".tab-btn").forEach(btn=>{
-    btn.addEventListener("click",()=>{
-      document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
-      btn.classList.add("active");
-
-      document.querySelectorAll(".tab-content").forEach(t=>t.classList.add("hidden"));
-      document.getElementById(btn.dataset.tab)?.classList.remove("hidden");
-    });
-  });
-
-  /* ===== AJAX CITY ===== */
-  const city=document.getElementById("city");
-  if(city){
-    city.addEventListener("change",()=>{
-      fetch(`/ajax/load-localities/?city_id=${city.value}`)
-        .then(r=>r.json())
-        .then(data=>{
-          const loc=document.getElementById("locality");
-          loc.innerHTML='<option value="">Select Locality</option>';
-          data.forEach(l=>loc.innerHTML+=`<option value="${l.id}">${l.name}</option>`);
+          breakpoints:{
+            320:{slidesPerView:1.2},
+            480:{slidesPerView:1.6},
+            640:{slidesPerView:2.3},
+            768:{slidesPerView:3},
+            1024:{slidesPerView:3.8},
+            1280:{slidesPerView:4.5}
+          }
         });
+      });
+
+      // Blog mobile slider
+      document.querySelectorAll(".blogSwiper").forEach(el=>{
+        new Swiper(el,{
+          slidesPerView:1,
+          spaceBetween:18,
+          loop:true,
+
+          autoplay:{
+            delay:4000,
+            disableOnInteraction:false,
+            pauseOnMouseEnter:true
+          },
+
+          pagination:{
+            el: el.querySelector(".swiper-pagination"),
+            clickable:true
+          }
+        });
+      });
+
+        // New Launch Projects slider
+      document.querySelectorAll(".newLaunchSwiper").forEach(el=>{
+        new Swiper(el,{
+          slidesPerView:1,
+          spaceBetween:20,
+          loop:true,
+
+          autoplay:{
+            delay:3500,
+            disableOnInteraction:false,
+            pauseOnMouseEnter:true
+          },
+
+          breakpoints:{
+            0:{slidesPerView:1},
+            640:{slidesPerView:1},
+            768:{slidesPerView:2},
+            1024:{slidesPerView:3}
+          }
+        });
+      });
+
+
+    }
+
+    /* ===== BHK TABS ===== */
+    function activateTab(tab, card){
+      const wrap = card.querySelector(".bhk-tabs");
+      const underline = wrap.querySelector(".bhk-underline");
+
+      card.querySelectorAll(".bhk-tab").forEach(t=>t.classList.remove("active"));
+      card.querySelectorAll(".bhk-panel").forEach(p=>p.classList.add("hidden"));
+
+      tab.classList.add("active");
+
+      const r1=tab.getBoundingClientRect(), r2=wrap.getBoundingClientRect();
+      underline.style.width=r1.width+"px";
+      underline.style.left=(r1.left-r2.left)+"px";
+
+      card.querySelector(`[data-panel="${tab.dataset.target}"]`)?.classList.remove("hidden");
+    }
+
+    document.addEventListener("click", e=>{
+      const tab=e.target.closest(".bhk-tab");
+      if(!tab || tab.classList.contains("bhk-disabled")) return;
+      const card=tab.closest(".config-card");
+      if(card) activateTab(tab,card);
     });
-  }
 
-});
-const container = document.querySelector(".card-container");
+    document.querySelectorAll(".config-card").forEach(card=>{
+      const first=card.querySelector(".bhk-tab:not(.bhk-disabled)");
+      if(first) activateTab(first,card);
+    });
 
-let isDown = false;
-let startX;
-let scrollLeft;
+    /* ===== SIMPLE TABS ===== */
+    document.querySelectorAll(".tab-btn").forEach(btn=>{
+      btn.addEventListener("click",()=>{
+        document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
+        btn.classList.add("active");
 
-// DRAG TO SLIDE (desktop premium feel)
-container.addEventListener("mousedown", e => {
-  isDown = true;
-  container.classList.add("active");
-  startX = e.pageX - container.offsetLeft;
-  scrollLeft = container.scrollLeft;
-});
+        document.querySelectorAll(".tab-content").forEach(t=>t.classList.add("hidden"));
+        document.getElementById(btn.dataset.tab)?.classList.remove("hidden");
+      });
+    });
 
-container.addEventListener("mouseleave", () => isDown = false);
-container.addEventListener("mouseup", () => isDown = false);
+    /* ===== AJAX CITY ===== */
+    const city=document.getElementById("city");
+    if(city){
+      city.addEventListener("change",()=>{
+        fetch(`/ajax/load-localities/?city_id=${city.value}`)
+          .then(r=>r.json())
+          .then(data=>{
+            const loc=document.getElementById("locality");
+            loc.innerHTML='<option value="">Select Locality</option>';
+            data.forEach(l=>loc.innerHTML+=`<option value="${l.id}">${l.name}</option>`);
+          });
+      });
+    }
 
-container.addEventListener("mousemove", e => {
-  if (!isDown) return;
-  e.preventDefault();
-  const x = e.pageX - container.offsetLeft;
-  const walk = (x - startX) * 1.5;
-  container.scrollLeft = scrollLeft - walk;
-});
+  });
+  const container = document.querySelector(".card-container");
 
-// AUTO SLIDE
-setInterval(() => {
-  container.scrollLeft += 220;
+  let isDown = false;
+  let startX;
+  let scrollLeft;
 
-  if (container.scrollLeft + container.clientWidth >= container.scrollWidth) {
-    container.scrollLeft = 0;
-  }
-}, 2500); 
-var swiper = new Swiper(".rentPropSwiper", {
-    slidesPerView: 3,
-    spaceBetween: 30,
-    loop: true,
-    grabCursor: true,
-
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true,
-    },
-
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
-
-    breakpoints: {
-      0: {
-        slidesPerView: 1,
-      },
-      640: {
-        slidesPerView: 2,
-      },
-      1024: {
-        slidesPerView: 3,
-      },
-    },
-    autoplay: {
-    delay: 3000,
-    disableOnInteraction: false,
-  },
+  // DRAG TO SLIDE (desktop premium feel)
+  container.addEventListener("mousedown", e => {
+    isDown = true;
+    container.classList.add("active");
+    startX = e.pageX - container.offsetLeft;
+    scrollLeft = container.scrollLeft;
   });
 
-</script>
+  container.addEventListener("mouseleave", () => isDown = false);
+  container.addEventListener("mouseup", () => isDown = false);
+
+  container.addEventListener("mousemove", e => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - container.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    container.scrollLeft = scrollLeft - walk;
+  });
+
+  // AUTO SLIDE
+  setInterval(() => {
+    container.scrollLeft += 220;
+
+    if (container.scrollLeft + container.clientWidth >= container.scrollWidth) {
+      container.scrollLeft = 0;
+    }
+  }, 2500); 
+  var swiper = new Swiper(".rentPropSwiper", {
+      slidesPerView: 3,
+      spaceBetween: 30,
+      loop: true,
+      grabCursor: true,
+
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+
+      breakpoints: {
+        0: {
+          slidesPerView: 1,
+        },
+        640: {
+          slidesPerView: 2,
+        },
+        1024: {
+          slidesPerView: 3,
+        },
+      },
+      autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
+    },
+    });
+
+  </script>
 
 <style>
  .swiper-slide {

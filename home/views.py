@@ -193,7 +193,7 @@ def contact_view(request):
         )
 
         messages.success(request, "Your message has been sent successfully!")
-        return redirect("contact")  
+        return redirect("/projects/thank-you/")
     
     context = {
         "settings_obj": settings_obj,

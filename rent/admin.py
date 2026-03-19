@@ -31,7 +31,7 @@ class RentalFacilityInline(admin.TabularInline):
     autocomplete_fields = ['facility']
 
 class OwnerDetailsInline(admin.StackedInline):
-    model = OwnerDetails   # ✅ correct model
+    model = OwnerDetails
     extra = 0
 
 class RentDetailsInline(admin.StackedInline):
