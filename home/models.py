@@ -12,6 +12,9 @@ class Setting(ImageCompressionMixin, models.Model):
     hero_video = models.FileField(upload_to='videos/', blank=True, null=True)
     header_footer_color = models.CharField(max_length=150, blank=True)
     text_color = models.CharField(max_length=150, blank=True)
+    services_text = models.CharField(max_length=150, blank=True)
+    services_description = models.CharField(max_length=150, blank=True)
+    services_hero = models.ImageField(upload_to='settings/', blank=True, null=True)
     button_color = models.CharField(max_length=150, blank=True)
     rera_color = models.CharField(max_length=150, blank=True)
     rera_number = models.CharField(max_length=150, blank=True)
@@ -251,7 +254,7 @@ class ImpactMetric(models.Model):
 class Service(models.Model):
     title = models.CharField(max_length=120)
     description = models.TextField()
-    image = models.ImageField(upload_to="services/")
+    icon = models.CharField(blank=True, null=True)
     order = models.PositiveIntegerField(default=0)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)

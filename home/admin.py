@@ -69,6 +69,15 @@ class SettingAdmin(admin.ModelAdmin):
             )
         }),
 
+        
+        ("⚙️🛠️ Services", {
+            "fields": (
+                "services_text",
+                "services_description",
+                "services_hero",
+            )
+        }),
+
         ("🔍 SEO Settings", {
             "fields": (
                 "meta_title",
@@ -288,21 +297,6 @@ class ServiceAdmin(admin.ModelAdmin):
 
     list_editable = ("order", "is_active")
 
-    fieldsets = (
-        ("Basic Info", {
-            "fields": ("title", "subtitle", "link")
-        }),
-        ("Hierarchy", {
-            "fields": ("parent",)
-        }),
-        ("Settings", {
-            "fields": ("order", "is_active")
-        }),
-    )
-
-    def get_queryset(self, request):
-        qs = super().get_queryset(request)
-        return qs.select_related("parent")    
 
 @admin.register(FooterLink)
 class FooterLinkAdmin(admin.ModelAdmin):
