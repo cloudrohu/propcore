@@ -36,12 +36,21 @@
   .custom-scroll::-webkit-scrollbar-thumb:hover {
     background: #333;
   }
-  
+  .highlight-card {
+    position: relative;
+    border-left: 4px solid #f39c12; /* Golden/Orange accent */
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  }
+
+  .highlight-card:hover {
+    border-left: 4px solid #2ecc71; /* Hover color change */
+  }
 </style>
 
 <main>
 
-  
   <!-- ======================= HERO START ======================= -->
   <section class="relative h-[650px] flex items-center justify-center overflow-hidden">
 
@@ -58,7 +67,7 @@
     <div class="absolute inset-0 bg-black/40"></div>
 
     <!-- Content -->
-    <div class="relative max-w-5xl mx-auto px-6">
+    <div class="relative max-w-5xl mx-auto px-6 mt-4">
 
       <div class="bg-blue-500/40 backdrop-blur-xl p-10 text-center">
 
@@ -100,7 +109,7 @@
 
         <div class="text-center mb-8">
           <h2 class="text-2xl md:text-4xl font-black uppercase text-slate-900 tracking-tight">
-            Featured <span class="text-orange-500">PROJECTS</span>
+            Featured <span class="text-green-500">PROJECTS</span>
           </h2>
           <div class="h-1 w-12 bg-orange-500 mx-auto mt-2 rounded-full"></div>
         </div>
@@ -110,131 +119,222 @@
             <div class="swiper-wrapper">
 
               {% for rs in project_featured %}
-              <div class="swiper-slide h-auto">
-                <div class="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden border border-slate-100 flex flex-col h-full">
+            <div class="swiper-slide h-auto border border-green-500">
 
-                  <div class="relative h-52 w-full overflow-hidden shrink-0">
-                    {% if rs.image %}
-                      <img src="{{ rs.image.url }}" alt="{{ rs.project_name }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
+              <div class="group bg-white rounded-lg shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden border border-slate-200 flex flex-col h-full">
+
+                <!-- IMAGE -->
+                <div class="relative h-52 w-full overflow-hidden shrink-0">
+
+                  {% if rs.image %}
+                  <img src="{{ rs.image.url }}" alt="{{ rs.project_name }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
+                  {% else %}
+                  <img src="{% static 'images/default-placeholder.jpg' %}" class="w-full h-full object-cover" loading="lazy">
+                  {% endif %}
+
+                </div>
+
+
+                <div class="p-4 flex flex-col flex-1">
+
+                  <!-- TITLE + LOCATION -->
+                  <div class="flex justify-between items-start gap-2 mb-3">
+
+                    <div class="flex-1">
+
+                      <h3 class="text-base font-bold text-green-800 line-clamp-1 group-hover:text-green-500 transition-colors">
+                        {{ rs.project_name }}
+                      </h3>
+
+                      <p class="text-xs text-slate-500 flex items-center gap-1 mt-0.5">
+                        <i class="fa-solid fa-location-dot text-green-500"></i>
+                        {{ rs.locality.name }}
+                      </p>
+
+                    </div>
+
+                    <div class="text-right">
+
+                      <p class="text-sm font-black text-green-600">
+                        {% if rs.min_price %}
+                          ₹{{ rs.min_price|indian_price }}
+                        {% else %}
+                          On Request
+                        {% endif %}
+                      </p>
+
+                    </div>
+
+                  </div>
+
+
+                  <!-- USP -->
+                  {% if rs.usps.all %}
+
+                  <div class="grid grid-cols-2 gap-2 mb-3">
+
+                    {% for usp in rs.usps.all|slice:":3" %}
+
+                    <div class="flex items-center gap-2 p-1.5 rounded-md bg-slate-50 border border-slate-100">
+
+                      <div class="w-6 h-6 flex items-center justify-center bg-green-100 rounded shrink-0">
+                        <i class="{{ usp.icon }} text-[10px] text-green-600"></i>
+                      </div>
+
+                      <span class="text-[12px] font-semibold text-slate-700 truncate">
+                        {{ usp.point }}
+                      </span>
+
+                    </div>
+
+                    {% endfor %}
+
+                  </div>
+
+                  {% else %}
+
+                  <div class="text-xs text-slate-500 italic mb-3 border border-dashed border-slate-300 p-6 text-center">
+                    Highlights Not Available
+                  </div>
+
+                  {% endif %}
+
+
+                  <!-- CONFIGURATION TABLE -->
+                  <div class="border border-slate-200 overflow-hidden flex flex-col h-[130px] bg-white">
+
+                    {% with rs.configurations.all as configs %}
+
+                    {% if configs %}
+
+                    {% regroup configs by bhk_type as bhk_groups %}
+
+                    <div class="bg-slate-50 border-b border-slate-200 px-2 shrink-0">
+
+                      <div class="flex gap-1 overflow-x-auto no-scrollbar py-1.5 bhk-tabs">
+
+                        {% for group in bhk_groups %}
+
+                        <button type="button" class="bhk-tab px-3 py-1 rounded-lg text-[10px] font-bold transition-all whitespace-nowrap {% if forloop.first %}active bg-slate-800 text-white{% else %}bg-white text-slate-500 border border-slate-200{% endif %}" data-target="bhk-{{ rs.id }}-{{ forloop.counter }}">
+
+                          {{ group.grouper }}
+
+                        </button>
+
+                        {% endfor %}
+
+                      </div>
+
+                    </div>
+
+
+                    <div class="flex-1 overflow-hidden relative">
+
+                      {% for group in bhk_groups %}
+
+                      <div class="bhk-panel {% if not forloop.first %}hidden{% endif %} h-full overflow-y-auto custom-scroll"
+                          data-panel="bhk-{{ rs.id }}-{{ forloop.counter }}">
+
+                        <table class="w-full text-xs border-collapse">
+
+                          <thead class="bg-slate-50 sticky top-0">
+
+                            <tr class="text-center font-bold text-slate-700">
+                              <th class="px-2 py-2 border-b">Area</th>
+                              <th class="px-2 py-2 border-b">Price</th>
+                              <th class="px-2 py-2 border-b">Parking</th>
+                              <th class="px-2 py-2 border-b">Balcony</th>
+                            </tr>
+
+                          </thead>
+
+
+                          <tbody class="text-center">
+
+                            {% for cfg in group.list %}
+
+                            <tr class="h-[32px] {% if cfg.sold_out %}bg-red-50{% endif %}">
+
+                              <td class="px-2 py-2 border-b">
+                                {{ cfg.area_sqft }} sqft
+                              </td>
+
+                              <td class="px-2 py-2 border-b font-semibold">
+
+                                {% if cfg.sold_out %}
+
+                                <span class="bg-red-100 text-red-700 px-2 py-0.5 text-[11px] font-bold">
+                                  SOLD OUT
+                                </span>
+
+                                {% else %}
+
+                                <span class="font-extrabold text-green-600">
+                                  {{ cfg.formatted_price }}
+                                </span>
+
+                                {% endif %}
+
+                              </td>
+
+                              <td class="px-2 py-2 border-b">
+                                {{ cfg.parking|yesno:"Yes,*" }}
+                              </td>
+
+                              <td class="px-2 py-2 border-b">
+                                {{ cfg.balcony|yesno:"Yes,*" }}
+                              </td>
+
+                            </tr>
+
+                            {% endfor %}
+
+                          </tbody>
+
+                        </table>
+
+                      </div>
+
+                      {% endfor %}
+
+                    </div>
+
                     {% else %}
-                      <img src="{% static 'images/default-placeholder.jpg' %}" class="w-full h-full object-cover" loading="lazy">
+
+                    <div class="flex-1 flex items-center justify-center text-[11px] text-slate-400 italic">
+                      Request Details
+                    </div>
+
                     {% endif %}
 
-                    <div class="absolute top-3 left-3">
-                      <span class="bg-white/80 backdrop-blur-md text-slate-900 text-[10px] font-bold px-3 py-1 rounded-md uppercase border border-white/50 shadow-sm">
-                          {{ rs.propert_type }}
-                      </span>
-                    </div>
-                    
-                    <span class="absolute bottom-3 right-3 bg-slate-900/70 backdrop-blur-sm text-white text-[10px] font-medium px-3 py-1 rounded-md">
-                      {{ rs.construction_status }}
-                    </span>
-                  </div>
-
-                  <div class="p-4 flex flex-col flex-1">
-                    
-                    <div class="flex justify-between items-start gap-2 mb-3">
-                      <div class="flex-1">
-                        <h3 class="text-base font-bold text-slate-800 line-clamp-1 group-hover:text-orange-500 transition-colors">
-                          {{ rs.project_name }}
-                        </h3>
-                        <p class="text-xs text-slate-500 flex items-center gap-1 mt-0.5">
-                          <i class="fa-solid fa-location-dot text-orange-500"></i> {{ rs.locality.name }}
-                        </p>
-                      </div>
-                      <div class="text-right">
-                        <p class="text-sm font-black text-orange-600">
-                          {% if rs.min_price %}₹{{ rs.min_price|indian_price }}{% else %}On Request{% endif %}
-                        </p>
-                      </div>
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-2 bg-slate-50 p-3 mb-3 border border-slate-100">
-                      <div>
-                        <span class="text-[9px] uppercase font-bold text-slate-400 block">Developer</span>
-                        <p class="text-xs font-bold text-slate-700 truncate">{{ rs.developer }}</p>
-                      </div>
-                      <div class="text-right border-l border-slate-200 pl-2">
-                        <span class="text-[9px] uppercase font-bold text-slate-400 block">Possession</span>
-                        <p class="text-xs font-bold text-green-600">{{ rs.possession_month }} {{ rs.possession_year }}</p>
-                      </div>
-                    </div>
-
-                    <div class="border border-slate-100 overflow-hidden flex flex-col h-[130px] bg-white">
-                      {% with rs.configurations.all as configs %}
-                      {% if configs %}
-                      {% regroup configs by bhk_type as bhk_groups %}
-
-                      <div class="bg-slate-50/80 border-b border-slate-100 px-2 shrink-0">
-                        <div class="flex gap-1 overflow-x-auto no-scrollbar py-1.5 bhk-tabs">
-                          {% for group in bhk_groups %}
-                          <button type="button" 
-                                  class="bhk-tab px-3 py-1 rounded-lg text-[10px] font-bold transition-all whitespace-nowrap {% if forloop.first %}active bg-slate-800 text-white{% else %}bg-white text-slate-500 border border-slate-200{% endif %}"
-                                  data-target="bhk-{{ rs.id }}-{{ forloop.counter }}">
-                            {{ group.grouper }}
-                          </button>
-                          {% endfor %}
-                        </div>
-                      </div>
-
-                      <div class="flex-1 overflow-hidden relative">
-                        {% for group in bhk_groups %}
-                        <div class="bhk-panel {% if not forloop.first %}hidden{% endif %} h-full overflow-y-auto custom-scroll"  data-panel="bhk-{{ rs.id }}-{{ forloop.counter }}">
-                            <table class="w-full text-xs sm:text-sm border-collapse">
-                              <thead class="bg-gray-50 sticky top-0">
-                                <tr class="text-center font-bold text-gray-700">
-                                  <th class="px-2 py-2 border-b">Area</th>
-                                  <th class="px-2 py-2 border-b">Price</th>
-                                  <th class="px-2 py-2 border-b">Parking</th>
-                                  <th class="px-2 py-2 border-b">Balcony</th>
-                                </tr>
-                              </thead>
-
-                              <tbody class="text-center">
-                                {% for cfg in group.list %}
-                                <tr class="h-[32px] {% if cfg.sold_out %}bg-red-50{% endif %}">
-                                  <td class="px-2 py-2 border-b">{{ cfg.area_sqft }} sqft</td>
-
-                                  <td class="px-2 py-2 border-b font-semibold">
-                                    {% if cfg.sold_out %}
-                                      <span class="bg-red-100 text-red-700 px-2 py-0.5 text-[11px] font-bold">SOLD OUT</span>
-                                    {% else %}
-                                      <span class="font-extrabold text-orange-600">{{ cfg.formatted_price }}</span>
-                                    {% endif %}
-                                  </td>
-
-                                  <td class="px-2 py-2 border-b">
-                                    {{ cfg.parking|yesno:"Yes,*" }}
-                                  </td>
-
-                                  <td class="px-2 py-2 border-b">
-                                    {{ cfg.balcony|yesno:"Yes,*" }}
-                                  </td>
-                                </tr>
-                                {% endfor %}
-                              </tbody>
-                            </table>
-                        </div>
-                        {% endfor %}
-                      </div>
-                      {% else %}
-                      <div class="flex-1 flex items-center justify-center text-[10px] text-slate-400 italic">Request Details</div>
-                      {% endif %}
-                      {% endwith %}
-                    </div>
-
-                    <div class="mt-4 flex gap-2">
-                      <a href="{{ rs.get_absolute_url }}" class="flex-1 bg-slate-800 text-white text-center py-2.5 rounded-xl font-bold text-xs hover:bg-slate-900 transition-all shadow-sm">
-                        View Project
-                      </a>
-                      <a href="tel:{{ settings_obj.phone }}" class="w-10 h-10 border border-slate-300 flex items-center justify-center rounded-xl text-slate-700 hover:border-orange-500 hover:text-orange-500 transition-all">
-                        <i class="fa-solid fa-phone text-sm"></i>
-                      </a>
-                    </div>
+                    {% endwith %}
 
                   </div>
+
+
+                  <!-- BUTTONS -->
+                  <div class="mt-4 flex gap-2">
+
+                    <a href="{{ rs.get_absolute_url }}" class="flex-1 bg-green-700 text-white text-center py-2.5 rounded-xl font-bold text-xs hover:bg-blue-800 transition-all shadow-sm">
+
+                      View Project
+
+                    </a>
+
+                    <a href="tel:{{ settings_obj.phone }}"
+                      class="w-10 h-10 border border-slate-300 flex items-center justify-center rounded-xl text-slate-700 hover:border-blue-500 hover:text-blue-600 transition-all">
+
+                      <i class="fa-solid fa-phone text-sm"></i>
+
+                    </a>
+
+                  </div>
+
                 </div>
+
               </div>
+
+            </div>
               {% endfor %}
 
             </div>
@@ -250,39 +350,59 @@
     </section>
 
     <script>
-      // Tab Switching Logic (Integrated)
+
       document.addEventListener('click', function(e) {
+
         if (e.target.classList.contains('bhk-tab')) {
+
           const btn = e.target;
           const card = btn.closest('.swiper-slide');
           const target = btn.getAttribute('data-target');
 
-          card.querySelectorAll('.bhk-tab').forEach(t => {
-            t.classList.remove('active', 'bg-slate-800', 'text-white');
-            t.classList.add('bg-white', 'text-slate-500', 'border-slate-200');
+          card.querySelectorAll('.bhk-tab').forEach(tab => {
+            tab.classList.remove('active','bg-slate-800','text-white');
+            tab.classList.add('bg-white','text-slate-500','border-slate-200');
           });
-          btn.classList.add('active', 'bg-slate-800', 'text-white');
-          btn.classList.remove('bg-white', 'text-slate-500', 'border-slate-200');
 
-          card.querySelectorAll('.bhk-panel').forEach(p => p.classList.add('hidden'));
+          btn.classList.add('active','bg-slate-800','text-white');
+          btn.classList.remove('bg-white','text-slate-500','border-slate-200');
+
+          card.querySelectorAll('.bhk-panel').forEach(panel => {
+            panel.classList.add('hidden');
+          });
+
           card.querySelector(`[data-panel="${target}"]`).classList.remove('hidden');
+
         }
+
       });
+
 
       var swiper = new Swiper(".featureSwiper", {
         slidesPerView: 1,
         spaceBetween: 20,
         loop: true,
-        autoplay: { delay: 4000 },
-        pagination: { el: ".swiper-pagination", clickable: true },
-        navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+        autoplay: {
+          delay: 4000,
+          disableOnInteraction: false
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev"
+        },
         breakpoints: {
           640: { slidesPerView: 1.5 },
           768: { slidesPerView: 2.2 },
           1024: { slidesPerView: 3 }
-        },
+        }
       });
+
     </script>
+
   <!-- ======================= FEATURE PROJECTS ======================= -->
 
   <!-- ======================= FEATURE PROPERTIES ======================= -->
@@ -1177,113 +1297,113 @@
 
 <style>
  .swiper-slide {
-  overflow: visible !important;
-}
-.common-btn{
-  margin-top:12px;padding:8px 16px;border:1px solid white;border-radius:6px;
-  font-size:14px;transition:.3s
-}
-@media(min-width:768px){
-  .common-btn{opacity:0}
-  .group:hover .common-btn{opacity:1}
-}
-.common-btn:hover{background:#fff;color:#000}
+   overflow: visible !important;
+  }
+  .common-btn{
+    margin-top:12px;padding:8px 16px;border:1px solid white;border-radius:6px;
+    font-size:14px;transition:.3s
+  }
+  @media(min-width:768px){
+    .common-btn{opacity:0}
+    .group:hover .common-btn{opacity:1}
+  }
+  .common-btn:hover{background:#fff;color:#000}
 
-/* Scrollbars */
-.table-scroll,.bhk-tabs,.bhk-panel div{
-  scrollbar-width:thin;
-  scrollbar-color:#fb923c transparent
-}
-.table-scroll::-webkit-scrollbar,
-.bhk-tabs::-webkit-scrollbar,
-.bhk-panel div::-webkit-scrollbar{width:6px;height:5px}
-.table-scroll::-webkit-scrollbar-thumb,
-.bhk-tabs::-webkit-scrollbar-thumb,
-.bhk-panel div::-webkit-scrollbar-thumb{
-  background:#fb923c;border-radius:10px
-}
+  /* Scrollbars */
+  .table-scroll,.bhk-tabs,.bhk-panel div{
+    scrollbar-width:thin;
+    scrollbar-color:#fb923c transparent
+  }
+  .table-scroll::-webkit-scrollbar,
+  .bhk-tabs::-webkit-scrollbar,
+  .bhk-panel div::-webkit-scrollbar{width:6px;height:5px}
+  .table-scroll::-webkit-scrollbar-thumb,
+  .bhk-tabs::-webkit-scrollbar-thumb,
+  .bhk-panel div::-webkit-scrollbar-thumb{
+    background:#fb923c;border-radius:10px
+  }
 
-/* BHK Tabs */
-.bhk-tab{
-  backdrop-filter:blur(10px);
-  background:rgba(255,255,255,.6);
-  padding:6px 10px;
-  color:#374151;
-  white-space:nowrap
-}
-.bhk-tab.active{color:#fb923c}
-.bhk-disabled{opacity:.4;pointer-events:none}
+  /* BHK Tabs */
+  .bhk-tab{
+    backdrop-filter:blur(10px);
+    background:rgba(255,255,255,.6);
+    padding:6px 10px;
+    color:#374151;
+    white-space:nowrap
+  }
+  .bhk-tab.active{color:#fb923c}
+  .bhk-disabled{opacity:.4;pointer-events:none}
 
-/* Underline */
-.bhk-underline{
-  background:#fb923c;
-  height:2px;
-  transition:.3s ease;
-  width:0;left:0
-}
-.developer-section {
-  font-family: Arial, sans-serif;
-  padding: 20px;
-  background-color: #f8f9fa;
-}
+  /* Underline */
+  .bhk-underline{
+    background:#fb923c;
+    height:2px;
+    transition:.3s ease;
+    width:0;left:0
+  }
+  .developer-section {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f8f9fa;
+  }
 
-.section-title {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
+  .section-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
 
-.card-container {
-  display: flex;
-  gap: 20px;
-  overflow-x: auto; /* Mobile ke liye scrollable */
-  padding-bottom: 10px;
-}
+  .card-container {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto; /* Mobile ke liye scrollable */
+    padding-bottom: 10px;
+  }
 
-.dev-card {
-  min-width: 200px;
-  background: white;
-  border-radius: 15px;
-  padding: 20px 15px 0 15px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+  .dev-card {
+    min-width: 200px;
+    background: white;
+    border-radius: 15px;
+    padding: 20px 15px 0 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-.logo {
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 40px;
-}
+  .logo {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px;
+  }
 
-.logo img {
-  max-width: 120px;
-}
+  .logo img {
+    max-width: 120px;
+  }
 
-.footer-badge {
-  background-color: #e8f5e9; /* Light green background */
-  width: 100%;
-  padding: 10px;
-  border-radius: 50% 50% 0 0 / 20% 20% 0 0; /* Yeh curve banata hai */
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  font-size: 10px;
-  font-weight: bold;
-  color: #1e7d32;
-}
+  .footer-badge {
+    background-color: #e8f5e9; /* Light green background */
+    width: 100%;
+    padding: 10px;
+    border-radius: 50% 50% 0 0 / 20% 20% 0 0; /* Yeh curve banata hai */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 10px;
+    font-weight: bold;
+    color: #1e7d32;
+  }
 
-.count {
-  background: #1a3e59; /* Dark blue circle */
-  color: white;
-  padding: 3px 5px;
-  border-radius: 50%;
-  font-size: 12px;
-}
+  .count {
+    background: #1a3e59; /* Dark blue circle */
+    color: white;
+    padding: 3px 5px;
+    border-radius: 50%;
+    font-size: 12px;
+  }
 </style>
 
 </main>

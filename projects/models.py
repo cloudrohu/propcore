@@ -287,41 +287,26 @@ class AboutUs(models.Model):
 
 class USP(models.Model):
     Project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name="usps")
+    icon = models.CharField(null=True, blank=True,max_length=150)
     point = models.CharField(null=True, blank=True,max_length=150)
     def __str__(self):
         return self.point
 
 class Configuration(models.Model):
-    Project = models.ForeignKey(
-        "Project",
-        on_delete=models.CASCADE,
-        related_name="configurations"
-    )
+    Project = models.ForeignKey("Project",on_delete=models.CASCADE,related_name="configurations")
 
     bhk_type = models.CharField(max_length=50)
 
-    area_sqft = models.IntegerField(
-        verbose_name="Area (Sq.ft)",
-        help_text="Enter area in numeric square feet."
-    )
+    area_sqft = models.IntegerField(verbose_name="Area (Sq.ft)",help_text="Enter area in numeric square feet.")
 
     parking = models.BooleanField(default=False)
     balcony = models.BooleanField(default=False)
     sold_out = models.BooleanField(default=False)
 
-    unit_plan = models.ImageField(
-        null=True,
-        blank=True,
-        upload_to='images/'
-    )
+    unit_plan = models.ImageField(null=True,blank=True,upload_to='images/')
 
     # ✅ PRICE (INTEGER ONLY – VERY IMPORTANT)
-    price_in_rupees = models.IntegerField(
-        verbose_name="Price (in ₹)",
-        help_text="Enter price in total rupees (e.g., 5000000).",
-        null=True,
-        blank=True
-    )
+    price_in_rupees = models.IntegerField(verbose_name="Price (in ₹)",help_text="Enter price in total rupees (e.g., 5000000).",null=True,blank=True)
 
     # ✅ PRICE FORMATTER (CR / L / NORMAL)
     def formatted_price(self):
@@ -430,6 +415,7 @@ class ProjectFAQ(models.Model):
 
     def __str__(self):
         return f"{self.project.project_name} - {self.question}"
+
 
 # projects/models.py  (or a separate app like enquiries/models.py)
 

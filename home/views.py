@@ -51,6 +51,7 @@ def index(request):
     # ================= FEATURED PROJECTS =================
     project_featured = (
         Project.objects.filter(active=True, featured_property=True)
+        .prefetch_related("usps")
         .annotate(
             min_price=Min("configurations__price_in_rupees", filter=Q(configurations__price_in_rupees__gt=0)),
             max_price=Max("configurations__price_in_rupees", filter=Q(configurations__price_in_rupees__gt=0)),

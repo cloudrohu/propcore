@@ -6,17 +6,15 @@
 
 {% block content %}
 
+<!-- HERO START HERE -->
 <section class="w-full px-6 py-10 bg-gray-200">
 
   <div class="relative overflow-hidden rounded-3xl h-[320px]">
 
-    <!-- Background Image -->
     <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070" class="absolute inset-0 w-full h-full object-cover">
 
-    <!-- Dark Overlay -->
     <div class="absolute inset-0 bg-teal-900/70"></div>
 
-    <!-- Content -->
     <div class="relative z-10 flex items-center h-full px-16">
 
       <h1 class="text-white text-5xl font-light tracking-wide">
@@ -28,7 +26,10 @@
   </div>
 
 </section>
+<!-- HERO START END -->
 
+
+<!-- SERVICES START -->
 {% if services %}
 <section class="bg-[#e9f0f2] py-24">
 
@@ -105,6 +106,7 @@
 
 </div>
 {% endif %}
+<!-- SERVICES END -->
 
 
 {% endblock %}
