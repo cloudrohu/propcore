@@ -187,29 +187,13 @@ class AboutAdmin(admin.ModelAdmin):
         ("🏠 Main About", {
             "fields": (
                 "title",
-                "subtitle",
                 "content",
                 "image",
+                "bottom_image",
+
             )
         }),
 
-        ("👥 Who We Are", {
-            "fields": (
-                "who_we_are_title",
-                "who_we_are_subtitle",
-                "who_we_are_description",
-            )
-        }),
-
-        ("📊 Highlights", {
-            "fields": (
-                "projects_delivered",
-                "happy_families",
-                "years_of_excellence",
-                "awards_recognitions",
-                "highlight_icon_color",
-            )
-        }),
 
         ("🎯 Mission & Vision", {
             "fields": (
@@ -217,15 +201,6 @@ class AboutAdmin(admin.ModelAdmin):
                 "our_mission",
                 "our_vision_title",
                 "our_vision",
-            )
-        }),
-
-        ("💼 Looking To", {
-            "fields": (
-                "looking_to_title",
-                "looking_to_description",
-                "looking_to_button_text",
-                "looking_to_button_link",
             )
         }),
 
@@ -237,17 +212,7 @@ class AboutAdmin(admin.ModelAdmin):
             )
         }),
 
-        ("⚙️ Background & Status", {
-            "fields": (
-                "home_bg",
-                "search_bg",
-                "is_active",
-                "created_at",
-                "updated_at",
-            )
-        }),
     )
-
 
 @admin.register(Contact_Page)
 class ContactPageAdmin(admin.ModelAdmin):
