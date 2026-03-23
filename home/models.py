@@ -2,6 +2,7 @@ from django.db import models
 from django_ckeditor_5.fields import CKEditor5Field
 from django.utils.safestring import mark_safe
 from utility.compress_mixin import ImageCompressionMixin
+import re
 
 
 class Setting(ImageCompressionMixin, models.Model):    
@@ -9,7 +10,7 @@ class Setting(ImageCompressionMixin, models.Model):
     logo = models.ImageField(upload_to='settings/', blank=True, null=True)
     favicon = models.ImageField(upload_to='settings/', blank=True, null=True)
     search_bg = models.ImageField(upload_to='logo/', blank=True, null=True)
-    hero_video = models.FileField(upload_to='videos/', blank=True, null=True)
+    hero_video = models.URLField(blank=True, null=True, help_text="Paste YouTube Video Link")
     header_footer_color = models.CharField(max_length=150, blank=True)
     text_color = models.CharField(max_length=150, blank=True)
     services_text = models.CharField(max_length=150, blank=True)
@@ -65,6 +66,7 @@ class Setting(ImageCompressionMixin, models.Model):
             return mark_safe(f'<img src="{self.logo.url}" width="100"/>')
         return "(No Logo)"
 
+    
     @property
     def logo_or_name(self):
         if self.logo and self.logo.name:

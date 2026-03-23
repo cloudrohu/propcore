@@ -51,64 +51,6 @@
 
 <main>
 
-  <!-- ======================= HERO START ======================= -->
-  <section class="relative h-[650px] flex items-center justify-center overflow-hidden">
-
-      <!-- Hero Background Video -->
-      {% if settings_obj.hero_video %}
-      <div class="absolute inset-0 w-full h-full overflow-hidden">
-
-        <video  autoplay  muted  loop  playsinline  preload="metadata" class="w-full h-full object-cover">
-
-          <source src="{{ settings_obj.hero_video.url }}" type="video/mp4">
-
-          Your browser does not support the video tag.
-
-        </video>
-
-      </div>
-      {% endif %}
-
-    <!-- Dark Overlay -->
-    <div class="absolute inset-0 bg-black/40"></div>
-
-    <!-- Content -->
-    <div class="relative max-w-5xl mx-auto px-6 mt-4">
-
-      <div class="bg-blue-500/40 backdrop-blur-xl p-10 text-center">
-
-        <h1 class="text-white text-4xl md:text-5xl font-bold">
-          Find a Tailored Project That Fits Your Lifestyle!
-        </h1>
-
-        <p class="text-white/90 mt-4 text-lg">
-          Whether you're a first-time homebuyer looking to find the perfect starter home,
-          a growing family searching for a spacious property, or an investor seeking
-          lucrative opportunities.
-        </p>
-
-        <!-- Buttons -->
-        <div class="flex flex-col md:flex-row justify-center gap-6 mt-8">
-
-          <a href="#projects"
-            class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-semibold transition">
-            Look through our project Listings.
-          </a>
-
-          <a href="#appointment"
-            class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-semibold transition">
-            Make a visit appointment with one of our agents.
-          </a>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-  <!-- ======================= HERO END ======================= -->
-
   <!-- ======================= FEATURE PROJECTS ======================= -->
     <section class="bg-[#f8fafc] py-12 relative overflow-hidden font-sans">
       <div class="max-w-7xl mx-auto px-4">
