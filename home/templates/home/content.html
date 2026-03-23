@@ -119,179 +119,71 @@
             <div class="swiper-wrapper">
 
               {% for rs in project_featured %}
-            <div class="swiper-slide h-auto border border-green-500">
+              <div class="swiper-slide h-auto border border-green-500">
 
-              <div class="group bg-white rounded-lg shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden border border-slate-200 flex flex-col h-full">
+                <div class="group bg-white rounded-lg shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden border border-slate-200 flex flex-col h-full">
 
-                <!-- IMAGE -->
-                <div class="relative h-52 w-full overflow-hidden shrink-0">
+                  <!-- IMAGE -->
+                  <div class="relative h-52 w-full overflow-hidden shrink-0">
 
-                  {% if rs.image %}
-                  <img src="{{ rs.image.url }}" alt="{{ rs.project_name }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
-                  {% else %}
-                  <img src="{% static 'images/default-placeholder.jpg' %}" class="w-full h-full object-cover" loading="lazy">
-                  {% endif %}
-
-                </div>
-
-
-                <div class="p-4 flex flex-col flex-1">
-
-                  <!-- TITLE + LOCATION -->
-                  <div class="flex justify-between items-start gap-2 mb-3">
-
-                    <div class="flex-1">
-
-                      <h3 class="text-base font-bold text-green-800 line-clamp-1 group-hover:text-green-500 transition-colors">
-                        {{ rs.project_name }}
-                      </h3>
-
-                      <p class="text-xs text-slate-500 flex items-center gap-1 mt-0.5">
-                        <i class="fa-solid fa-location-dot text-green-500"></i>
-                        {{ rs.locality.name }}
-                      </p>
-
-                    </div>
-
-                    <div class="text-right">
-
-                      <p class="text-sm font-black text-green-600">
-                        {% if rs.min_price %}
-                          ₹{{ rs.min_price|indian_price }}
-                        {% else %}
-                          On Request
-                        {% endif %}
-                      </p>
-
-                    </div>
+                    {% if rs.image %}
+                    <img src="{{ rs.image.url }}" alt="{{ rs.project_name }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
+                    {% else %}
+                    <img src="{% static 'images/default-placeholder.jpg' %}" class="w-full h-full object-cover" loading="lazy">
+                    {% endif %}
 
                   </div>
 
 
-                  <!-- USP -->
-                  {% if rs.usps.all %}
+                  <div class="p-4 flex flex-col flex-1">
 
-                  <div class="grid grid-cols-2 gap-2 mb-3">
+                    <!-- TITLE + LOCATION -->
+                    <div class="flex justify-between items-start gap-2 mb-3">
 
-                    {% for usp in rs.usps.all|slice:":3" %}
+                      <div class="flex-1">
 
-                    <div class="flex items-center gap-2 p-1.5 rounded-md bg-slate-50 border border-slate-100">
+                        <h3 class="text-base font-bold text-green-800 line-clamp-1 group-hover:text-green-500 transition-colors">
+                          {{ rs.project_name }}
+                        </h3>
 
-                      <div class="w-6 h-6 flex items-center justify-center bg-green-100 rounded shrink-0">
-                        <i class="{{ usp.icon }} text-[10px] text-green-600"></i>
+                        <p class="text-xs text-slate-500 flex items-center gap-1 mt-0.5">
+                          <i class="fa-solid fa-location-dot text-green-500"></i>
+                          {{ rs.locality.name }}
+                        </p>
+
                       </div>
 
-                      <span class="text-[12px] font-semibold text-slate-700 truncate">
-                        {{ usp.point }}
-                      </span>
+                      <div class="text-right">
 
-                    </div>
-
-                    {% endfor %}
-
-                  </div>
-
-                  {% else %}
-
-                  <div class="text-xs text-slate-500 italic mb-3 border border-dashed border-slate-300 p-6 text-center">
-                    Highlights Not Available
-                  </div>
-
-                  {% endif %}
-
-
-                  <!-- CONFIGURATION TABLE -->
-                  <div class="border border-slate-200 overflow-hidden flex flex-col h-[130px] bg-white">
-
-                    {% with rs.configurations.all as configs %}
-
-                    {% if configs %}
-
-                    {% regroup configs by bhk_type as bhk_groups %}
-
-                    <div class="bg-slate-50 border-b border-slate-200 px-2 shrink-0">
-
-                      <div class="flex gap-1 overflow-x-auto no-scrollbar py-1.5 bhk-tabs">
-
-                        {% for group in bhk_groups %}
-
-                        <button type="button" class="bhk-tab px-3 py-1 rounded-lg text-[10px] font-bold transition-all whitespace-nowrap {% if forloop.first %}active bg-slate-800 text-white{% else %}bg-white text-slate-500 border border-slate-200{% endif %}" data-target="bhk-{{ rs.id }}-{{ forloop.counter }}">
-
-                          {{ group.grouper }}
-
-                        </button>
-
-                        {% endfor %}
+                        <p class="text-sm font-black text-green-600">
+                          {% if rs.min_price %}
+                            ₹{{ rs.min_price|indian_price }}
+                          {% else %}
+                            On Request
+                          {% endif %}
+                        </p>
 
                       </div>
 
                     </div>
 
 
-                    <div class="flex-1 overflow-hidden relative">
+                    <!-- USP -->
+                    {% if rs.usps.all %}
 
-                      {% for group in bhk_groups %}
+                    <div class="grid grid-cols-2 gap-2 mb-3">
 
-                      <div class="bhk-panel {% if not forloop.first %}hidden{% endif %} h-full overflow-y-auto custom-scroll"
-                          data-panel="bhk-{{ rs.id }}-{{ forloop.counter }}">
+                      {% for usp in rs.usps.all|slice:":3" %}
 
-                        <table class="w-full text-xs border-collapse">
+                      <div class="flex items-center gap-2 p-1.5 rounded-md bg-slate-50 border border-slate-100">
 
-                          <thead class="bg-slate-50 sticky top-0">
+                        <div class="w-6 h-6 flex items-center justify-center bg-green-100 rounded shrink-0">
+                          <i class="{{ usp.icon|default:"fa-solid fa-check" }} text-[10px] text-green-600"></i>
+                        </div>
 
-                            <tr class="text-center font-bold text-slate-700">
-                              <th class="px-2 py-2 border-b">Area</th>
-                              <th class="px-2 py-2 border-b">Price</th>
-                              <th class="px-2 py-2 border-b">Parking</th>
-                              <th class="px-2 py-2 border-b">Balcony</th>
-                            </tr>
-
-                          </thead>
-
-
-                          <tbody class="text-center">
-
-                            {% for cfg in group.list %}
-
-                            <tr class="h-[32px] {% if cfg.sold_out %}bg-red-50{% endif %}">
-
-                              <td class="px-2 py-2 border-b">
-                                {{ cfg.area_sqft }} sqft
-                              </td>
-
-                              <td class="px-2 py-2 border-b font-semibold">
-
-                                {% if cfg.sold_out %}
-
-                                <span class="bg-red-100 text-red-700 px-2 py-0.5 text-[11px] font-bold">
-                                  SOLD OUT
-                                </span>
-
-                                {% else %}
-
-                                <span class="font-extrabold text-green-600">
-                                  {{ cfg.formatted_price }}
-                                </span>
-
-                                {% endif %}
-
-                              </td>
-
-                              <td class="px-2 py-2 border-b">
-                                {{ cfg.parking|yesno:"Yes,*" }}
-                              </td>
-
-                              <td class="px-2 py-2 border-b">
-                                {{ cfg.balcony|yesno:"Yes,*" }}
-                              </td>
-
-                            </tr>
-
-                            {% endfor %}
-
-                          </tbody>
-
-                        </table>
+                        <span class="text-[12px] font-semibold text-slate-700 truncate">
+                          {{ usp.point }}
+                        </span>
 
                       </div>
 
@@ -301,40 +193,148 @@
 
                     {% else %}
 
-                    <div class="flex-1 flex items-center justify-center text-[11px] text-slate-400 italic">
-                      Request Details
+                    <div class="text-xs text-slate-500 italic mb-3 border border-dashed border-slate-300 p-6 text-center">
+                      Highlights Not Available
                     </div>
 
                     {% endif %}
 
-                    {% endwith %}
 
-                  </div>
+                    <!-- CONFIGURATION TABLE -->
+                    <div class="border border-slate-200 overflow-hidden flex flex-col h-[130px] bg-white">
+
+                      {% with rs.configurations.all as configs %}
+
+                      {% if configs %}
+
+                      {% regroup configs by bhk_type as bhk_groups %}
+
+                      <div class="bg-slate-50 border-b border-slate-200 px-2 shrink-0">
+
+                        <div class="flex gap-1 overflow-x-auto no-scrollbar py-1.5 bhk-tabs">
+
+                          {% for group in bhk_groups %}
+
+                          <button type="button" class="bhk-tab px-3 py-1 rounded-lg text-[10px] font-bold transition-all whitespace-nowrap {% if forloop.first %}active bg-slate-800 text-white{% else %}bg-white text-slate-500 border border-slate-200{% endif %}" data-target="bhk-{{ rs.id }}-{{ forloop.counter }}">
+
+                            {{ group.grouper }}
+
+                          </button>
+
+                          {% endfor %}
+
+                        </div>
+
+                      </div>
 
 
-                  <!-- BUTTONS -->
-                  <div class="mt-4 flex gap-2">
+                      <div class="flex-1 overflow-hidden relative">
 
-                    <a href="{{ rs.get_absolute_url }}" class="flex-1 bg-green-700 text-white text-center py-2.5 rounded-xl font-bold text-xs hover:bg-blue-800 transition-all shadow-sm">
+                        {% for group in bhk_groups %}
 
-                      View Project
+                        <div class="bhk-panel {% if not forloop.first %}hidden{% endif %} h-full overflow-y-auto custom-scroll"
+                            data-panel="bhk-{{ rs.id }}-{{ forloop.counter }}">
 
-                    </a>
+                          <table class="w-full text-xs border-collapse">
 
-                    <a href="tel:{{ settings_obj.phone }}"
-                      class="w-10 h-10 border border-slate-300 flex items-center justify-center rounded-xl text-slate-700 hover:border-blue-500 hover:text-blue-600 transition-all">
+                            <thead class="bg-slate-50 sticky top-0">
 
-                      <i class="fa-solid fa-phone text-sm"></i>
+                              <tr class="text-center font-bold text-slate-700">
+                                <th class="px-2 py-2 border-b">Area</th>
+                                <th class="px-2 py-2 border-b">Price</th>
+                                <th class="px-2 py-2 border-b">Parking</th>
+                                <th class="px-2 py-2 border-b">Balcony</th>
+                              </tr>
 
-                    </a>
+                            </thead>
+
+
+                            <tbody class="text-center">
+
+                              {% for cfg in group.list %}
+
+                              <tr class="h-[32px] {% if cfg.sold_out %}bg-red-50{% endif %}">
+
+                                <td class="px-2 py-2 border-b">
+                                  {{ cfg.area_sqft }} sqft
+                                </td>
+
+                                <td class="px-2 py-2 border-b font-semibold">
+
+                                  {% if cfg.sold_out %}
+
+                                  <span class="bg-red-100 text-red-700 px-2 py-0.5 text-[11px] font-bold">
+                                    SOLD OUT
+                                  </span>
+
+                                  {% else %}
+
+                                  <span class="font-extrabold text-green-600">
+                                    {{ cfg.formatted_price }}
+                                  </span>
+
+                                  {% endif %}
+
+                                </td>
+
+                                <td class="px-2 py-2 border-b">
+                                  {{ cfg.parking|yesno:"Yes,*" }}
+                                </td>
+
+                                <td class="px-2 py-2 border-b">
+                                  {{ cfg.balcony|yesno:"Yes,*" }}
+                                </td>
+
+                              </tr>
+
+                              {% endfor %}
+
+                            </tbody>
+
+                          </table>
+
+                        </div>
+
+                        {% endfor %}
+
+                      </div>
+
+                      {% else %}
+
+                      <div class="flex-1 flex items-center justify-center text-[11px] text-slate-400 italic">
+                        Request Details
+                      </div>
+
+                      {% endif %}
+
+                      {% endwith %}
+
+                    </div>
+
+
+                    <!-- BUTTONS -->
+                    <div class="mt-4 flex gap-2">
+
+                      <a href="{{ rs.get_absolute_url }}" class="flex-1 bg-green-700 text-white text-center py-2.5 rounded-xl font-bold text-xs hover:bg-blue-800 transition-all shadow-sm">
+
+                        View Project
+
+                      </a>
+
+                      <a href="tel:{{ settings_obj.phone }}"
+                        class="w-10 h-10 border border-slate-300 flex items-center justify-center rounded-xl text-slate-700 hover:border-blue-500 hover:text-blue-600 transition-all">
+
+                        <i class="fa-solid fa-phone text-sm"></i>
+
+                      </a>
+
+                    </div>
 
                   </div>
 
                 </div>
 
               </div>
-
-            </div>
               {% endfor %}
 
             </div>
@@ -946,27 +946,118 @@
   <!-- ======================= LOCALITY END ======================= -->
 
   <!-- ======================= TESTIMONIALS ======================= -->
-  <section class="py-16 bg-gray-100" id="testimonial">
-    <div class="max-w-4xl mx-auto px-6 text-center">
-      <h2 class="text-3xl font-bold text-orange-600 mb-10">Testimonials</h2>
-      <div class="grid md:grid-cols-2 gap-8">
-        {% for t in testimonials %}
-        <div class="bg-white shadow rounded p-2" data-aos="fade-up">
-          {% if t.image %}
-          <img src="{{ t.image.url }}" class="w-16 h-16 rounded-full mx-auto mb-3" />
-          {% endif %}
-          <p class="text-gray-700 italic">"{{ t.message }}"</p>
-          <h3 class="mt-3 font-bold">{{ t.name }}</h3>
-          {% if t.designation %}<p class="text-sm text-gray-500">{{ t.designation }}</p>{% endif %}
-          <p class="text-yellow-400 mt-2">{% for i in "12345"|slice:":t.rating" %}⭐{% endfor %}</p>
+  <section class="py-16 bg-gray-50">
+
+    <div class="max-w-7xl mx-auto px-6">
+
+      <!-- Heading -->
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-800">
+          What Our Clients Say
+        </h2>
+        <p class="text-gray-500 mt-2">
+          Trusted by our happy customers
+        </p>
+      </div>
+
+      <!-- Swiper -->
+      <div class="swiper testimonialSwiper">
+
+        <div class="swiper-wrapper">
+
+          {% for t in testimonials %}
+
+          <div class="swiper-slide">
+
+            <div class="bg-white rounded-xl shadow-md p-6 border">
+
+              <!-- Message -->
+              <p class="clamp-text text-gray-600 text-sm mb-3">
+                {{ t.message }}
+              </p>
+
+              <!-- Read More -->
+                <button class="text-orange-500 text-sm font-semibold readMoreBtn" data-name="{{ t.name }}" data-designation="{{ t.designation }}" data-message="{{ t.message }}">
+                  Read More
+                </button>
+
+              <!-- Rating -->
+              <div class="flex text-yellow-400 mt-4 mb-4">
+                {% for i in "12345" %}
+                  {% if forloop.counter <= t.rating %}
+                    <i class="fa-solid fa-star"></i>
+                  {% else %}
+                    <i class="fa-regular fa-star"></i>
+                  {% endif %}
+                {% endfor %}
+              </div>
+
+              <!-- User -->
+              <div class="flex items-center gap-3">
+
+                {% if t.image %}
+                <img src="{{ t.image.url }}" class="w-12 h-12 rounded-full object-cover">
+                {% else %}
+                <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                    class="w-12 h-12 rounded-full">
+                {% endif %}
+
+                <div>
+                  <h4 class="font-semibold text-gray-800">
+                    {{ t.name }}
+                  </h4>
+                  <p class="text-xs text-gray-500">
+                    {{ t.designation }}
+                  </p>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          {% endfor %}
+
         </div>
-        {% empty %}
-        <p>No testimonials available.</p>
-        {% endfor %}
+
+      </div>
+
+    </div>
+
+  </section>
+  <!-- ======================= TESTIMONIALS ======================= -->
+
+  <section class="bg-slate-900 py-16 px-6 text-center">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight">
+        Looking to Buy Your Dream Home?
+      </h2>
+      
+      <p class="text-slate-400 text-lg mb-10 max-w-2xl mx-auto">
+        Get expert guidance and the best deals with <span class="text-indigo-400 font-semibold uppercase">{{settings_obj.site_name}}</span>
+      </p>
+
+      <div class="flex flex-wrap justify-center gap-4">
+        
+        <a href="tel:+91{{settings_obj.phone}}"  class="inline-flex items-center gap-2 bg-white text-slate-900 px-8 py-3 font-bold hover:bg-slate-200 transition-colors shadow-xl">
+          <i class="fas fa-phone-alt"></i>
+          Call Now
+        </a>
+
+        <a href="https://wa.me/{{settings_obj.whatsapp}}"  class="inline-flex items-center gap-2 bg-[#25D366] text-white px-8 py-3 font-bold hover:bg-[#128C7E] transition-colors shadow-xl">
+          <i class="fab fa-whatsapp text-xl"></i>
+          WhatsApp
+        </a>
+
+        <a href="{% url "contact" %}"  class="inline-flex items-center gap-2 bg-indigo-600 text-white px-8 py-3 font-bold hover:bg-indigo-700 transition-colors shadow-xl">
+          <i class="far fa-calendar-alt"></i>
+          Book Free Consultation
+        </a>
+
       </div>
     </div>
   </section>
-  <!-- ======================= TESTIMONIALS ======================= -->
 
   <!-- ======================= CLASSIC CONTACT SECTION ======================= -->
   <section id="contact" class="py-20 bg-gray-50">
@@ -1085,7 +1176,25 @@
   </section>
   <!-- ======================= CONTACT SECTION END ======================= -->
 
-  <script defer>
+<div id="testimonialModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+
+  <div class="bg-white max-w-lg w-full rounded-lg p-8 relative">
+
+    <button id="closeModal" class="absolute top-3 right-4 text-gray-600 text-xl">
+      ×
+    </button>
+
+    <h3 id="modalName" class="text-xl font-semibold mb-1"></h3>
+
+    <p id="modalDesignation" class="text-sm text-gray-500 mb-4"></p>
+
+    <p id="modalMessage" class="text-gray-700 text-sm leading-relaxed"></p>
+
+  </div>
+
+</div>
+
+<script defer>
   document.addEventListener("DOMContentLoaded", () => {
 
     /* ===== MODAL ===== */
@@ -1293,7 +1402,79 @@
     },
     });
 
-  </script>
+    var swiper = new Swiper(".testimonialSwiper", {
+
+  loop: true,
+
+  spaceBetween: 30,
+
+  autoplay: {
+    delay: 3000,
+    disableOnInteraction: false
+  },
+
+  breakpoints: {
+
+    0: {
+      slidesPerView: 1
+    },
+
+    768: {
+      slidesPerView: 2
+    },
+
+    1024: {
+      slidesPerView: 4
+    }
+
+  }
+
+  });
+
+
+  const buttons = document.querySelectorAll(".readMoreBtn");
+
+  const modal = document.getElementById("testimonialModal");
+
+  const modalName = document.getElementById("modalName");
+  const modalDesignation = document.getElementById("modalDesignation");
+  const modalMessage = document.getElementById("modalMessage");
+
+  const closeModal = document.getElementById("closeModal");
+
+
+  buttons.forEach(button => {
+
+    button.addEventListener("click", function () {
+
+      modalName.innerText = this.dataset.name;
+      modalDesignation.innerText = this.dataset.designation;
+      modalMessage.innerText = this.dataset.message;
+
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+
+    });
+
+  });
+
+
+  closeModal.addEventListener("click", function () {
+
+    modal.classList.add("hidden");
+
+  });
+
+
+  modal.addEventListener("click", function (e) {
+
+    if (e.target === modal) {
+      modal.classList.add("hidden");
+    }
+
+  });
+
+</script>
 
 <style>
  .swiper-slide {
@@ -1404,6 +1585,14 @@
     border-radius: 50%;
     font-size: 12px;
   }
+  .clamp-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 5; /* Limit to 3 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Ensures ellipsis is shown */
+  }
+
 </style>
 
 </main>
