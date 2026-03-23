@@ -10,7 +10,6 @@ class Setting(ImageCompressionMixin, models.Model):
     logo = models.ImageField(upload_to='settings/', blank=True, null=True)
     favicon = models.ImageField(upload_to='settings/', blank=True, null=True)
     search_bg = models.ImageField(upload_to='logo/', blank=True, null=True)
-    hero_video = models.URLField(blank=True, null=True, help_text="Paste YouTube Video Link")
     header_footer_color = models.CharField(max_length=150, blank=True)
     text_color = models.CharField(max_length=150, blank=True)
     services_text = models.CharField(max_length=150, blank=True)
