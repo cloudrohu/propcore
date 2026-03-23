@@ -2,7 +2,6 @@ from django.db import models
 from django_ckeditor_5.fields import CKEditor5Field
 from django.utils.safestring import mark_safe
 from utility.compress_mixin import ImageCompressionMixin
-import re
 
 
 class Setting(ImageCompressionMixin, models.Model):    
@@ -65,7 +64,6 @@ class Setting(ImageCompressionMixin, models.Model):
             return mark_safe(f'<img src="{self.logo.url}" width="100"/>')
         return "(No Logo)"
 
-    
     @property
     def logo_or_name(self):
         if self.logo and self.logo.name:

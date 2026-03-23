@@ -6,7 +6,6 @@ from .models import (
     Testimonial, FAQ, ImpactMetric, Service, FooterLink , ContactEnquiry
 )
 
-    
 @admin.register(Setting)
 class SettingAdmin(admin.ModelAdmin):
 
