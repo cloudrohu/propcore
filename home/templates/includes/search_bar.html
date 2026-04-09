@@ -1,367 +1,248 @@
 {% load static %}
 
 <style>
-.tab-btn{
-  background:transparent;
-  color:var(--tabColor);
-  border:1px solid var(--tabColor);
-  font-weight:600;
-  transition:0.3s;
-}
+  .tab-btn {
+    background: transparent;
+    border: 1px solid var(--tabColor);
+    color: var(--tabColor);
+    transition: all 0.3s ease;
+  }
 
-/* Hover */
-.tab-btn:hover{
-  background:var(--tabColor);
-  color:white;
-}
+  .tab-btn:hover {
+    background: var(--tabColor);
+    color: #fff;
+  }
 
-/* Active */
-.tab-btn.active{
-  background:var(--tabColor);
-  color:white;
-  border-color:var(--tabColor);
-  font-weight:700;
-}
-
-/* Active par hover change nahi hoga */
-.tab-btn.active:hover{
-  background:var(--tabColor);
-  color:white;
-}
-.tab-btn.active{
-  background:var(--tabColor);
-  color:white;
-  border-color:var(--tabColor);
-  font-weight:700;
-}
+  .tab-btn.active {
+    background: var(--tabColor);
+    color: #fff;
+    font-weight: 600;
+  }
 </style>
 
-<section class="relative py-28 bg-cover bg-center" style="background-image:url('{{ slider.image.url }}'); --tabColor: {{ slider.tabs_color|default:'#2b8cc9' }};">
+<section class="relative py-32 bg-cover bg-center" style="background-image:url('{{ slider.image.url }}'); --tabColor: {{ slider.tabs_color|default:'#2b8cc9' }};">
 
   <!-- Overlay -->
-  <div class="absolute inset-0 bg-black/50"></div>
+  <div class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
 
-  <div class="relative max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center text-white">
+  <div class="relative max-w-6xl mx-auto px-6 flex flex-col items-center text-center text-white">
 
-    <!-- LEFT CONTENT -->
-    <div>
+    <!-- TAGLINE -->
+    <p class="text-sm tracking-[3px] uppercase text-gray-300 mb-3">
+      #letsfindyourperfecthometogether
+    </p>
 
-      <!-- TAGLINE -->
-      <p class="text-sm tracking-widest uppercase text-gray-300 mb-2">
-        #letsfindyourperfecthometogether
-      </p>
+    <!-- HEADING -->
+    <h2 class="text-3xl md:text-4xl font-medium text-gray-200 mb-2">
+      {{ slider.heading }}
+    </h2>
 
-      <h2 class="text-4xl md:text-4xl mb-3 font-bold" style="font-family: Georgia, serif;">
-        {{ slider.heading }}
-      </h2>
-
-      <h1 class="text-5xl md:text-6xl uppercase font-extrabold mb-6"> 
+    <!-- MAIN TITLE -->
+    <h1 class="text-5xl md:text-6xl font-bold leading-tight mb-6 text-uppercase">
+      <span class="bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
         {{ slider.subtitle }}
-      </h1>
+      </span>
+    </h1>
 
-      <p class="text-gray-200 max-w-lg mb-6">
-        15+ Years Experience | Verified Properties | Best Deals in Mumbai
-      </p>
+    <!-- DESCRIPTION -->
+    <p class="text-gray-300 max-w-2xl mb-8 text-lg">
+      15+ Years Experience • Verified Properties • Best Deals in Mumbai
+    </p>
 
-      <!-- TABS -->
-      <div id="hero-tabs" class="flex flex-wrap gap-3 mb-6">
-
-        <button class="tab-btn active text-center px-4 py-2 rounded-md font-semibold shadow">
-          Buy
-        </button>
-
-        <button class="tab-btn text-center px-4 py-2 rounded-md font-semibold">
-          New Projects
-        </button>
-
-        <button class="tab-btn text-center px-4 py-2 rounded-md font-semibold">
-          Rent
-        </button>
-
-      </div>
-
-
-      <!-- SEARCH BOX -->
-      <div class="flex items-center bg-white rounded-md shadow-lg overflow-visible max-w-xl relative mb-6">
-
-        <select id="propertyType" class="px-[3px] py-3 outline-none text-gray-600 border-r">
-          <option>Residential</option>
-          <option>Commercial</option>
-        </select>
-
-        <div class="relative flex-1">
-
-          <input id="searchInput" required type="text" placeholder="Select City, Locality, Developer Or Projects Name" class="w-full px-2 py-3 outline-none text-gray-700"/>
-
-          <ul id="suggestionBox" class="absolute  left-0 right-0 top-full bg-white border border-gray-200 rounded-b-lg shadow-xl max-h-56 overflow-y-auto hidden z-50 text-black"></ul>
-
-        </div>
-
-        <button id="searchButton" class="text-white px-2 py-3 font-semibold transition bg-[{{ slider.search_btn_color }}]">
-          Search
-        </button>
-
-      </div>
-
-
-    <!-- CTA BUTTONS -->
-    <div class="flex flex-wrap gap-2 mt-4">
-
-        <!-- CALL -->
-        <a href="tel:{{settings_obj.phone}}" class="flex items-center gap-2 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white px-2 py-3 font-semibold tracking-wide shadow-lg hover:shadow-xl transition-all duration-300">
-
-          <i class="fa-solid fa-phone"></i>
-          Call Now
-
-        </a>
-
-
-        <!-- WHATSAPP -->
-        <a href="https://wa.me/91{{settings_obj.phone}}" class="flex items-center gap-2 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-2 py-3 font-semibold tracking-wide shadow-lg hover:shadow-xl transition-all duration-300">
-
-          <i class="fa-brands fa-whatsapp"></i>
-            WhatsApp Now
-
-        </a>
-
-
-        <!-- SITE VISIT -->
-        <a href="{% url "contact" %}" class="flex items-center gap-2 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-2 py-3 font-semibold tracking-wide shadow-lg hover:shadow-xl transition-all duration-300">
-
-          <i class="fa-solid fa-calendar-check"></i>
-          Book Site Visit
-        </a>
-
+    <!-- TABS -->
+    <div id="hero-tabs" class="flex gap-3 mb-8">
+      <button class="tab-btn active px-5 py-2 rounded-md shadow">Buy</button>
+      <button class="tab-btn px-5 py-2 rounded-md shadow">New Projects</button>
+      <button class="tab-btn px-5 py-2 rounded-md shadow">Rent</button>
     </div>
 
+    <!-- SEARCH BOX (WIDE + LUXURY) -->
+    <div class="flex items-center bg-white/95 backdrop-blur-md  shadow-2xl overflow-hidden w-full max-w-4xl mb-10">
+
+      <select class="px-4 py-3 outline-none text-gray-600 border-r bg-transparent">
+        <option>Residential</option>
+        <option>Commercial</option>
+      </select>
+
+      <input id="searchInput" type="text" placeholder="Search City, Locality, Developer or Project" class="flex-1 px-5 py-3 outline-none text-gray-700 text-lg"/>
+
+      <button id="searchButton" class="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-8 py-3 font-semibold text-lg transition">
+        Search
+      </button>
     </div>
 
+    <!-- CTA BUTTONS (UNIFORM BLUE THEME) -->
+    <div class="flex flex-wrap gap-4 justify-center">
 
-      <!-- RIGHT LEAD FORM -->
-    <div class="flex justify-center lg:justify-end">
+      <!-- CALL -->
+      <a href="tel:{{settings_obj.phone}}" class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 px-6 py-2.5  shadow-lg transition">
+        <i class="fa-solid fa-phone"></i> Call Now
+      </a>
 
-      <div class="bg-white shadow-2xl rounded-md p-8 w-full max-w-sm text-gray-800 border">
+      <!-- WHATSAPP -->
+      <a href="https://wa.me/91{{settings_obj.phone}}" class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 px-6 py-2.5  shadow-lg transition">
+        <i class="fa-brands fa-whatsapp"></i> WhatsApp
+      </a>
 
-        <h3 class="text-2xl font-bold mb-6 flex items-center gap-2">
-          <i class="fa-solid fa-house text-blue-600"></i>
-          Get Best Property Deals
-        </h3>
-
-        <form method="POST" action="{% url 'contact' %}" class="space-y-5">
-
-          {% csrf_token %}
-
-          <!-- NAME -->
-          <div class="relative">
-
-            <i class="fa-solid fa-user absolute left-4 top-4 text-gray-400"></i>
-
-            <input type="text" name="name" placeholder="Full Name" required class="w-full border border-gray-300 pl-11 pr-4 py-3 rounded-md outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition" />
-
-          </div>
-
-          <!-- EMAIL -->
-          <div class="relative">
-
-            <i class="fa-solid fa-envelope absolute left-4 top-4 text-gray-400"></i>
-
-            <input type="email" name="email" placeholder="Email Address" required class="w-full border border-gray-300 pl-11 pr-4 py-3 rounded-md outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition" />
-
-          </div>
-
-
-          <!-- PHONE -->
-          <div class="relative">
-
-            <i class="fa-solid fa-phone absolute left-4 top-4 text-gray-400"></i>
-
-            <input type="tel" name="phone" placeholder="Phone Number" required class="w-full border border-gray-300 pl-11 pr-4 py-3 rounded-md outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition" />
-
-          </div>
-
-
-          <!-- MESSAGE -->
-          <div class="relative">
-
-            <i class="fa-solid fa-comment absolute left-4 top-4 text-gray-400"></i>
-
-            <textarea name="message" rows="4" placeholder="Your Message" class="w-full border border-gray-300 pl-11 pr-4 py-3 rounded-md outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none transition" ></textarea>
-
-          </div>
-
-          
-
-
-          <!-- SUBMIT BUTTON -->
-          <button type="submit" class="w-full bg-[{{ slider.search_btn_color|default:'#2b8cc9' }}] hover:opacity-90 text-white py-3 rounded-md font-semibold tracking-wide flex items-center justify-center gap-2 shadow-md transition">
-
-            <i class="fa-solid fa-paper-plane"></i>
-
-            Get Details Instantly
-
-          </button>
-
-        </form>
-
-      </div>
+      <!-- SITE VISIT -->
+      <a href="{% url 'contact' %}" class="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 px-6 py-2.5  shadow-lg transition">
+        <i class="fa-solid fa-calendar-check"></i> Book Visit
+      </a>
 
     </div>
 
   </div>
-
 </section>
 
 
-
 <script>
-document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function () {
 
-  const tabs = document.querySelectorAll("#hero-tabs .tab-btn");
+    const tabs = document.querySelectorAll("#hero-tabs .tab-btn");
 
-    tabs.forEach(tab => {
+      tabs.forEach(tab => {
 
-    tab.addEventListener("click", function(){
+      tab.addEventListener("click", function(){
 
-    tabs.forEach(btn => btn.classList.remove("active"));
+      tabs.forEach(btn => btn.classList.remove("active"));
 
-    this.classList.add("active");
+      this.classList.add("active");
+
+      });
 
     });
 
   });
-
-});
 </script>
 
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function () {
 
-  /* =========================
-     DEBOUNCE FUNCTION
-  ========================== */
-  function debounce(callback, delay = 350) {
-    let timer;
-    return function (...args) {
-      clearTimeout(timer);
-      timer = setTimeout(() => callback.apply(this, args), delay);
-    };
-  }
-
-  /* =========================
-     ELEMENTS
-  ========================== */
-  const desktopInput = document.getElementById("searchInput");
-  const desktopBox = document.getElementById("suggestionBox");
-  const desktopBtn = document.getElementById("searchButton");
-
-  const mobileInput = document.getElementById("mobileSearchInput");
-  const mobileBtn = document.getElementById("mobileSearchButton");
-
-  /* =========================
-     FETCH SUGGESTIONS
-  ========================== */
-  async function fetchSuggestions(query, suggestionBox, inputField) {
-
-    if (!suggestionBox) return;
-
-    if (query.length < 1) {
-      suggestionBox.classList.add("hidden");
-      return;
+    /* =========================
+      DEBOUNCE FUNCTION
+    ========================== */
+    function debounce(callback, delay = 350) {
+      let timer;
+      return function (...args) {
+        clearTimeout(timer);
+        timer = setTimeout(() => callback.apply(this, args), delay);
+      };
     }
 
-    try {
-      const response = await fetch(`/projects/api/search-suggestions/?q=${encodeURIComponent(query)}`);
+    /* =========================
+      ELEMENTS
+    ========================== */
+    const desktopInput = document.getElementById("searchInput");
+    const desktopBox = document.getElementById("suggestionBox");
+    const desktopBtn = document.getElementById("searchButton");
 
-      if (!response.ok) throw new Error("Network error");
+    const mobileInput = document.getElementById("mobileSearchInput");
+    const mobileBtn = document.getElementById("mobileSearchButton");
 
-      const data = await response.json();
-      suggestionBox.innerHTML = "";
+    /* =========================
+      FETCH SUGGESTIONS
+    ========================== */
+    async function fetchSuggestions(query, suggestionBox, inputField) {
 
-      if (!data.length) {
-        suggestionBox.innerHTML =
-          `<li class="px-4 py-2 text-sm text-gray-500">No results found</li>`;
-        suggestionBox.classList.remove("hidden");
+      if (!suggestionBox) return;
+
+      if (query.length < 1) {
+        suggestionBox.classList.add("hidden");
         return;
       }
 
-      data.forEach(item => {
-        const li = document.createElement("li");
-        li.className =
-          "px-4 py-2 text-sm cursor-pointer hover:bg-gray-100 flex justify-between items-center";
+      try {
+        const response = await fetch(`/projects/api/search-suggestions/?q=${encodeURIComponent(query)}`);
 
-        li.innerHTML = `
-          <span>${item.name}</span>
-          <span class="text-xs text-gray-400">${item.type}</span>
-        `;
+        if (!response.ok) throw new Error("Network error");
 
-        li.addEventListener("click", () => {
+        const data = await response.json();
+        suggestionBox.innerHTML = "";
 
-          // Smart redirect based on type
-          if (item.type === "Project") {
-            window.location.href =
-              `/projects/search/?q=${encodeURIComponent(item.name)}`;
-          }
+        if (!data.length) {
+          suggestionBox.innerHTML =
+            `<li class="px-4 py-2 text-sm text-gray-500">No results found</li>`;
+          suggestionBox.classList.remove("hidden");
+          return;
+        }
 
-          else if (item.type === "Developer") {
-            window.location.href =
-              `/projects/search/?q=${encodeURIComponent(item.name)}`;
-          }
+        data.forEach(item => {
+          const li = document.createElement("li");
+          li.className =
+            "px-4 py-2 text-sm cursor-pointer hover:bg-gray-100 flex justify-between items-center";
 
-          else if (item.type === "Locality") {
-            window.location.href =
-              `/projects/search/?q=${encodeURIComponent(item.name)}`;
-          }
+          li.innerHTML = `
+            <span>${item.name}</span>
+            <span class="text-xs text-gray-400">${item.type}</span>
+          `;
 
-          else if (item.type === "City") {
-            window.location.href =
-              `/projects/search/?q=${encodeURIComponent(item.name)}`;
-          }
+          li.addEventListener("click", () => {
 
-          suggestionBox.classList.add("hidden");
+            // Smart redirect based on type
+            if (item.type === "Project") {
+              window.location.href =
+                `/projects/search/?q=${encodeURIComponent(item.name)}`;
+            }
+
+            else if (item.type === "Developer") {
+              window.location.href =
+                `/projects/search/?q=${encodeURIComponent(item.name)}`;
+            }
+
+            else if (item.type === "Locality") {
+              window.location.href =
+                `/projects/search/?q=${encodeURIComponent(item.name)}`;
+            }
+
+            else if (item.type === "City") {
+              window.location.href =
+                `/projects/search/?q=${encodeURIComponent(item.name)}`;
+            }
+
+            suggestionBox.classList.add("hidden");
+          });
+
+          suggestionBox.appendChild(li);
         });
 
-        suggestionBox.appendChild(li);
-      });
+        suggestionBox.classList.remove("hidden");
 
-      suggestionBox.classList.remove("hidden");
-
-    } catch (error) {
-      suggestionBox.innerHTML =
-        `<li class="px-4 py-2 text-sm text-red-500">Error loading</li>`;
-      suggestionBox.classList.remove("hidden");
-    }
-  }
-
-  /* =========================
-     DESKTOP SEARCH
-  ========================== */
-  const desktopSearch = debounce((value) => {
-    fetchSuggestions(value, desktopBox, desktopInput);
-  });
-
-  desktopInput?.addEventListener("input", (e) => {
-    desktopSearch(e.target.value.trim());
-  });
-
-
-
-  
-  /* =========================
-     CLOSE DROPDOWN ON OUTSIDE CLICK
-  ========================== */
-  document.addEventListener("click", function (e) {
-
-    if (!e.target.closest("#searchInput")) {
-      desktopBox?.classList.add("hidden");
+      } catch (error) {
+        suggestionBox.innerHTML =
+          `<li class="px-4 py-2 text-sm text-red-500">Error loading</li>`;
+        suggestionBox.classList.remove("hidden");
+      }
     }
 
-    if (!e.target.closest("#mobileSearchInput")) {
-      mobileBox?.classList.add("hidden");
-    }
+    /* =========================
+      DESKTOP SEARCH
+    ========================== */
+    const desktopSearch = debounce((value) => {
+      fetchSuggestions(value, desktopBox, desktopInput);
+    });
+
+    desktopInput?.addEventListener("input", (e) => {
+      desktopSearch(e.target.value.trim());
+    });
+
+
+
+    
+    /* =========================
+      CLOSE DROPDOWN ON OUTSIDE CLICK
+    ========================== */
+    document.addEventListener("click", function (e) {
+
+      if (!e.target.closest("#searchInput")) {
+        desktopBox?.classList.add("hidden");
+      }
+
+      if (!e.target.closest("#mobileSearchInput")) {
+        mobileBox?.classList.add("hidden");
+      }
+
+    });
 
   });
-
-});
-
 </script>
