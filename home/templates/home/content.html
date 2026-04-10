@@ -57,7 +57,7 @@
 
         <div class="text-center mb-8">
           <h2 class="text-2xl md:text-4xl font-black uppercase text-slate-900 tracking-tight">
-            Featured <span class="text-green-500">PROJECTS</span>
+            Featured <span class="text-blue-500">PROJECTS</span>
           </h2>
           <div class="h-1 w-12 bg-orange-500 mx-auto mt-2 rounded-full"></div>
         </div>
@@ -67,7 +67,7 @@
             <div class="swiper-wrapper">
 
               {% for rs in project_featured %}
-              <div class="swiper-slide h-auto border border-green-500">
+               <div class="swiper-slide h-auto border border-blue-500">
 
                 <div class="group bg-white rounded-lg shadow-sm hover:shadow-xl transition-all duration-500 overflow-hidden border border-slate-200 flex flex-col h-full">
 
@@ -90,12 +90,12 @@
 
                       <div class="flex-1">
 
-                        <h3 class="text-base font-bold text-green-800 line-clamp-1 group-hover:text-green-500 transition-colors">
+                        <h3 class="text-base font-bold text-[#1D6795] line-clamp-1 group-hover:text-[#1D6795] transition-colors">
                           {{ rs.project_name }}
                         </h3>
 
                         <p class="text-xs text-slate-500 flex items-center gap-1 mt-0.5">
-                          <i class="fa-solid fa-location-dot text-green-500"></i>
+                          <i class="fa-solid fa-location-dot text-blue-500"></i>
                           {{ rs.locality.name }}
                         </p>
 
@@ -103,7 +103,7 @@
 
                       <div class="text-right">
 
-                        <p class="text-sm font-black text-green-600">
+                        <p class="text-sm font-black text-[#1D6795]">
                           {% if rs.min_price %}
                             ₹{{ rs.min_price|indian_price }}
                           {% else %}
@@ -125,8 +125,8 @@
 
                       <div class="flex items-center gap-2 p-1.5 rounded-md bg-slate-50 border border-slate-100">
 
-                        <div class="w-6 h-6 flex items-center justify-center bg-green-100 rounded shrink-0">
-                          <i class="{{ usp.icon|default:"fa-solid fa-check" }} text-[10px] text-green-600"></i>
+                        <div class="w-6 h-6 flex items-center justify-center bg-blue-100 rounded shrink-0">
+                          <i class="{{ usp.icon|default:"fa-solid fa-check" }} text-[10px] text-blue-600"></i>
                         </div>
 
                         <span class="text-[12px] font-semibold text-slate-700 truncate">
@@ -263,17 +263,12 @@
                     <!-- BUTTONS -->
                     <div class="mt-4 flex gap-2">
 
-                      <a href="{{ rs.get_absolute_url }}" class="flex-1 bg-green-700 text-white text-center py-2.5 rounded-xl font-bold text-xs hover:bg-blue-800 transition-all shadow-sm">
-
+                      <a href="{{ rs.get_absolute_url }}" class="flex-1 bg-blue-500 text-white text-center py-2.5 rounded-xl font-bold text-xs hover:bg-blue-800 transition-all shadow-sm">
                         View Project
-
                       </a>
 
-                      <a href="tel:{{ settings_obj.phone }}"
-                        class="w-10 h-10 border border-slate-300 flex items-center justify-center rounded-xl text-slate-700 hover:border-blue-500 hover:text-blue-600 transition-all">
-
+                      <a href="tel:{{ settings_obj.phone }}" class="w-10 h-10 border border-slate-300 flex items-center justify-center rounded-xl text-slate-700 hover:border-blue-500 hover:text-blue-600 transition-all">
                         <i class="fa-solid fa-phone text-sm"></i>
-
                       </a>
 
                     </div>
@@ -308,12 +303,12 @@
           const target = btn.getAttribute('data-target');
 
           card.querySelectorAll('.bhk-tab').forEach(tab => {
-            tab.classList.remove('active','bg-slate-800','text-white');
-            tab.classList.add('bg-white','text-slate-500','border-slate-200');
+            tab.classList.remove('active','bg-blue-800','text-white');
+            tab.classList.add('bg-white','text-blue-500','border-blue-200');
           });
 
-          btn.classList.add('active','bg-slate-800','text-white');
-          btn.classList.remove('bg-white','text-slate-500','border-slate-200');
+          btn.classList.add('active','bg-blue-800','text-white');
+          btn.classList.remove('bg-white','text-blue-500','border-slate-200');
 
           card.querySelectorAll('.bhk-panel').forEach(panel => {
             panel.classList.add('hidden');
@@ -350,7 +345,6 @@
       });
 
     </script>
-
   <!-- ======================= FEATURE PROJECTS ======================= -->
 
   <!-- ======================= FEATURE PROPERTIES ======================= -->
@@ -489,78 +483,151 @@
   <!-- ======================= FEATURE PROPERTIES END ======================= -->
   
   <!-- ======================= 🌟 WHY CHOOSE US ======================= -->
-  <section class="bg-[#dfe7e7] py-16">
+    {% if why_choose_items %}
+    <section class="bg-[#dfe7e7] py-16">
 
-    <div class="max-w-6xl mx-auto px-6">
+      <div class="max-w-6xl mx-auto px-6">
 
-      <!-- Heading -->
+        <!-- Heading -->
+        <div class="text-center mb-12">
+
+          <h2 class="text-4xl md:text-5xl font-serif text-[#0e2c2c] mb-3">
+            Why on {{settings_obj.site_name}}?
+          </h2>
+
+          <p class="text-gray-700 max-w-2xl mx-auto text-sm">
+            With over a decade of experience in the real estate market, we understand the
+            ins and outs of property transactions like no other.
+          </p>
+
+        </div>
+
+        <!-- Cards -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+
+        <!-- Card -->
+        {% for rs in why_choose_items %}
+        <div class="bg-white rounded-xl shadow-md p-4 text-center hover:shadow-lg transition duration-300">
+
+            <img src="{{rs.image.url}}" alt="{{rs.title}}" class="w-16 h-16 mx-auto mb-2 object-contain" >
+
+            <h3 class="text-base font-semibold text-gray-800">
+                        {{rs.title}}
+            </h3>
+
+        </div>
+        {% endfor %}
+
+      </div>
+
+    </section>
+    {% else %}
+  <section class="py-16 text-center">
+      <div class="max-w-md mx-auto px-6">
+
+        <div class="bg-gray-100 p-8 rounded-2xl border-2 border-dashed border-gray-300">
+          <p class="text-gray-500 font-medium">No features found at the moment.</p>
+          <span class="text-xs text-gray-400 italic">Please check back later, </span>
+        </div>
+      </div>
+    </section>
+    {% endif %}
+  <!-- ======================= 🌟 WHY CHOOSE US END ======================= -->
+
+  
+  <!-- ================= OUR TESTIMONIAL ================= -->
+  <section class="py-20 bg-white border border-black">
+    <div class="max-w-7xl mx-auto px-6">
+
       <div class="text-center mb-12">
-
-        <h2 class="text-4xl md:text-5xl font-serif text-[#0e2c2c] mb-3">
-          Why Rely on {{settings_obj.site_name}}?
-        </h2>
-
-        <p class="text-gray-700 max-w-2xl mx-auto text-sm">
-          With over a decade of experience in the real estate market, we understand the
-          ins and outs of property transactions like no other.
-        </p>
-
+        <div class="flex justify-center items-center gap-3 mb-4">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1280px-Google_2015_logo.svg.png" alt="Google" class="h-8">
+          <span class="text-2xl font-medium text-gray-700">Reviews</span>
+        </div>
+        
+        <div class="flex flex-col items-center">
+          <div class="flex items-center gap-2">
+            <span class="text-4xl font-bold text-gray-800">4.8</span>
+            <div class="flex text-yellow-400 text-2xl">
+              ★★★★★
+            </div>
+          </div>
+          <p class="text-gray-500 mt-1 text-sm font-medium uppercase tracking-widest">Success Stories</p>
+          <div class="h-1 w-20 bg-[#4285F4] mt-4 rounded-full"></div>
+        </div>
       </div>
 
-      <!-- Cards -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div class="relative overflow-hidden py-4">
+        <div id="testimonialSlider" class="flex transition-transform duration-500 ease-in-out">
 
-      <!-- Card -->
-      <div class="bg-white rounded-xl shadow-md p-4 text-center hover:shadow-lg transition duration-300">
+          {% for t in testimonials %}
+          <div class="min-w-full md:min-w-[33.333%] px-3">
+            <div class="bg-white border border-gray-200 rounded-2xl p-6 h-full flex flex-col justify-between hover:shadow-lg transition-shadow duration-300">
+              
+              <div>
+                <div class="flex justify-between items-start mb-4">
+                  <div class="flex items-center gap-3">
+                    {% if t.image %}
+                    <img src="{{ t.image.url }}" class="w-11 h-11 rounded-full object-cover border border-gray-100">
+                    {% else %}
+                    <div class="w-11 h-11 rounded-full bg-[#4285F4] flex items-center justify-center text-white font-bold text-lg">
+                      {{ t.name|slice:":1" }}
+                    </div>
+                    {% endif %}
+                    
+                    <div>
+                      <h4 class="font-bold text-gray-900 text-sm">{{ t.name }}</h4>
+                      <p class="text-[11px] text-gray-400 uppercase tracking-tighter">Local Guide</p>
+                    </div>
+                  </div>
+                  <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_Logo.svg" class="h-4 w-4">
+                </div>
 
-          <img src="https://propcore.in/wp-content/uploads/2024/09/3D-Icon-3-2.png" alt="Experienced Team" class="w-16 h-16 mx-auto mb-2 object-contain" >
+                <div class="text-yellow-400 text-xs mb-3">
+                  {% for i in "12345"|slice:":t.rating" %}
+                    ★
+                  {% endfor %}
+                </div>
 
-          <h3 class="text-base font-semibold text-gray-800">
-              Experienced Team
-          </h3>
+                <p class="text-gray-600 text-[13px] leading-relaxed italic">
+                  "{{ t.message }}"
+                </p>
+              </div>
 
+              {% if t.designation %}
+              <div class="mt-4 pt-4 border-t border-gray-50">
+                  <p class="text-[11px] font-semibold text-[#4285F4]">{{ t.designation }}</p>
+              </div>
+              {% endif %}
+
+            </div>
+          </div>
+          {% empty %}
+          <div class="w-full text-center py-10">
+            <p class="text-gray-400">No reviews found yet.</p>
+          </div>
+          {% endfor %}
+
+        </div>
       </div>
 
-      <!-- Card -->
-      <div class="bg-white rounded-xl shadow-md p-4 text-center hover:shadow-lg transition duration-300">
-
-          <img src="https://propcore.in/wp-content/uploads/2024/09/3D-Icon-2-2.png" alt="Certified Properties/Projects" class="w-16 h-16 mx-auto mb-2 object-contain" >
-
-          <h3 class="text-base font-semibold text-gray-800">
-              Certified Properties/Projects
-          </h3>
-
-      </div>
-      
-      
-      <!-- Card -->
-      <div class="bg-white rounded-xl shadow-md p-4 text-center hover:shadow-lg transition duration-300">
-
-          <img src="https://propcore.in/wp-content/uploads/2024/09/3D-Icon-1-2.png" alt="Uncomplicated Transactions" class="w-16 h-16 mx-auto mb-2 object-contain" >
-
-          <h3 class="text-base font-semibold text-gray-800">
-              Uncomplicated Transactions
-          </h3>
-
-      </div>
-      
-      <!-- Card -->
-      <div class="bg-white rounded-xl shadow-md p-4 text-center hover:shadow-lg transition duration-300">
-
-          <img src="https://propcore.in/wp-content/uploads/2024/09/handshake-icon.png" alt="Best value Deals" class="w-16 h-16 mx-auto mb-2 object-contain" >
-
-          <h3 class="text-base font-semibold text-gray-800">
-              Best value Deals
-          </h3>
-
-      </div>
-
+      <div class="flex justify-center mt-8 gap-2">
+        {% with total=testimonials|length %}
+          {% if total > 3 %}
+            {% for i in testimonials %}
+              {% if forloop.counter0|divisibleby:3 %}
+                <button class="dot w-2 h-2 rounded-full {% if forloop.first %}bg-[#4285F4] w-6{% else %}bg-gray-300{% endif %} transition-all duration-300"></button>
+              {% endif %}
+            {% endfor %}
+          {% else %}
+              <button class="dot w-6 h-2 rounded-full bg-[#4285F4]"></button>
+          {% endif %}
+        {% endwith %}
       </div>
 
     </div>
-
   </section>
-  <!-- ======================= 🌟 WHY CHOOSE US END ======================= -->
+  <!-- ===================== OUR TESTIMONIAL SECTION END ===================== -->
 
   <!-- ======================= POSSESSION STATUS (UNIQUE) ======================= -->
   <section class="py-16 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
@@ -682,98 +749,6 @@
   </section>
   <!-- ======================= POSSESSION STATUS (UNIQUE END) ======================= -->
 
-  <hr>
-  <!-- ======================= WHAT ARE YOU LOOKING FOR? ======================= -->
-  <section class="py-16 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 text-center">
-
-      <!-- Heading -->
-      <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-800 mb-12 uppercase" data-aos="fade-up">
-        What Are You Looking For?
-      </h2>
-
-      <!-- Grid Responsive -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-
-        <!-- Office Space -->
-        <div class="text-center bg-white shadow-sm hover:shadow-md p-8 transition" data-aos="fade-up" data-aos-delay="100">
-          <div class="flex items-center justify-center h-20 w-20 mx-auto bg-orange-50 shadow">
-            <i class="fas fa-building text-orange-500 text-3xl"></i>
-          </div>
-          <h3 class="mt-4 font-bold text-gray-800 uppercase">Office Space</h3>
-          <p class="text-sm text-gray-600 mt-2">
-            Give your business a presence in prime location with luxurious working atmosphere.
-          </p>
-        </div>
-
-        <!-- Residential -->
-        <div class="text-center bg-white shadow-sm hover:shadow-md p-8 transition" data-aos="fade-up" data-aos-delay="200">
-          <div class="flex items-center justify-center h-20 w-20 mx-auto bg-orange-50 shadow">
-            <i class="fas fa-home text-orange-500 text-3xl"></i>
-          </div>
-          <h3 class="mt-4 font-bold text-gray-800 uppercase">Residential Apartment</h3>
-          <p class="text-sm text-gray-600 mt-2">
-            Find verified listings of luxury apartments for sale or rent from trusted owners.
-          </p>
-        </div>
-
-        <!-- Land -->
-        <div class="text-center bg-white shadow-sm hover:shadow-md p-8 transition" data-aos="fade-up" data-aos-delay="300">
-          <div class="flex items-center justify-center h-20 w-20 mx-auto bg-orange-50 shadow">
-            <i class="fas fa-map-marked-alt text-orange-500 text-3xl"></i>
-          </div>
-          <h3 class="mt-4 font-bold text-gray-800 uppercase">Land</h3>
-          <p class="text-sm text-gray-600 mt-2">
-            Buy, rent or sell residential and commercial land in your location.
-          </p>
-        </div>
-
-        <!-- Commercial -->
-        <div class="text-center bg-white shadow-sm hover:shadow-md p-8 transition" data-aos="fade-up" data-aos-delay="400">
-          <div class="flex items-center justify-center h-20 w-20 mx-auto bg-orange-50 shadow">
-            <i class="fas fa-store text-orange-500 text-3xl"></i>
-          </div>
-          <h3 class="mt-4 font-bold text-gray-800 uppercase">Commercial</h3>
-          <p class="text-sm text-gray-600 mt-2">
-            Explore shops, showrooms and office spaces for sale or rent.
-          </p>
-        </div>
-
-      </div>
-
-    </div>
-  </section>
-  <!-- ======================= WHAT ARE YOU LOOKING FOR? ======================= -->
-   
-  <br>
-  <!-- ======================= STATS COUNTER ======================= -->
-  <section class="py-20 bg-[#0f172a] text-white">
-    <div class="max-w-6xl mx-auto grid md:grid-cols-4 gap-10">
-
-      {% for item in impactmetric %}
-
-      <div class="group">
-        
-        <!-- PROGRESS LINE -->
-        <div class="h-1 bg-orange-500 rounded-full mb-3"
-            style="width: {{ item.value|cut:'+'|cut:'%' }}%; max-width: 100%;"></div>
-
-        <!-- ICON + VALUE -->
-        <div class="flex items-center gap-3">
-          <i class="{{ item.icon }} text-orange-400 text-2xl"></i>
-          <h3 class="text-4xl font-bold">{{ item.value }}</h3>
-        </div>
-
-        <!-- TITLE -->
-        <p class="text-gray-300 mt-1">{{ item.title }}</p>
-
-      </div>
-
-      {% endfor %}
-
-    </div>
-  </section>
-  <!-- ======================= STATS COUNTER END ======================= -->
 
   <!-- ======================= HOME LOAN PARTNERS SLIDER ======================= -->
   <section class="py-20 bg-white" id="home-loan-partners">
@@ -893,234 +868,194 @@
   </section>
   <!-- ======================= LOCALITY END ======================= -->
 
-  <!-- ======================= TESTIMONIALS ======================= -->
-  <section class="py-16 bg-gray-50">
 
-    <div class="max-w-7xl mx-auto px-6">
 
-      <!-- Heading -->
+  <!-- ======================= CLASSIC CONTACT SECTION ======================= -->
+  <section class="min-h-screen py-16">
+    <div class="max-w-6xl mx-auto px-4 lg:px-6">
+      
+      <!-- PAGE TITLE -->
       <div class="text-center mb-12">
-        <h2 class="text-3xl font-bold text-gray-800">
-          What Our Clients Say
-        </h2>
-        <p class="text-gray-500 mt-2">
-          Trusted by our happy customers
+        <p class="text-sm uppercase tracking-[0.25em] text-indigo-500 mb-2">
+          Get in Touch
+        </p>
+        <h1 class="text-3xl md:text-4xl font-bold text-slate-900">
+          We'd love to hear from you
+        </h1>
+        <p class="mt-3 text-slate-500 max-w-2xl mx-auto text-sm md:text-base">
+          Have a question, project idea, or just want to say hello?  
+          Fill the form below or reach us through our contact details.
         </p>
       </div>
 
-      <!-- Swiper -->
-      <div class="swiper testimonialSwiper">
+      <!-- MAIN GRID -->
+      <div class="grid gap-10 lg:grid-cols-2 items-start">
+        
+        <!-- LEFT: CONTACT INFO + FOLLOW ON -->
+        <div class="space-y-8">
+          <!-- Card -->
+          <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 md:p-8">
+            <h2 class="text-xl font-semibold text-slate-900 mb-4">
+              Contact Details
+            </h2>
+            <p class="text-sm text-slate-500 mb-6">
+              You can reach us via phone, email or visit our office during working hours.
+            </p>
 
-        <div class="swiper-wrapper">
-
-          {% for t in testimonials %}
-
-          <div class="swiper-slide">
-
-            <div class="bg-white rounded-xl shadow-md p-6 border">
-
-              <!-- Message -->
-              <p class="clamp-text text-gray-600 text-sm mb-3">
-                {{ t.message }}
-              </p>
-
-              <!-- Read More -->
-                <button class="text-orange-500 text-sm font-semibold readMoreBtn" data-name="{{ t.name }}" data-designation="{{ t.designation }}" data-message="{{ t.message }}">
-                  Read More
-                </button>
-
-              <!-- Rating -->
-              <div class="flex text-yellow-400 mt-4 mb-4">
-                {% for i in "12345" %}
-                  {% if forloop.counter <= t.rating %}
-                    <i class="fa-solid fa-star"></i>
-                  {% else %}
-                    <i class="fa-regular fa-star"></i>
-                  {% endif %}
-                {% endfor %}
+            <!-- CONTACT INFO LIST -->
+            <div class="space-y-4 text-sm">
+              <div class="flex items-start gap-3">
+                <span class="mt-1 inline-flex h-9 w-9 items-center justify-center rounded-full bg-indigo-50">
+                  <!-- Phone Icon -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.25 6.75c0 8.284 6.716 15 15 15h1.5a1.5 1.5 0 001.5-1.5v-2.4a1.5 1.5 0 00-1.125-1.455l-3.375-.9a1.5 1.5 0 00-1.59.54l-.975 1.3a1 1 0 01-1.2.3 11.25 11.25 0 01-5.22-5.22 1 1 0 01.3-1.2l1.3-.975a1.5 1.5 0 00.54-1.59l-.9-3.375A1.5 1.5 0 006.15 3H3.75A1.5 1.5 0 002.25 4.5v2.25z" />
+                  </svg>
+                </span>
+                <div>
+                  <p class="font-medium text-slate-900">Call / WhatsApp</p>
+                  <a href="tel:{{settings_obj.phone}}"><p class="text-slate-500">+91 {{settings_obj.phone}}</p></a>
+                </div>
               </div>
 
-              <!-- User -->
-              <div class="flex items-center gap-3">
-
-                {% if t.image %}
-                <img src="{{ t.image.url }}" class="w-12 h-12 rounded-full object-cover">
-                {% else %}
-                <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
-                    class="w-12 h-12 rounded-full">
-                {% endif %}
-
+              <div class="flex items-start gap-3">
+                <span class="mt-1 inline-flex h-9 w-9 items-center justify-center rounded-full bg-indigo-50">
+                  <!-- Mail Icon -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.5a2.25 2.25 0 01-2.31 0l-7.5-4.5A2.25 2.25 0 012.25 6.993V6.75" />
+                  </svg>
+                </span>
                 <div>
-                  <h4 class="font-semibold text-gray-800">
-                    {{ t.name }}
-                  </h4>
-                  <p class="text-xs text-gray-500">
-                    {{ t.designation }}
-                  </p>
+                  <p class="font-medium text-slate-900">Email</p>
+                  <a href="mailto:{{settings_obj.email}}"><p class="text-slate-500 break-all">{{settings_obj.email}}</p></a>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <span class="mt-1 inline-flex h-9 w-9 items-center justify-center rounded-full bg-indigo-50">
+                  <!-- Location Icon -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                  </svg>
+                </span>
+                <div>
+                  <p class="font-medium text-slate-900">Office Address</p>
+                    <p class="text-slate-500">
+                          {{settings_obj.address}}
+                    </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- FOLLOW ON -->
+            <div class="mt-8">
+              <p class="text-xs uppercase tracking-[0.25em] text-slate-400 mb-3">
+                Follow On
+              </p>
+              <div class="flex flex-wrap gap-3">
+                <a href="{{settings_obj.instagram}}" class="inline-flex items-center gap-2 rounded-full border border-slate-200 px-4 py-2 text-xs font-medium text-slate-700 hover:border-indigo-500 hover:text-indigo-600 transition">
+                  <!-- Insta -->
+                   <i class="fa-brands fa-instagram text-1xl"></i>
+                  Instagram
+                </a>
+                <a href="{{settings_obj.facebook}}" class="inline-flex items-center gap-2 rounded-full border border-slate-200 px-4 py-2 text-xs font-medium text-slate-700 hover:border-indigo-500 hover:text-indigo-600 transition">
+                  <!-- Facebook -->
+                <i class="fa-brands fa-facebook-f"></i>
+                  Facebook
+                </a>
+                <a href="{{settings_obj.youtube}}" class="inline-flex items-center gap-2 rounded-full border border-slate-200 px-4 py-2 text-xs font-medium text-slate-700 hover:border-indigo-500 hover:text-indigo-600 transition">
+                  <!-- YouTube -->
+                  <i class="fa-brands fa-youtube"></i>
+                  YouTube
+                </a>
+                <a href="{{settings_obj.linkedin}}" class="inline-flex items-center gap-2 rounded-full border border-slate-200 px-4 py-2 text-xs font-medium text-slate-700 hover:border-indigo-500 hover:text-indigo-600 transition">
+                  <!-- LinkedIn -->
+                <i class="fa-brands fa-linkedin"></i>
+                  LinkedIn
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: CONTACT FORM -->
+        <div>
+          <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 md:p-8">
+            <h2 class="text-xl font-semibold text-slate-900 mb-2">
+              Send us a message
+            </h2>
+            <p class="text-sm text-slate-500 mb-6">
+              Fill out the form and we’ll get back to you as soon as possible.
+            </p>
+
+            <form action="{% url 'contact' %}" method="POST" class="space-y-4">
+              {% csrf_token %}
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                <!-- Name -->
+                <div>
+                  <label class="block text-xs font-medium text-slate-600 mb-1">
+                    Full Name <span class="text-red-400 italic text-lg">*</span>
+                  </label>
+                  <input type="text" name="name" required class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm outline-none focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-100"  placeholder="Enter your name">
+                </div>
+
+                <!-- Phone -->
+                <div>
+                  <label class="block text-xs font-medium text-slate-600 mb-1">
+                    Phone Number <span class="text-red-400 italic text-lg">*</span>
+                  </label>
+                  <input type="tel" name="phone" class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm outline-none focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-100" placeholder="98765 43210">
                 </div>
 
               </div>
 
-            </div>
+              <!-- Email -->
+              <div>
+                <label class="block text-xs font-medium text-slate-600 mb-1">
+                  Email Address
+                </label>
+                <input type="email" name="email" class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm outline-none focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-100" placeholder="you@example.com">
+              </div>
+
+              <!-- Subject -->
+              <div>
+                <label class="block text-xs font-medium text-slate-600 mb-1">
+                  Subject
+                </label>
+                <input type="text" name="subject" class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm outline-none focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-100" placeholder="How can we help you?">
+              </div>
+
+              <!-- Message -->
+              <div>
+                <label class="block text-xs font-medium text-slate-600 mb-1">
+                  Message <span class="text-red-400 italic text-lg">*</span>
+                </label>
+                <textarea name="message" rows="4" required class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm outline-none focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-100 resize-none" placeholder="Kindly request your Property Requirements..."></textarea>
+              </div>
+
+              <!-- Consent + Button -->
+              <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pt-2">
+                <label class="inline-flex items-start gap-2 text-xs text-slate-500">
+                  <input required type="checkbox" class="mt-0.5 h-4 w-4 border border-gray-400 rounded-sm appearance-auto">
+                  I provide my informed consent for {{settings_obj.site_name}} to reach out to me.
+                </label>
+
+                <button type="submit" class="w-full md:w-auto inline-flex items-center justify-center rounded-xl bg-indigo-600 px-7 py-3 text-sm font-semibold text-white shadow hover:bg-indigo-700 transition-all duration-200">
+                  Send Message
+                </button>
+              </div>
+
+            </form>
 
           </div>
-
-          {% endfor %}
-
         </div>
+
 
       </div>
 
     </div>
-
-  </section>
-  <!-- ======================= TESTIMONIALS ======================= -->
-
-  <section class="bg-slate-900 py-16 px-6 text-center">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight">
-        Looking to Buy Your Dream Home?
-      </h2>
-      
-      <p class="text-slate-400 text-lg mb-10 max-w-2xl mx-auto">
-        Get expert guidance and the best deals with <span class="text-indigo-400 font-semibold uppercase">{{settings_obj.site_name}}</span>
-      </p>
-
-      <div class="flex flex-wrap justify-center gap-4">
-        
-        <a href="tel:+91{{settings_obj.phone}}"  class="inline-flex items-center gap-2 bg-white text-slate-900 px-8 py-3 font-bold hover:bg-slate-200 transition-colors shadow-xl">
-          <i class="fas fa-phone-alt"></i>
-          Call Now
-        </a>
-
-        <a href="https://wa.me/{{settings_obj.whatsapp}}"  class="inline-flex items-center gap-2 bg-[#25D366] text-white px-8 py-3 font-bold hover:bg-[#128C7E] transition-colors shadow-xl">
-          <i class="fab fa-whatsapp text-xl"></i>
-          WhatsApp
-        </a>
-
-        <a href="{% url "contact" %}"  class="inline-flex items-center gap-2 bg-indigo-600 text-white px-8 py-3 font-bold hover:bg-indigo-700 transition-colors shadow-xl">
-          <i class="far fa-calendar-alt"></i>
-          Book Free Consultation
-        </a>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ======================= CLASSIC CONTACT SECTION ======================= -->
-  <section id="contact" class="py-20 bg-gray-50">
-
-    <div class="max-w-7xl mx-auto px-6">
-
-      <!-- Section Heading -->
-      <div class="text-center mb-14">
-
-        <h2 class="text-4xl font-bold text-gray-900 mb-3">
-          Contact Our Property Experts
-        </h2>
-
-        <p class="text-gray-600 max-w-2xl mx-auto">
-          Have questions about buying, selling or renting property?  
-          Our team is ready to assist you with the best real estate solutions.
-        </p>
-
-      </div>
-
-
-      <div class="grid lg:grid-cols-2 gap-12">
-
-
-        <div class="space-y-8">
-
-        <!-- Address -->
-        <div class="flex items-start gap-5 border-b pb-6">
-
-        <i class="fa-solid fa-location-dot text-orange-600 text-xl mt-1"></i>
-
-        <div>
-
-          <h4 class="font-semibold text-gray-900 mb-1">
-            Office Address
-          </h4>
-
-          <p class="text-gray-600">
-            Mumbai, Maharashtra, India
-          </p>
-
-        </div>
-
-        </div>
-
-
-        <!-- Phone -->
-        <div class="flex items-start gap-5 border-b pb-6">
-
-          <i class="fa-solid fa-phone text-orange-600 text-xl mt-1"></i>
-
-          <div>
-
-          <h4 class="font-semibold text-gray-900 mb-1">
-          Call Us
-          </h4>
-
-          <p class="text-gray-600">
-          +91 98980 34466
-          </p>
-
-          </div>
-
-        </div>
-
-
-        <!-- Email -->
-        <div class="flex items-start gap-5 border-b pb-6">
-
-          <i class="fa-solid fa-envelope text-orange-600 text-xl mt-1"></i>
-
-          <div>
-
-            <h4 class="font-semibold text-gray-900 mb-1">
-              Email Address
-            </h4>
-
-            <p class="text-gray-600">
-              info@example.com
-            </p>
-
-          </div>
-
-        </div>
-        </div>
-
-
-        <div class="bg-white border shadow-sm p-6">
-
-          <h3 class="text-2xl font-semibold text-gray-900 mb-6">
-            Send Us a Message
-          </h3>
-
-          <form class="space-y-5">
-
-            <input type="text" placeholder="Full Name" class="w-full border p-3 focus:outline-none focus:border-orange-500" >
-
-            <input type="email" placeholder="Email Address" class="w-full border p-3 focus:outline-none focus:border-orange-500" >
-
-            <input type="tel" placeholder="Phone Number" class="w-full border p-3 focus:outline-none focus:border-orange-500" >
-
-            <textarea rows="5" placeholder="Your Message" class="w-full border p-3 focus:outline-none focus:border-orange-500" ></textarea>
-
-            <button class="w-full bg-orange-600 text-white py-3 font-semibold hover:bg-orange-700 transition" >
-              Send Message
-            </button>
-
-          </form>
-
-        </div>
-
-      </div>
-
-    </div>
-
   </section>
   <!-- ======================= CONTACT SECTION END ======================= -->
 

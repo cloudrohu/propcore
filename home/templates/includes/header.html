@@ -52,10 +52,7 @@
             <a href="/admin/" class="hidden sm:flex items-center gap-2 text-gray-700 font-medium hover:text-red-500 transition">
                   <i class="fa-regular fa-user"></i> Login/Register
               </a>
-              
-              <a href="{% url 'contact' %}" class="bg-[#4095bd] hover:bg-[#4ABEF5] text-white px-3 md:px-4 py-2 md:py-2.5 font-semibold text-xs md:text-sm flex items-center gap-2 transition shadow-md shadow-red-100">
-                  <i class="fa-solid fa-plus"></i> <span class="hidden sm:inline">Sell/Rent your property</span><span class="sm:hidden">Sell/Rent your property</span>
-              </a>
+           
 
               <button id="openMenu" class="xl:hidden text-2xl text-gray-700">
                   <i class="fa-solid fa-bars-staggered"></i>
@@ -98,11 +95,6 @@
         <a class="flex items-center gap-3 px-6 py-4 border-b border-gray-50" href="{% url 'contact' %}"><i class="fa-solid fa-phone text-gray-400"></i> Contact</a>
 
     </nav>
-    <div class="p-6 border-t space-y-3">
-        <a href="{% url 'contact' %}" class="block text-center py-3 bg-[#4ABEF5] text-white font-bold shadow-lg">
-            + Sell/Rent your property
-        </a>
-    </div>
 </div>
 
 <div id="drawerOverlay" class="fixed inset-0 bg-black/50 hidden z-[998]"></div>

@@ -294,21 +294,15 @@ class USP(models.Model):
 
 class Configuration(models.Model):
     Project = models.ForeignKey("Project",on_delete=models.CASCADE,related_name="configurations")
-
     bhk_type = models.CharField(max_length=50)
-
     area_sqft = models.IntegerField(verbose_name="Area (Sq.ft)",help_text="Enter area in numeric square feet.")
-
     parking = models.BooleanField(default=False)
     balcony = models.BooleanField(default=False)
     sold_out = models.BooleanField(default=False)
-
+    tax_included = models.BooleanField(default=False)
     unit_plan = models.ImageField(null=True,blank=True,upload_to='images/')
-
-    # ✅ PRICE (INTEGER ONLY – VERY IMPORTANT)
     price_in_rupees = models.IntegerField(verbose_name="Price (in ₹)",help_text="Enter price in total rupees (e.g., 5000000).",null=True,blank=True)
 
-    # ✅ PRICE FORMATTER (CR / L / NORMAL)
     def formatted_price(self):
         """
         Returns:

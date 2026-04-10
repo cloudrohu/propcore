@@ -69,6 +69,7 @@ class ConfigurationInline(admin.TabularInline):
         'area_sqft',
         'price_in_rupees',
         'parking',
+        'tax_included',
         'balcony',
         'sold_out',
         'unit_plan',

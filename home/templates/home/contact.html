@@ -7,160 +7,6 @@
 
 {% block content %}
 
-<!-- HERO -->
-<section class="relative min-h-[45vh] flex items-center justify-center text-white overflow-hidden bg-blue-500">
-  <div class="absolute inset-0 bg-[url('{% static 'images/bg-pattern.svg' %}')] opacity-10"></div>
-  <div class="relative z-10 max-w-3xl mx-auto px-6 text-center">
-    <h1 class="text-4xl md:text-5xl font-bold mb-4">Get in Touch</h1>
-    <p class="text-lg md:text-xl opacity-90">We’d love to hear from you. Reach out for inquiries, collaborations, or support.</p>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section class="py-16 bg-gray-50">
-  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 px-6">
-
-    <!-- FORM -->
-    <div class="bg-white p-8 shadow-xl border border-gray-100">
-      <h2 class="text-2xl font-bold text-gray-800 mb-6 uppercase">Send Us a Message</h2>
-
-       {% if messages %}
-        {% for message in messages %}
-          <div class="bg-green-100 text-green-700 px-4 py-2 rounded-lg mb-4">
-            {{ message }}
-          </div>
-        {% endfor %}
-      {% endif %}
-
-    <form class="bg-white p-8 shadow-xl border border-gray-100 space-y-6 max-w-xl mx-auto" action="{% url 'contact' %}" method="POST">
-      {% csrf_token %}
-
-      <div class="relative">
-        <i class="fa-solid fa-user absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
-        <input name="name" type="text" placeholder="Full Name" required class="w-full border border-gray-300 pl-12 pr-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
-      </div>
-
-      <div class="relative">
-        <i class="fa-solid fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
-        <input name="email" type="email" placeholder="Email Address" required class="w-full border border-gray-300 pl-12 pr-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
-      </div>
-
-      <div class="relative">
-        <i class="fa-solid fa-phone absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
-        <input name="phone" type="tel" placeholder="Phone Number" required class="w-full border border-gray-300 pl-12 pr-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
-      </div>
-
-      <div class="relative">
-        <i class="fa-solid fa-comment absolute left-4 top-4 text-gray-400"></i>
-        <textarea name="message" rows="5" placeholder="Write your message..." required class="w-full border border-gray-300 pl-12 pr-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition resize-none"></textarea>
-      </div>
-
-      <button type="submit" class="w-full bg-blue-600 text-white py-3 font-semibold hover:bg-blue-700 transition shadow-md">
-        Send Message
-      </button>
-
-    </form>
-
-    </div>
-
-    <!-- INFO -->
-    <div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-100 flex flex-col justify-between">
-      
-      <div class="space-y-8">
-
-      <!-- Address -->
-      <div class="flex items-start gap-5 border-b pb-6">
-
-      <i class="fa-solid fa-location-dot text-blue-600 text-xl mt-1"></i>
-
-      <div>
-
-        <h4 class="font-semibold text-gray-900 mb-1">
-          Office Address
-        </h4>
-
-        <p class="text-gray-600">
-          Mumbai, Maharashtra, India
-        </p>
-
-      </div>
-
-      </div>
-
-
-      <!-- Phone -->
-      <div class="flex items-start gap-5 border-b pb-6">
-
-        <i class="fa-solid fa-phone text-blue-600 text-xl mt-1"></i>
-
-        <div>
-
-        <h4 class="font-semibold text-gray-900 mb-1">
-          Call Us
-        </h4>
-
-        <p class="text-gray-600">
-          +91 98980 34466
-        </p>
-
-        </div>
-
-      </div>
-
-
-      <!-- Email -->
-      <div class="flex items-start gap-5 border-b pb-6">
-
-        <i class="fa-solid fa-envelope text-blue-600 text-xl mt-1"></i>
-
-        <div>
-
-          <h4 class="font-semibold text-gray-900 mb-1">
-            Email Address
-          </h4>
-
-          <p class="text-gray-600">
-            info@example.com
-          </p>
-
-        </div>
-
-      </div>
-      </div>
-
-    </div>
-
-  </div>
-</section>
-
-<!-- CONTACT INFO SECTION -->
- <section class="py-16 bg-white">
-  <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
-
-    <!-- PHONE -->
-    <div class="text-center bg-gray-50 p-8 rounded-xl shadow hover:shadow-xl transition">
-      <i class="fa-solid fa-phone text-red-600 text-3xl"></i>
-      <h3 class="text-xl font-bold mt-4">Phone</h3>
-      <p class="text-gray-600 mt-2">+91 {{settings_obj.phone}}</p>
-    </div>
-
-    <!-- EMAIL -->
-    <div class="text-center bg-gray-50 p-8 rounded-xl shadow hover:shadow-xl transition">
-      <i class="fa-solid fa-envelope text-red-600 text-3xl"></i>
-      <h3 class="text-xl font-bold mt-4">Email</h3>
-      <p class="text-gray-600 mt-2">{{settings_obj.email}}</p>
-    </div>
-
-    <!-- LOCATION -->
-    <div class="text-center bg-gray-50 p-8 rounded-xl shadow hover:shadow-xl transition">
-      <i class="fa-solid fa-location-dot text-red-600 text-3xl"></i>
-      <h3 class="text-xl font-bold mt-4">Location</h3>
-      <p class="text-gray-600 mt-2">{{settings_obj.address}}</p>
-    </div>
-
-  </div>
-</section>
-<!-- CONTACT INFO SECTION END HERE -->
 
 <!-- CONTACT FORM SECTION START HERE -->
   <section class="min-h-screen py-16">
@@ -232,9 +78,9 @@
                 </span>
                 <div>
                   <p class="font-medium text-slate-900">Office Address</p>
-                  <p class="text-slate-500">
-                         {{settings_obj.address}}
-                  </p>
+                    <p class="text-slate-500">
+                          {{settings_obj.address}}
+                    </p>
                 </div>
               </div>
             </div>
@@ -331,7 +177,7 @@
               <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pt-2">
                 <label class="inline-flex items-start gap-2 text-xs text-slate-500">
                   <input required type="checkbox" class="mt-0.5 h-4 w-4 border border-gray-400 rounded-sm appearance-auto">
-                  I provide my informed consent for {{setting_obj.site_name}} to reach out to me.
+                  I provide my informed consent for {{settings_obj.site_name}} to reach out to me.
                 </label>
 
                 <button type="submit" class="w-full md:w-auto inline-flex items-center justify-center rounded-xl bg-indigo-600 px-7 py-3 text-sm font-semibold text-white shadow hover:bg-indigo-700 transition-all duration-200">
@@ -340,6 +186,7 @@
               </div>
 
             </form>
+
           </div>
         </div>
 

@@ -3,73 +3,53 @@
 {% load static %}
 {% load utility_tags %} 
 {% load humanize %} 
-{% block title %}{{ site_settings.meta_title|default:'Best Real Estate Deals' }}{% endblock %}
+{% block title %}{{ site_settings.meta_title }}{% endblock %}
 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
 <style>
-.slider-animation {
-    display: flex;
-    animation: slide 12s infinite linear;
-}
-.slider-animation img {
-    width: 100%;
-    flex-shrink: 0;
-    object-fit: cover;
-}
+  .slider-animation {
+      display: flex;
+      animation: slide 12s infinite linear;
+  }
+  .slider-animation img {
+      width: 100%;
+      flex-shrink: 0;
+      object-fit: cover;
+  }
 
-@keyframes slide {
-    0% { transform: translateX(0); }
-    20% { transform: translateX(0); }
+  @keyframes slide {
+      0% { transform: translateX(0); }
+      20% { transform: translateX(0); }
 
-    25% { transform: translateX(-100%); }
-    45% { transform: translateX(-100%); }
+      25% { transform: translateX(-100%); }
+      45% { transform: translateX(-100%); }
 
-    50% { transform: translateX(-200%); }
-    70% { transform: translateX(-200%); }
+      50% { transform: translateX(-200%); }
+      70% { transform: translateX(-200%); }
 
-    75% { transform: translateX(-300%); }
-    100% { transform: translateX(-300%); }
-}
-.nice-scroll::-webkit-scrollbar { width: 6px; }
-.nice-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-.nice-scroll::-webkit-scrollbar-track { background: transparent; }
+      75% { transform: translateX(-300%); }
+      100% { transform: translateX(-300%); }
+  }
+  .nice-scroll::-webkit-scrollbar { width: 6px; }
+  .nice-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+  .nice-scroll::-webkit-scrollbar-track { background: transparent; }
 
-.filter-body {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.35s ease;
-}
-.filter-body.open {
-  max-height: 420px;
-}
+  .filter-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+  }
+  .filter-body.open {
+    max-height: 420px;
+  }
 </style>
 
 {% block content %}
 
 
-<!-- ✅ Hero Section -->
-<section class="relative h-[300px] bg-cover bg-center top-fixed" style="background-image: url({% static 'main/images/hero/slid-3.jpg' %});">
-  <!-- Overlay -->
-  <div class="absolute inset-0 bg-black bg-opacity-50"></div>
-
-  <!-- Content -->
-  <div class="relative z-10 flex flex-col justify-center items-center h-full text-center text-white">
-    <h1 class="text-3xl md:text-5xl font-bold">PROJECTS LISTING</h1>
-    <nav class="mt-3 text-sm md:text-base">
-      <ol class="flex justify-center space-x-2">
-        <li><a href="/" class="hover:text-orange-400">Home</a></li>
-        <li>/</li>
-        <li class="text-orange-400">Projects Listing</li>
-      </ol>
-    </nav>
-  </div>
-</section>
-
-<!-- ✅ Hero Section -->
-
 
 <!-- ================= MAIN CONTAINER ================= -->
-<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6 p-18">
 
   <aside class="space-y-4 md:space-y-5 lg:space-y-6 lg:sticky lg:top-24">
 
@@ -186,7 +166,7 @@
 
               {% if bhk_choices|length > 5 %}
               <button id="bhkMoreBtn" type="button" onclick="showMoreBhk()"
-                  class="text-sm text-orange-600 font-medium hover:underline mt-2">
+                  class="text-sm text-blue-600 font-medium hover:underline mt-2">
                   + {{ bhk_choices|length|add:"-5" }} more
               </button>
               {% endif %}
@@ -267,7 +247,7 @@
       </div>
 
       <!-- ================= SUBMIT ================= -->
-      <button type="submit" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3">
+      <button type="submit" class="w-full bg-blue-700 hover:bg-blue-600 text-white font-semibold py-3">
         Filter Properties
       </button>
 
@@ -275,7 +255,7 @@
         
       <!-- ================= FILTER BUTTON ================= -->
       <div class="fixed bottom-0 left-0 right-0 p-3 bg-white shadow-lg md:hidden z-50">
-        <button type="submit" form="filterForm" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-xl">
+        <button type="submit" form="filterForm" class="w-full bg-blue-700 hover:bg-blue-600 text-white font-semibold py-3 rounded-xl">
           Search Properties
         </button>
       </div>
@@ -287,16 +267,16 @@
 
     <div class="flex items-center gap-2 bg-white shadow p-3 mb-4">
 
-      <button id="listViewBtn" class="bg-orange-500 text-white p-2">
+      <button id="listViewBtn" class="bg-blue-700 text-white p-2">
         <i class="fas fa-list"></i>
       </button>
 
       <!-- Grid Button (Desktop only) -->
-      <button id="gridViewBtn" class="hidden sm:hidden md:inline-flex items-center justify-center bg-gray-200 text-gray-700 p-[12px] hover:bg-orange-100 hover:text-orange-600 transition">
+      <button id="gridViewBtn" class="hidden sm:hidden md:inline-flex items-center justify-center bg-gray-200 text-gray-700 p-[12px] hover:bg-blue-200 hover:text-blue-600 transition">
         <i class="fas fa-th"></i>
       </button>
 
-      <span class="font-semibold text-orange-600">
+      <span class="font-semibold text-blue-600">
         Properties
       </span>
 
@@ -306,7 +286,7 @@
     <div id="listView" class="space-y-6">
       {% for project in projects %}
 
-        <div class="flex flex-col sm:flex-row bg-white  shadow border p-3 hover:border-orange-500 hover:shadow-xl transition-all ">
+        <div class="flex flex-col sm:flex-row bg-white  shadow border p-3 hover:border-blue-700 hover:shadow-xl transition-all ">
 
           <a href="{{ project.get_absolute_url }}">
           <!-- Project Image -->
@@ -335,7 +315,7 @@
                 </h2>
 
                 <!-- Price -->
-                <span class="text-[18px] sm:text-xl font-bold text-orange-600 tracking-tight drop-shadow-sm">
+                <span class="text-[18px] sm:text-xl font-bold text-blue-600 tracking-tight drop-shadow-sm">
                   {{ project.get_price_range }}
                 </span>
 
@@ -344,7 +324,7 @@
               <!-- Row 2: Location -->
               <p class="text-[13px] sm:text-sm text-gray-500 flex items-center gap-1 mt-1">
 
-                <i class="fas fa-map-marker-alt text-orange-500 text-[12px]"></i>
+                <i class="fas fa-map-marker-alt text-blue-700 text-[12px]"></i>
 
                 <span class="leading-none">
                   {{ project.locality }}
@@ -488,7 +468,7 @@
                     data-project="{{ project.project_name }}"
                     data-project-id="{{ project.id }}"
                     data-type="details"
-                    class="openContactPopup flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-4 py-2 bg-orange-500 text-white text-sm font-semibold rounded-3xl hover:bg-orange-600 transition">
+                    class="openContactPopup flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-4 py-2 bg-blue-700 text-white text-sm font-semibold rounded-3xl hover:bg-blue-600 transition">
                     View Details
                   </a>
 
@@ -497,7 +477,7 @@
                     data-project="{{ project.project_name }}"
                     data-project-id="{{ project.id }}"
                     data-type="contact"
-                    class="openContactPopup flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-4 py-2 border border-orange-500 text-orange-600 text-sm font-semibold rounded-3xl hover:bg-orange-50 transition">
+                    class="openContactPopup flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-4 py-2 border border-blue-700 text-blue-600 text-sm font-semibold rounded-3xl hover:bg-blue-50 transition">
                     Contact Us
                   </a>
 
@@ -518,7 +498,7 @@
     <div id="gridView" class="hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
 
           {% for project in projects %}
-          <div class="bg-white shadow border hover:shadow-lg hover:border-orange-500 transition">
+          <div class="bg-white shadow border hover:shadow-lg hover:border-blue-700 transition">
 
             <!-- IMAGE -->
             <a href="{{ project.get_absolute_url }}">
@@ -547,7 +527,7 @@
 
               <!-- LOCATION -->
               <p class="text-xs text-gray-500 flex items-center gap-1">
-                <i class="fas fa-map-marker-alt text-orange-500"></i>
+                <i class="fas fa-map-marker-alt text-blue-700"></i>
                 {{ project.locality }}, {{ project.city }}
               </p>
 
@@ -576,9 +556,9 @@
                     <button type="button"
                       class="bhk-tab pb-1 border-b-2
                       {% if forloop.first %}
-                        border-orange-500 text-orange-600
+                        border-blue-700 text-blue-600
                       {% else %}
-                        border-transparent hover:text-orange-600
+                        border-transparent hover:text-blue-600
                       {% endif %}"
                       data-target="grid-bhk-{{ project.id }}-{{ forloop.counter }}">
                       {{ group.grouper }}
@@ -675,13 +655,13 @@
 
               <!-- CTA -->
               <div class="flex gap-3 pt-2">
-                <a href="{{ project.get_absolute_url }}" class="flex-1 text-center px-3 py-2 bg-orange-500 text-white text-sm font-semibold rounded-full hover:bg-orange-600" target="_blank" >
+                <a href="{{ project.get_absolute_url }}" class="flex-1 text-center px-3 py-2 bg-blue-700 text-white text-sm font-semibold rounded-full hover:bg-blue-600" target="_blank" >
                   View Details
                 </a>
 
                 <a href="javascript:void(0)"
-                  class="flex-1 text-center px-3 py-2 border border-orange-500
-                          text-orange-600 text-sm font-semibold rounded-full">
+                  class="flex-1 text-center px-3 py-2 border border-blue-700
+                          text-blue-600 text-sm font-semibold rounded-full">
                   Contact
                 </a>
               </div>
@@ -759,7 +739,7 @@
   <div class="relative w-full max-w-sm rounded-xl shadow-2xl bg-white overflow-hidden">
 
     <!-- HEADER -->
-    <div class="bg-gradient-to-r from-orange-500 to-orange-600 px-4 py-3 text-white">
+    <div class="bg-gradient-to-r from-blue-700 to-blue-600 px-4 py-3 text-white">
       <h3 class="text-base font-semibold">Enquiry For</h3>
       <p id="enquiryProjectName" class="text-xs opacity-90 mt-0.5">
         Project Name
@@ -802,7 +782,7 @@
         <textarea name="message" rows="2" class="mt-1 w-full border rounded-md px-3 py-2"></textarea>
       </div>
 
-      <button type="submit" class="w-full bg-orange-500 text-white py-2.5 rounded-lg font-semibold">
+      <button type="submit" class="w-full bg-blue-700 text-white py-2.5 rounded-lg font-semibold">
         Submit Enquiry
       </button>
 
@@ -816,108 +796,108 @@
 <!-- ================= END POPUP ================= -->
 
 <style>
-/* ================= CONFIG TABLE SCROLL ================= */
-.table-scroll {
-  max-height: 105px;          /* yahin se height control */
-  overflow-y: auto;
-  border: 1px solid #e5e7eb;
-}
+  /* ================= CONFIG TABLE SCROLL ================= */
+  .table-scroll {
+    max-height: 105px;          /* yahin se height control */
+    overflow-y: auto;
+    border: 1px solid #e5e7eb;
+  }
 
-/* Sticky header */
-.table-scroll thead th {
-  position: sticky;
-  top: 0;
-  background: #f3f4f6;
-  z-index: 5;
-}
+  /* Sticky header */
+  .table-scroll thead th {
+    position: sticky;
+    top: 0;
+    background: #f3f4f6;
+    z-index: 5;
+  }
 
-/* Orange scrollbar */
-.table-scroll::-webkit-scrollbar {
-  width: 6px;
-}
-.table-scroll::-webkit-scrollbar-thumb {
-  background: #fb923c;
-  border-radius: 10px;
-}
+  /* Blue scrollbar */
+  .table-scroll::-webkit-scrollbar {
+    width: 6px;
+  }
+  .table-scroll::-webkit-scrollbar-thumb {
+    background: #fb923c;
+    border-radius: 10px;
+  }
 
 </style>
 
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function () {
 
-  const popup = document.getElementById("contactPopup");
-  const closeBtn = document.getElementById("closeContactPopup");
-  const projectNameText = document.getElementById("enquiryProjectName");
-  const projectIdInput = document.getElementById("projectIdInput");
-  const redirectTypeInput = document.getElementById("redirectType");
-  const enquiryForm = document.getElementById("enquiryForm");
+    const popup = document.getElementById("contactPopup");
+    const closeBtn = document.getElementById("closeContactPopup");
+    const projectNameText = document.getElementById("enquiryProjectName");
+    const projectIdInput = document.getElementById("projectIdInput");
+    const redirectTypeInput = document.getElementById("redirectType");
+    const enquiryForm = document.getElementById("enquiryForm");
 
-  const nameInput = document.getElementById("userName");
-  const emailInput = document.getElementById("userEmail");
-  const phoneInput = document.getElementById("userPhone");
+    const nameInput = document.getElementById("userName");
+    const emailInput = document.getElementById("userEmail");
+    const phoneInput = document.getElementById("userPhone");
 
-  document.querySelectorAll(".openContactPopup").forEach(btn => {
-    btn.addEventListener("click", function (e) {
-      e.preventDefault();
+    document.querySelectorAll(".openContactPopup").forEach(btn => {
+      btn.addEventListener("click", function (e) {
+        e.preventDefault();
 
-      const projectName = this.dataset.project;
-      const projectId = this.dataset.projectId;
-      const type = this.dataset.type;
+        const projectName = this.dataset.project;
+        const projectId = this.dataset.projectId;
+        const type = this.dataset.type;
 
-      projectNameText.textContent = projectName;
-      projectIdInput.value = projectId;
-      redirectTypeInput.value = type;
+        projectNameText.textContent = projectName;
+        projectIdInput.value = projectId;
+        redirectTypeInput.value = type;
 
-      enquiryForm.action = `/projects/submit-enquiry/${projectId}/`;
+        enquiryForm.action = `/projects/submit-enquiry/${projectId}/`;
 
-      popup.classList.remove("hidden");
-      popup.classList.add("flex");
+        popup.classList.remove("hidden");
+        popup.classList.add("flex");
 
-      loadSavedUserData();
-      document.body.style.overflow = "hidden";
+        loadSavedUserData();
+        document.body.style.overflow = "hidden";
+      });
     });
+
+    closeBtn.addEventListener("click", closePopup);
+
+    popup.addEventListener("click", e => {
+      if (e.target === popup) closePopup();
+    });
+
+    document.addEventListener("keydown", e => {
+      if (e.key === "Escape") closePopup();
+    });
+
+    function closePopup() {
+      popup.classList.add("hidden");
+      popup.classList.remove("flex");
+      document.body.style.overflow = "";
+    }
+
+    function loadSavedUserData() {
+      nameInput.value = localStorage.getItem("enquiry_name") || "";
+      emailInput.value = localStorage.getItem("enquiry_email") || "";
+      phoneInput.value = localStorage.getItem("enquiry_phone") || "";
+    }
+
+    enquiryForm.addEventListener("submit", function () {
+      localStorage.setItem("enquiry_name", nameInput.value);
+      localStorage.setItem("enquiry_email", emailInput.value);
+      localStorage.setItem("enquiry_phone", phoneInput.value);
+    });
+
   });
-
-  closeBtn.addEventListener("click", closePopup);
-
-  popup.addEventListener("click", e => {
-    if (e.target === popup) closePopup();
-  });
-
-  document.addEventListener("keydown", e => {
-    if (e.key === "Escape") closePopup();
-  });
-
-  function closePopup() {
-    popup.classList.add("hidden");
-    popup.classList.remove("flex");
-    document.body.style.overflow = "";
-  }
-
-  function loadSavedUserData() {
-    nameInput.value = localStorage.getItem("enquiry_name") || "";
-    emailInput.value = localStorage.getItem("enquiry_email") || "";
-    phoneInput.value = localStorage.getItem("enquiry_phone") || "";
-  }
-
-  enquiryForm.addEventListener("submit", function () {
-    localStorage.setItem("enquiry_name", nameInput.value);
-    localStorage.setItem("enquiry_email", emailInput.value);
-    localStorage.setItem("enquiry_phone", phoneInput.value);
-  });
-
-});
 </script>
 
 <script>
-function openBHK(e, id) {
-  document.querySelectorAll('.bhk-content').forEach(el => el.classList.add('hidden'));
-  document.querySelectorAll('.bhk-tab').forEach(el => el.classList.remove('active'));
+  function openBHK(e, id) {
+    document.querySelectorAll('.bhk-content').forEach(el => el.classList.add('hidden'));
+    document.querySelectorAll('.bhk-tab').forEach(el => el.classList.remove('active'));
 
-  document.getElementById(id).classList.remove('hidden');
-  e.target.classList.add('active');
-}
+    document.getElementById(id).classList.remove('hidden');
+    e.target.classList.add('active');
+  }
 </script>
 
 <script>
@@ -978,32 +958,32 @@ function openBHK(e, id) {
 
 
 <script>
-document.addEventListener("click", function (e) {
+  document.addEventListener("click", function (e) {
 
-  const tab = e.target.closest(".bhk-tab");
-  if (!tab) return;
+    const tab = e.target.closest(".bhk-tab");
+    if (!tab) return;
 
-  const card = tab.closest(".bg-white");
-  if (!card) return;
+    const card = tab.closest(".bg-white");
+    if (!card) return;
 
-  // reset tabs
-  card.querySelectorAll(".bhk-tab").forEach(t => {
-    t.classList.remove("border-orange-500", "text-orange-600");
-    t.classList.add("border-transparent", "text-gray-600");
+    // reset tabs
+    card.querySelectorAll(".bhk-tab").forEach(t => {
+      t.classList.remove("border-blue-700", "text-blue-600");
+      t.classList.add("border-transparent", "text-gray-600");
+    });
+
+    // reset panels
+    card.querySelectorAll(".bhk-panel").forEach(p => {
+      p.classList.add("hidden");
+    });
+
+    // activate
+    tab.classList.add("border-blue-700", "text-blue-600");
+    tab.classList.remove("border-transparent", "text-gray-600");
+
+    const panel = card.querySelector(`[data-panel="${tab.dataset.target}"]`);
+    if (panel) panel.classList.remove("hidden");
   });
-
-  // reset panels
-  card.querySelectorAll(".bhk-panel").forEach(p => {
-    p.classList.add("hidden");
-  });
-
-  // activate
-  tab.classList.add("border-orange-500", "text-orange-600");
-  tab.classList.remove("border-transparent", "text-gray-600");
-
-  const panel = card.querySelector(`[data-panel="${tab.dataset.target}"]`);
-  if (panel) panel.classList.remove("hidden");
-});
 </script>
 
 <script>
@@ -1059,34 +1039,34 @@ document.addEventListener("click", function (e) {
 
 
 <style>
-/* Glass tabs */
-.bhk-tab {
-  backdrop-filter: blur(10px);
-  background: rgba(255,255,255,0.6);
-  color: #4b5563;
-}
+  /* Glass tabs */
+  .bhk-tab {
+    backdrop-filter: blur(10px);
+    background: rgba(255,255,255,0.6);
+    color: #4b5563;
+  }
 
-/* Active tab */
-.bhk-tab.active {
-  color: #16a34a;
-}
+  /* Active tab */
+  .bhk-tab.active {
+    color: #16a34a;
+  }
 
-/* Disabled tab */
-.bhk-disabled {
-  opacity: 0.4;
-  pointer-events: none;
-}
+  /* Disabled tab */
+  .bhk-disabled {
+    opacity: 0.4;
+    pointer-events: none;
+  }
 
-/* Gradient underline */
-.bhk-underline {
-  background: linear-gradient(90deg, #16a34a, #22c55e);
-  width: 0;
-  left: 0;
-  opacity: 0;
-  transition:
-    left 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-    width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-}
+  /* Gradient underline */
+  .bhk-underline {
+    background: linear-gradient(90deg, #16a34a, #22c55e);
+    width: 0;
+    left: 0;
+    opacity: 0;
+    transition:
+      left 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+      width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
 </style>
 
 
@@ -1129,15 +1109,15 @@ document.addEventListener("click", function (e) {
   .bhk-panel div {
   scrollbar-width: thin;
   scrollbar-color: #fb923c transparent;
-}
+  }
 
-.bhk-panel div::-webkit-scrollbar {
-  width: 6px;
-}
-.bhk-panel div::-webkit-scrollbar-thumb {
-  background: #fb923c;
-  border-radius: 10px;
-}
+  .bhk-panel div::-webkit-scrollbar {
+    width: 6px;
+  }
+  .bhk-panel div::-webkit-scrollbar-thumb {
+    background: #fb923c;
+    border-radius: 10px;
+  }
 
 </style>
 
@@ -1208,10 +1188,10 @@ document.addEventListener("click", function (e) {
         listView.classList.remove("hidden");
         gridView.classList.add("hidden");
 
-        listViewBtn.classList.add("bg-orange-500", "text-white");
+        listViewBtn.classList.add("bg-blue-700", "text-white");
         listViewBtn.classList.remove("bg-gray-200", "text-gray-700");
 
-        gridViewBtn.classList.remove("bg-orange-500", "text-white");
+        gridViewBtn.classList.remove("bg-blue-700", "text-white");
         gridViewBtn.classList.add("bg-gray-200", "text-gray-700");
       });
 
@@ -1219,11 +1199,11 @@ document.addEventListener("click", function (e) {
         gridView.classList.remove("hidden");
         listView.classList.add("hidden");
 
-        gridViewBtn.classList.add("bg-orange-500", "text-white");
+        gridViewBtn.classList.add("bg-blue-700", "text-white");
         gridViewBtn.classList.remove("bg-gray-200", "text-gray-700");
 
         
-        listViewBtn.classList.remove("bg-orange-500", "text-white");
+        listViewBtn.classList.remove("bg-blue-700", "text-white");
         listViewBtn.classList.add("bg-gray-200", "text-gray-700");
       });
 </script>

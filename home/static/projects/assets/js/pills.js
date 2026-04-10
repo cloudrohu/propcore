@@ -210,8 +210,8 @@ function activeType() {
   return `
     px-4 py-1.5 rounded-full
     text-sm font-medium
-    bg-orange-50 text-orange-600
-    border border-orange-300
+    bg-blue-50 text-blue-600
+    border border-blue-300
   `;
 }
 
@@ -266,8 +266,8 @@ function activeBhk() {
   return `
     bhk-pill px-4 py-1.5 rounded-full
     text-sm font-medium
-    bg-orange-50 text-orange-600
-    border border-orange-300
+    bg-blue-50 text-blue-600
+    border border-blue-300
   `;
 }
 
@@ -310,8 +310,8 @@ function csActive() {
   return `
     cs-pill px-4 py-1.5 rounded-full
     text-sm font-medium
-    bg-orange-50 text-orange-600
-    border border-orange-300
+    bg-blue-50 text-blue-600
+    border border-blue-300
   `;
 }
 
@@ -389,8 +389,8 @@ function amenActive() {
   return `
     amen-pill px-4 py-1.5 rounded-full
     text-sm font-medium
-    bg-orange-50 text-orange-600
-    border border-orange-300
+    bg-blue-50 text-blue-600
+    border border-blue-300
   `;
 }
 
@@ -447,8 +447,8 @@ function furActive() {
   return `
     fur-pill px-4 py-1.5 rounded-full
     text-sm font-medium
-    bg-orange-50 text-orange-600
-    border border-orange-300
+    bg-blue-50 text-blue-600
+    border border-blue-300
   `;
 }
 
@@ -504,8 +504,8 @@ function reraActive() {
   return `
     rera-pill px-4 py-1.5 rounded-full
     text-sm font-medium
-    bg-orange-50 text-orange-600
-    border border-orange-300
+    bg-blue-50 text-blue-600
+    border border-blue-300
   `;
 }
 

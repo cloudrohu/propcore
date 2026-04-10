@@ -113,6 +113,7 @@ class Leadership(models.Model):
 class Why_Choose(models.Model):
     title = models.CharField(max_length=200)
     subtitle = models.CharField(max_length=300, blank=True, null=True)
+    image = models.ImageField(upload_to='why_choose/', blank=True, null=True)
     order = models.PositiveIntegerField(default=0, help_text="Order of appearance on frontend")
     is_active = models.BooleanField(default=True, help_text="Toggle visibility on frontend")
 
