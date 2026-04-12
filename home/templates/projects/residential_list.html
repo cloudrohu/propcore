@@ -392,15 +392,35 @@
                   {% for cfg in group.list %}
                   <tr class="{% if cfg.sold_out %}bg-red-50{% endif %}">
                     <td class="border px-1 py-1">{{ cfg.area_sqft }} sqft</td>
+                      <td class="border px-1 py-1 font-semibold">
+                        {% if cfg.sold_out %}
+                          <span class="text-red-600 text-xs uppercase font-bold">
+                            Sold Out
+                          </span>
+                        {% else %}
 
-                    <td class="border px-1 py-1 font-semibold">
-                      {% if cfg.sold_out %}
-                        <span class="text-red-600 text-xs uppercase font-bold">Sold Out</span>
-                      {% else %}
-                        {{ cfg.formatted_price }}
-                      {% endif %}
-                    </td>
+                          <div class="flex items-center justify-center gap-1 flex-wrap">
 
+                            <!-- Price -->
+                            <span class="text-green-600 font-extrabold">
+                              {{ cfg.formatted_price }}
+                            </span>
+
+                            <!-- Tax Badge -->
+                            {% if cfg.tax_included %}
+                              <span class="text-[9px] px-1.5 py-0.5 bg-green-100 text-green-700 rounded font-semibold">
+                                All Inc.
+                              </span>
+                            {% else %}
+                              <span class="text-[9px] px-1.5 py-0.5 bg-yellow-100 text-yellow-700 rounded font-semibold">
+                                + Tax
+                              </span>
+                            {% endif %}
+
+                          </div>
+
+                        {% endif %}
+                      </td>
                     <td class="border px-1 py-1">
                       {% if cfg.parking %}
                         <span class="text-green-600 font-semibold">Yes</span>
