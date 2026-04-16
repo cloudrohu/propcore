@@ -64,19 +64,19 @@
 
   <div class="relative max-w-6xl mx-auto px-6 flex flex-col items-center text-center text-white">
 
-    <p class="text-xs md:text-sm tracking-[0.3em] uppercase text-blue-400 font-bold mb-4">
+     <a href="/" class="flex-shrink-0 mb-3">
+        {% if settings_obj.logo %}
+          <img src="{{ settings_obj.logo.url }}" class="h-10 md:h-16 object-contain">
+        {% else %}
+          <div class="text-xl md:text-2xl font-bold text-[#ff5a5f] flex items-center gap-1">
+             <i class="fa-solid fa-house-chimney"></i> <span class="hidden xs:inline">RealtyPro</span>
+          </div>
+        {% endif %}
+      </a>
+
+     <p class="text-xs md:text-sm tracking-[0.3em] uppercase text-blue-400 font-bold mb-4">
         #letsfindyourperfecthometogether
     </p>
-
-    <h2 class="text-2xl md:text-3xl mb-3 font-light tracking-wide text-gray-300">
-        {{ slider.heading }}
-    </h2>
-
-    <h1 class="text-5xl md:text-8xl uppercase font-black mb-6 leading-tight tracking-tight">
-        <span class="bg-gradient-to-b from-white via-gray-100 to-gray-400 bg-clip-text text-transparent">
-            {{ slider.subtitle }}
-        </span>
-    </h1>
 
     <div class="flex items-center gap-4 text-sm md:text-base text-gray-300 mb-10 font-medium">
         <span class="border-r border-gray-500 pr-4">15+ Years Experience</span>

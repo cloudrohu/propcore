@@ -1,12 +1,12 @@
 {% load static %}
 
 <header class="sticky top-0 z-50 border-b  shadow-sm font-sans" style="background:{{ settings_obj.header_footer_color }};color:{{ settings_obj.text_color }}">
-  <div class="max-w-[1400px] mx-auto px-4 py-3">
+  <div class="max-w-[1400px] mx-auto px-4 py-2">
     <div class="flex items-center justify-between gap-4">
       
       <a href="/" class="flex-shrink-0">
         {% if settings_obj.logo %}
-          <img src="{{ settings_obj.logo.url }}" class="h-8 md:h-12 object-contain">
+          <img src="{{ settings_obj.logo.url }}" class="h-10 md:h-16 w-[120px] md:w-[150px] object-contain">
         {% else %}
           <div class="text-xl md:text-2xl font-bold text-[#ff5a5f] flex items-center gap-1">
              <i class="fa-solid fa-house-chimney"></i> <span class="hidden xs:inline">RealtyPro</span>
