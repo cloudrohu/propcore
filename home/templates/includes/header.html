@@ -1,56 +1,107 @@
 {% load static %}
 
 <header class="sticky top-0 z-50 border-b shadow-sm font-sans" style="background:{{ settings_obj.header_footer_color }};color:{{ settings_obj.text_color }}">
-  <div class="max-w-[1400px] mx-auto px-4 py-2">
-    <div class="flex items-center justify-between gap-2 md:gap-4">
-      
+
+  <div class="max-w-[1400px] mx-auto px-3 py-2">
+
+    <div class="flex items-center justify-between gap-2">
+
+      <!-- Logo -->
       <a href="/" class="flex-shrink-0">
         {% if settings_obj.logo %}
-          <img src="{{ settings_obj.logo.url }}" class="h-8 md:h-16 w-auto max-w-[100px] md:max-w-[150px] object-contain" alt="Logo">
+          <img src="{{ settings_obj.logo.url }}"
+               class="h-9 md:h-16 w-[100px] md:w-[150px] object-contain" alt="Logo">
         {% else %}
-          <div class="text-lg md:text-2xl font-bold text-[#ff5a5f] flex items-center gap-1">
-             <i class="fa-solid fa-house-chimney"></i> <span>RealtyPro</span>
+          <div class="text-xl md:text-2xl font-bold text-[#ff5a5f] flex items-center gap-1">
+            <i class="fa-solid fa-house-chimney"></i>
+            <span class="hidden xs:inline">RealtyPro</span>
           </div>
         {% endif %}
       </a>
 
-      <form action="{% url 'search_projects' %}" method="GET" class="hidden md:flex border border-slate-500 flex-1 max-w-md relative group mx-4">
-          <input type="text" name="q" placeholder="What are you looking for?" class="w-full bg-gray-100 border-none py-2.5 px-6 focus:ring-2 focus:ring-red-400 outline-none text-sm transition-all" required>
-          <button type="submit" class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-red-500">
-              <i class="fa-solid fa-magnifying-glass"></i>
-          </button>
+      <!-- Search (NOW ALWAYS VISIBLE) -->
+      <form action="{% url 'search_projects' %}" method="GET"class="flex-1 max-w-xs sm:max-w-sm md:max-w-md relative mx-2">
+
+        <input type="text" name="q" placeholder="Search..." class="w-full bg-gray-100 border border-slate-300 py-2 px-4 focus:ring-2 focus:ring-blue-400 outline-none text-sm" required>
+
+        <button type="submit"
+                class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-blue-500">
+          <i class="fa-solid fa-magnifying-glass text-sm"></i>
+        </button>
+
       </form>
 
-      <div class="flex items-center gap-3 md:gap-6">
-          <nav class="hidden xl:flex items-center gap-6 text-[15px] font-medium">
-              <a href="/" class="hover:text-red-500 transition">Home</a>
-              <a href="{% url 'calculator' %}" class="hover:text-red-500 transition">Calculator</a>
-              <a href="{% url 'contact' %}" class="hover:text-red-500 transition">Contact</a>
+      <!-- Right Section -->
+      <div class="flex items-center gap-2 md:gap-6">
+
+        <!-- Desktop Nav -->
+          <nav class="hidden xl:flex items-center gap-6 text-[15px] font-medium text-gray-700">
+
+              <a href="/" class="hover:text-blue-500 transition">Home</a>
+
+              <div class="relative inline-block text-left">
+
+                  <button type="button" class="inline-flex items-center justify-between w-full py-2 font-medium text-gray-700 bg-transparent rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2" id="menu-button" aria-expanded="true" aria-haspopup="true">
+
+                  Properites
+
+                  <svg class="w-5 h-5 ml-2 -mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+
+                      <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+
+                  </svg>
+
+                  </button>
+
+
+
+                  <div class="absolute right-0 w-56 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" id="dropdown-menu">
+
+                  <div class="py-1" role="none">
+
+                      <a href="{% url "search_projects" %}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100" role="menuitem">Buy Properties</a>
+
+                      <hr>
+
+                      <a href="{% url "rent_list" %}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100" role="menuitem">Rent Properties</a>
+
+                  </div>
+
+                  </div>
+
+              </div>
+
+              <a href="{% url 'calculator' %}" class="hover:text-blue-500 transition">Calculator</a>
+
+              <a href="{% url 'about' %}" class="hover:text-blue-500 transition">About</a>
+
+              <a href="{% url 'services' %}" class="hover:text-blue-500 transition">Services</a>
+
+              <a href="{% url 'contact' %}" class="hover:text-blue-500 transition">Contact</a>
+
+
+
           </nav>
 
-          <div class="flex items-center gap-4">
-             <a href="/admin/" class="flex items-center gap-2 font-medium hover:text-red-500 transition">
-                <i class="fa-regular fa-user text-xl md:text-base"></i> 
-                <span class="hidden sm:inline">Login/Register</span>
-             </a>
+        <!-- Login -->
+            <a href="/admin/" class="hidden sm:flex items-center gap-2 md:px-5 text-gray-700 font-bold hover:text-blue-500 transition">
 
-             <button id="openMenu" class="xl:hidden text-2xl">
-                 <i class="fa-solid fa-bars-staggered"></i>
-             </button>
-          </div>
+                <i class="fa-regular fa-user font-bold"></i> Login/Register
+
+            </a>
+
+        <!-- Toggle -->
+        <button id="openMenu"
+                class="xl:hidden text-xl text-gray-700">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+
       </div>
+
     </div>
 
-    <div class="mt-2 md:hidden">
-        <form action="{% url 'search_projects' %}" method="GET" class="relative">
-            <input type="text" name="q" placeholder="Search projects..." class="w-full bg-gray-100 border-none py-2 px-4 rounded-lg focus:ring-2 focus:ring-red-400 outline-none text-sm">
-            <button type="submit" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-        </form>
-    </div>
-    
   </div>
+
 </header>
 
 <div id="mobileDrawer" class="fixed top-0 right-0 w-[75%] h-full bg-white shadow-2xl translate-x-full transition-transform duration-300 z-[999] flex flex-col">
