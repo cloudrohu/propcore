@@ -58,11 +58,11 @@
   }
 </style>
 
-<section class="relative py-22 md:py-22 bg-cover bg-center" style="background-image:url('{{ slider.image.url }}'); --tabColor: {{ slider.tabs_color|default:'#2b8cc9' }};">
+<section class="relative py-22 md:py-24 bg-cover bg-center md:bg-cover" style="background-image:url('{{ slider.image.url }}'); --tabColor: {{ slider.tabs_color|default:'#2b8cc9' }};">
 
     <div class="absolute inset-0 bg-black/60"></div>
 
-    <div class="relative max-w-6xl mx-auto px-6 flex flex-col items-center text-center text-white pt-20 md:pt-20"
+    <div class="relative max-w-6xl mx-auto px-6 flex flex-col items-center text-center text-white pt-20 md:pt-20" 
 
       <a href="/" class="flex-shrink-0 md:mb-3 p-3">
           {% if settings_obj.logo %}
