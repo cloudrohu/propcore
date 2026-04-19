@@ -58,31 +58,29 @@
   }
 </style>
 
-<section class="relative py-22 md:py-24 bg-cover bg-center md:bg-cover" style="background-image:url('{{ slider.image.url }}'); --tabColor: {{ slider.tabs_color|default:'#2b8cc9' }};">
 
-    <div class="absolute inset-0 bg-black/60"></div>
+<section class="hero-image">
 
-    <div class="relative max-w-6xl mx-auto px-6 flex flex-col items-center text-center text-white pt-20 md:pt-20" 
+
+   <!-- Overlay -->
+  <div class="hero-overlay"></div>
+
+  <!-- Content -->
+  <div class="hero-content relative z-10 max-w-6xl mx-auto px-6 flex flex-col items-center text-center text-white pt-20 md:pt-20">
 
       <a href="/" class="flex-shrink-0 md:mb-3 p-3">
           {% if settings_obj.logo %}
             <img src="{{ settings_obj.logo.url }}" class="p-2 h-[12vh] md:h-[15vh] object-contain border border-white/30 rounded-full bg-white shadow-lg" alt="Logo">
           {% else %}
             <div class="text-xl md:text-2xl font-bold text-[#ff5a5f] flex items-center gap-1">
-              <i class="fa-solid fa-house-chimney"></i> <span class="hidden xs:inline">RealtyPro</span>
+              <i class="fa-solid fa-house-chimney"></i> RealtyPro
             </div>
           {% endif %}
       </a>
 
       <p class="text-xs md:text-sm tracking-[0.3em] uppercase text-blue-400 font-bold mb-2 mt-2 md:mb-4">
           #letsfindyourperfecthometogether
-      </p>
-
-      <div class="flex items-center gap-4 text-sm md:text-base text-gray-300 mb-3 md:mb-6 font-medium">
-          <span class="border-r border-gray-500 pr-4">15+ Years Experience</span>
-          <span class="border-r border-gray-500 pr-4">Verified Properties</span>
-          <span>Best Deals in Mumbai</span>
-      </div>
+      </p>     
 
 
       <div id="hero-tabs" class="flex flex-nowrap md:flex-wrap gap-2 mb-4 overflow-x-auto no-scrollbar">
@@ -134,9 +132,44 @@
           
       </div>
 
-    </div>
+  </div>
 
 </section>
+
+<style>
+.hero-image {
+  width: 100%;
+  height: 80vh;
+  position: relative;
+  background-image: url("{{ slider.image.url }}");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* 🔥 Dark Overlay */
+.hero-image::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35); /* darkness control */
+  z-index: 1;
+}
+@media (max-width: 768px) {
+  .hero-image {
+    height: 50vh;
+    background-position: center top;
+  }
+
+  .hero-image::before {
+    background: rgba(0, 0, 0, 0.4); /* mobile pe thoda aur dark */
+  }
+}
+</style>
+
+
+
+
 
 <script>
   // Tab Switching Logic

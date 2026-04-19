@@ -1,0 +1,25 @@
+{% load static %}
+
+<section class="hero-image">
+
+
+</section>
+
+<style>
+.hero-image {
+  width: 100%;
+  height: 80vh; /* 100vh tha → ab thoda kam */
+  background-image: url("{{slider_image.url}}");
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@media (max-width: 868px) {
+  .hero-image {
+    height: 50vh; /* Mobile me aur compact */
+    background-position: center top;
+  }
+}
+
+</style>
